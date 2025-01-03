@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class No;
+class Aresta;
 
 class Grafo
 {
@@ -19,37 +21,34 @@ private:
 
     No *primeiroNo;
     No *ultimoNo;
-   
 
 public:
     Grafo(int ordem, int totalArestas, bool direcionado, bool pesoArestas, bool pesoNos);
-    ~Grafo();
+    virtual ~Grafo();
 
+    virtual void incOrdem() const = 0;
+    virtual void decOrdem() const = 0;
 
-    void incOrdem();
-    void decOrdem();
+    virtual int getNumArestas() const = 0;
+    virtual No *getPrimeiroNo() const = 0;
+    virtual No *getUltimoNo() const = 0;
+    virtual int getOrdem() const = 0;
+    virtual int getGrau() const = 0;
 
-    int getNumArestas();
-    No *getPrimeiroNo();
-    No *getUltimoNo();
-    int getOrdem();
-    int getGrau();
+    virtual void printGrau() const = 0;
+    virtual bool ehDigrafo() const = 0;
 
+    virtual void imprimeGrafo() const = 0;
 
-    void printGrau();
-    bool ehDigrafo();
-
-    void imprimeGrafo();
-
-    bool ehBipartido();
-    int nConexo();
-    bool ehDirecionado();
-    bool verticePonderado();
-    bool arestaPonderada();
-    bool ehCompleto();
-    bool ehArvore();
-    bool possuiArticulacao();
-    bool possuiPonte();
-    void carregaGrafo(const string &filename);
-    void novoGrafo(const string &configFile);
+    virtual bool ehBipartido() const = 0;
+    virtual int nConexo() const = 0;
+    virtual bool ehDirecionado() const = 0;
+    virtual bool verticePonderado() const = 0;
+    virtual bool arestaPonderada() const = 0;
+    virtual bool ehCompleto() const = 0;
+    virtual bool ehArvore() const = 0;
+    virtual bool possuiArticulacao() const = 0;
+    virtual bool possuiPonte() const = 0;
+    virtual void carregaGrafo(const string &filename) = 0;
+    virtual void novoGrafo(const string &configFile) = 0;
 };
