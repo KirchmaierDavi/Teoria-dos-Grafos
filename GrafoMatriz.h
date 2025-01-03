@@ -7,7 +7,7 @@ class GrafoMatriz : public Grafo {
 private:
     static const int MAX_VERTICES = 100;
     int matriz[MAX_VERTICES][MAX_VERTICES];
-    int num_vertices;
+    int numVertices;
     bool direcionado;
     bool vertices_ponderados;
     bool arestas_ponderadas;

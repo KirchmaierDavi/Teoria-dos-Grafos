@@ -17,9 +17,9 @@ public:
     ListaEncadeada() : cabeca(nullptr) {}
 
     void adicionar(int vertice) {
-        No* novo_no = new No(vertice);
-        novo_no->proximo = cabeca;
-        cabeca = novo_no;
+        No* novoNo = new No(vertice);
+        novoNo->proximo = cabeca;
+        cabeca = novoNo;
     }
 
     ~ListaEncadeada() {
@@ -34,10 +34,10 @@ public:
 class GrafoLista : public Grafo {
 private:
     std::vector<ListaEncadeada> lista_adj;
-    int num_vertices;
+    int numVertices;
     bool direcionado;
-    bool vertices_ponderados;
-    bool arestas_ponderadas;
+    bool verticesPonderados;
+    bool arestasPonderadas;
 
 public:
     GrafoLista(int num_vertices, bool direcionado, bool vertices_ponderados, bool arestas_ponderadas);
