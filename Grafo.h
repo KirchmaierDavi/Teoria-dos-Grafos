@@ -5,8 +5,6 @@
 
 using namespace std;
 
-class No;
-class Aresta;
 
 class Grafo
 {
@@ -21,7 +19,7 @@ private:
 
     No *primeiroNo;
     No *ultimoNo;
-    No *removido;
+   
 
 public:
     Grafo(int ordem, int totalArestas, bool direcionado, bool pesoArestas, bool pesoNos);
