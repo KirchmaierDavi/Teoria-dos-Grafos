@@ -35,7 +35,6 @@ public:
     virtual int getOrdem();
     virtual int getGrau();
 
-    virtual void printGrau();
     virtual bool ehDigrafo();
 
     virtual void imprimeGrafo();

@@ -115,3 +115,17 @@ bool Grafo::arestaPonderada()
     }
     return false;
 }
+
+int Grafo::getGrau()
+{
+    No *no = primeiroNo;
+    int grau = no->getGrauEntrada();
+    while (no != nullptr)
+    {
+        if(no->getProxNo()->getGrauEntrada() > grau){
+            grau = no->getProxNo()->getGrauEntrada();
+        }
+        no = no->getProxNo();
+    }
+    return grau;
+} 
