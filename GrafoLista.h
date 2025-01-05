@@ -2,38 +2,16 @@
 #define GRAFOLISTA_H
 
 #include "Grafo.h"
-#include <vector>
-
-class ListaEncadeada {
-public:
-    struct No {
-        int vertice;
-        No* proximo;
-        No(int v) : vertice(v), proximo(nullptr) {}
-    };
-
-    No* cabeca;
-
-    ListaEncadeada() : cabeca(nullptr) {}
-
-    void adicionar(int vertice) {
-        No* novoNo = new No(vertice);
-        novoNo->proximo = cabeca;
-        cabeca = novoNo;
-    }
-
-    ~ListaEncadeada() {
-        while (cabeca) {
-            No* temp = cabeca;
-            cabeca = cabeca->proximo;
-            delete temp;
-        }
-    }
-};
+#include "No.h"
+#include "ListaEncadeada.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
 
 class GrafoLista : public Grafo {
 private:
-    std::vector<ListaEncadeada> lista_adj;
+    ListaEncadeada* listaAdj;
     int numVertices;
     bool direcionado;
     bool verticesPonderados;
@@ -41,6 +19,7 @@ private:
 
 public:
     GrafoLista(int num_vertices, bool direcionado, bool vertices_ponderados, bool arestas_ponderadas);
+    ~GrafoLista();
 
     bool ehBipartido() override;
     int nConexo() override;
@@ -53,8 +32,11 @@ public:
     bool ehArvore() override;
     bool possuiArticulacao() override;
     bool possuiPonte() override;
-    void carregaGrafo(std::string& filename);
-    void novoGrafo(std::string& config_filename);
+    void carregaGrafo(const std::string& filename) override;
+    void novoGrafo(const std::string& config_filename) override;
+
+    void addNo(int id, float peso = 0);
+    void addAresta(int origem, int destino, float peso = 0);
 };
 
 #endif // GRAFOLISTA_H
