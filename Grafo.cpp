@@ -67,26 +67,51 @@ void Grafo::novoGrafo(const string &configFile)
     file.close();
 }
 
-void Grafo::incOrdem() {
+void Grafo::incOrdem()
+{
     ordem++;
 }
 
-void Grafo::decOrdem() {
+void Grafo::decOrdem()
+{
     ordem--;
 }
 
-int Grafo::getNumArestas() {
+int Grafo::getNumArestas()
+{
     return numArestas;
 }
 
-No* Grafo::getPrimeiroNo() {
+No *Grafo::getPrimeiroNo()
+{
     return primeiroNo;
 }
 
-No* Grafo::getUltimoNo() {
+No *Grafo::getUltimoNo()
+{
     return ultimoNo;
 }
 
-int Grafo::getOrdem() {
+int Grafo::getOrdem()
+{
     return ordem;
+}
+
+bool Grafo::arestaPonderada()
+{
+    No *no = primeiroNo;
+    while (no != nullptr)
+    {
+        Aresta *aresta = no->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            if (aresta->getPesoAresta() != 0)
+            {
+                return true;
+            }
+            aresta = aresta->getProxAresta();
+        }
+        no = no->getProxNo();
+    }
+    return false;
 }

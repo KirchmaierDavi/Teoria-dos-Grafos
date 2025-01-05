@@ -51,6 +51,8 @@ public:
 
     
     void setPeso(float valor);
+    int getPeso();
+
     void setIdNo(int valor);
 
     bool foiVisitado();
