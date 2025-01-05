@@ -26,29 +26,29 @@ public:
     Grafo(int ordem, int totalArestas, bool direcionado, bool pesoArestas, bool pesoNos);
     virtual ~Grafo();
 
-    virtual void incOrdem() const = 0;
-    virtual void decOrdem() const = 0;
+    virtual void incOrdem();
+    virtual void decOrdem();
 
-    virtual int getNumArestas() const = 0;
-    virtual No *getPrimeiroNo() const = 0;
-    virtual No *getUltimoNo() const = 0;
-    virtual int getOrdem() const = 0;
-    virtual int getGrau() const = 0;
+    virtual int getNumArestas();
+    virtual No *getPrimeiroNo();
+    virtual No *getUltimoNo();
+    virtual int getOrdem();
+    virtual int getGrau();
 
-    virtual void printGrau() const = 0;
-    virtual bool ehDigrafo() const = 0;
+    virtual void printGrau();
+    virtual bool ehDigrafo();
 
-    virtual void imprimeGrafo() const = 0;
+    virtual void imprimeGrafo();
 
-    virtual bool ehBipartido() const = 0;
-    virtual int nConexo() const = 0;
-    virtual bool ehDirecionado() const = 0;
-    virtual bool verticePonderado() const = 0;
-    virtual bool arestaPonderada() const = 0;
-    virtual bool ehCompleto() const = 0;
-    virtual bool ehArvore() const = 0;
-    virtual bool possuiArticulacao() const = 0;
-    virtual bool possuiPonte() const = 0;
-    virtual void carregaGrafo(const string &filename) = 0;
-    virtual void novoGrafo(const string &configFile) = 0;
+    virtual bool ehBipartido();
+    virtual int nConexo();
+    virtual bool ehDirecionado();
+    virtual bool verticePonderado();
+    virtual bool arestaPonderada();
+    virtual bool ehCompleto();
+    virtual bool ehArvore();
+    virtual bool possuiArticulacao();
+    virtual bool possuiPonte();
+    virtual void carregaGrafo(const string &filename);
+    virtual void novoGrafo(const string &configFile);
 };

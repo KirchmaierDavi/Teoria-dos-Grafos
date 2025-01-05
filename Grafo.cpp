@@ -66,3 +66,27 @@ void Grafo::novoGrafo(const string &configFile)
 
     file.close();
 }
+
+void Grafo::incOrdem() {
+    ordem++;
+}
+
+void Grafo::decOrdem() {
+    ordem--;
+}
+
+int Grafo::getNumArestas() {
+    return numArestas;
+}
+
+No* Grafo::getPrimeiroNo() {
+    return primeiroNo;
+}
+
+No* Grafo::getUltimoNo() {
+    return ultimoNo;
+}
+
+int Grafo::getOrdem() {
+    return ordem;
+}
