@@ -116,16 +116,40 @@ bool Grafo::arestaPonderada()
     return false;
 }
 
+bool Grafo::verticePonderado()
+{
+    No *no = primeiroNo;
+    while (no != nullptr)
+    {
+        if (no->getPeso() != 0)
+        {
+            return true;
+        }
+        no = no->getProxNo();
+    }
+    return false;
+}
+
 int Grafo::getGrau()
 {
     No *no = primeiroNo;
     int grau = no->getGrauEntrada();
     while (no != nullptr)
     {
-        if(no->getProxNo()->getGrauEntrada() > grau){
+        if (no->getProxNo()->getGrauEntrada() > grau)
+        {
             grau = no->getProxNo()->getGrauEntrada();
         }
         no = no->getProxNo();
     }
     return grau;
-} 
+}
+
+bool Grafo::ehDirecionado()
+{
+    if (direcionado == 1)
+    {
+        return true;
+    }
+    return false;
+}
