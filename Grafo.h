@@ -14,6 +14,7 @@ class Grafo
 private:
     int ordem;
     int numArestas;
+    int numNos;
     int totalArestas;
     bool pesoNos;
     bool pesoArestas;
@@ -30,6 +31,7 @@ public:
     virtual void decOrdem();
 
     virtual int getNumArestas();
+    virtual int getNumNos();
     virtual No *getPrimeiroNo();
     virtual No *getUltimoNo();
     virtual int getOrdem();
@@ -40,6 +42,7 @@ public:
     virtual void imprimeGrafo();
 
     virtual bool ehBipartido();
+    virtual No *getNoPeloId(int id);
     virtual int nConexo();
     virtual bool ehDirecionado();
     virtual bool verticePonderado();

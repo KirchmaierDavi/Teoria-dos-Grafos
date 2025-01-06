@@ -82,6 +82,11 @@ int Grafo::getNumArestas()
     return numArestas;
 }
 
+int Grafo::getNumNos()
+{
+    return numNos;
+}
+
 No *Grafo::getPrimeiroNo()
 {
     return primeiroNo;
@@ -153,3 +158,101 @@ bool Grafo::ehDirecionado()
     }
     return false;
 }
+
+bool Grafo::ehBipartido()
+{
+    if (primeiroNo == nullptr)
+    {
+        return true;
+    }
+
+    struct Fila
+    {
+        No *no;
+        Fila *prox;
+    };
+
+    Fila *inicio = nullptr;
+    Fila *fim = nullptr;
+
+    auto enfileirar = [&](No *no)
+    {
+        Fila *novo = new Fila;
+        novo->no = no;
+        novo->prox = nullptr;
+        if (inicio == nullptr)
+        {
+            inicio = novo;
+            fim = novo;
+        }
+        else
+        {
+            fim->prox = novo;
+            fim = novo;
+        }
+    };
+
+    auto desenfileirar = [&]() -> No*
+    {
+        if (inicio == nullptr)
+        {
+            return nullptr;
+        }
+        No *no = inicio->no;
+        Fila *temp = inicio;
+        inicio = inicio->prox;
+        if (inicio == nullptr)
+        {
+            fim = nullptr;
+        }
+        delete temp;
+        return no;
+    };
+
+    // Utilizando coloração para verificar se é bipartido, nesse caso utilizaremos 2 cores, 0 e 1, -1 para não colorido
+
+    int cores[getNumNos()];
+    for (int i = 0; i < getNumNos(); i++)
+    {
+        cores[i] = -1;
+    }
+
+    No *noInicial = primeiroNo;
+    enfileirar(noInicial);
+    cores[noInicial->getIdNo()] = 1;
+
+    while (inicio != nullptr)
+    {
+        No *noAtual = desenfileirar();
+
+        Aresta *aresta = noAtual->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            No *noAdjacente = getNoPeloId(aresta->getIdDestino());
+            if (cores[noAdjacente->getIdNo()] == -1)
+            {
+                cores[noAdjacente->getIdNo()] = 1 - cores[noAtual->getIdNo()];
+                enfileirar(noAdjacente);
+            }
+            else if (cores[noAdjacente->getIdNo()] == cores[noAtual->getIdNo()])
+            {
+                return false;
+            }
+            aresta = aresta->getProxAresta();
+        }
+    }
+
+    return true;
+}
+
+No* Grafo::getNoPeloId(int id) {
+    No* no = primeiroNo;
+    while (no != nullptr) {
+        if (no->getIdNo() == id) {
+            return no;
+        }
+        no = no->getProxNo();
+    }
+    return nullptr;
+}
+
