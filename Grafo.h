@@ -1,56 +1,32 @@
-#include <iostream>
-#include <stdlib.h>
-#include "No.h"
-#include "Aresta.h"
+#ifndef GRAFO_H
+#define GRAFO_H
 
-using namespace std;
+#include <string>
 
-class No;
-class Aresta;
-
-class Grafo
-{
-
-private:
+class Grafo {
+protected:
     int ordem;
-    int numArestas;
-    int numNos;
-    int totalArestas;
-    bool pesoNos;
-    bool pesoArestas;
     bool direcionado;
-
-    No *primeiroNo;
-    No *ultimoNo;
+    bool ponderadoVertices;
+    bool ponderadoArestas;
 
 public:
-    Grafo(int ordem, int totalArestas, bool direcionado, bool pesoArestas, bool pesoNos);
+    Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     virtual ~Grafo();
 
-    virtual void incOrdem();
-    virtual void decOrdem();
-
-    virtual int getNumArestas();
-    virtual int getNumNos();
-    virtual No *getPrimeiroNo();
-    virtual No *getUltimoNo();
+    virtual int getGrau(int vertice) = 0;
     virtual int getOrdem();
-    virtual int getGrau();
-
-    virtual bool ehDigrafo();
-
-    virtual void imprimeGrafo();
-
-    virtual bool ehBipartido();
-    virtual No *getNoPeloId(int id);
-    virtual int nConexo();
     virtual bool ehDirecionado();
     virtual bool verticePonderado();
     virtual bool arestaPonderada();
-    virtual bool ehCompleto();
-    virtual bool ehArvore();
-    virtual bool possuiArticulacao();
-    virtual bool possuiPonte();
-    virtual void carregaGrafo(const string &filename);
-    virtual void novoGrafo(const string &configFile);
+    virtual bool ehCompleto() = 0;
+    virtual bool ehBipartido() = 0;
+    virtual int nConexo() = 0;
+    virtual bool ehArvore() = 0;
+    virtual bool possuiPonte() = 0;
+    virtual bool possuiArticulacao() = 0;
+    virtual void carregaGrafo(const std::string& arquivo) = 0;
+    virtual void novoGrafo(const std::string& arquivoConfig) = 0;
 };
+
+#endif // GRAFO_H

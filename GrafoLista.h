@@ -2,41 +2,29 @@
 #define GRAFOLISTA_H
 
 #include "Grafo.h"
-#include "No.h"
-#include "ListaEncadeada.h"
-#include <iostream>
-#include <fstream>
+#include <list>
+#include <vector>
 #include <string>
-#include <cstdlib>
+#include <utility>
 
 class GrafoLista : public Grafo {
 private:
-    ListaEncadeada* listaAdj;
-    int numVertices;
-    bool direcionado;
-    bool verticesPonderados;
-    bool arestasPonderadas;
+    std::vector<std::list<std::pair<int, int>>> listaAdj;
 
 public:
-    GrafoLista(int num_vertices, bool direcionado, bool vertices_ponderados, bool arestas_ponderadas);
+    GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     ~GrafoLista();
 
+    int getGrau(int vertice) override;
+    bool ehCompleto() override;
     bool ehBipartido() override;
     int nConexo() override;
-    int getGrau() override;
-    int getOrdem() override;
-    bool ehDirecionado() override;
-    bool verticePonderado() override;
-    bool arestaPonderada() override;
-    bool ehCompleto() override;
     bool ehArvore() override;
-    bool possuiArticulacao() override;
     bool possuiPonte() override;
-    void carregaGrafo(const std::string& filename) override;
-    void novoGrafo(const std::string& config_filename) override;
+    bool possuiArticulacao() override;
 
-    void addNo(int id, float peso = 0);
-    void addAresta(int origem, int destino, float peso = 0);
+    void carregaGrafo(const std::string& arquivo) override;
+    void novoGrafo(const std::string& arquivoConfig) override;
 };
 
 #endif // GRAFOLISTA_H

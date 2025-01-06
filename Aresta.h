@@ -1,42 +1,22 @@
 #ifndef ARESTA_H
 #define ARESTA_H
-#include <iostream>
-#include <stdlib.h>
-#include <string>
-#include "No.h"
-
-using namespace std;
-
-class No;
 
 class Aresta {
-
 private:
-    float pesoAresta;
-    int noDestino;
-    int noOrigem;
-    Aresta *proxAresta;
-    bool direcionado;
-
+    int origem;
+    int destino;
+    float peso;
+    Aresta* proxAresta;
 
 public:
-   
-    Aresta(int noDestino, int noOrigem, float pesoAresta);
-     ~Aresta();
+    Aresta(int origem, int destino, float peso = 1.0);
+    ~Aresta();
 
-    float getPesoAresta();
-    int getIdDestino();
-    int getIdOrigem();
-
-    void setPesoAresta(float pesoAresta);
-    void setNoDestino(No *valor);
-
+    int getOrigem();
+    int getDestino();
+    float getPeso();
     Aresta* getProxAresta();
-    void setProxAresta(Aresta *proxAresta);
-    
-    bool ehDirecionado();
-    void setDirecionado(bool direcionado);
-
+    void setProxAresta(Aresta* prox);
 };
 
 #endif // ARESTA_H
