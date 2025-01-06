@@ -13,15 +13,15 @@ class Aresta {
 
 private:
     float pesoAresta;
-    int noDestino;
-    int noOrigem;
+    No* noDestino;
+    No* noOrigem;
     Aresta *proxAresta;
     bool direcionado;
 
 
 public:
    
-    Aresta(int noDestino, int noOrigem, float pesoAresta);
+    Aresta(No* noDestino, No* noOrigem, float pesoAresta);
      ~Aresta();
 
     float getPesoAresta();
