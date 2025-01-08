@@ -2,11 +2,11 @@
 #define GRAFOMATRIZ_H
 
 #include "Grafo.h"
-#include <vector>
+
 
 class GrafoMatriz : public Grafo {
 private:
-    std::vector<std::vector<int>> matrizAdj; // Matriz de adjacência
+    int** matrizAdj; // Matriz de adjacência
     int numVertices;
 
 public:

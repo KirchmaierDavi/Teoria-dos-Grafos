@@ -1,15 +1,18 @@
 #include "GrafoMatriz.h"
 #include <fstream>
 #include <iostream>
-#include <queue>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 
 GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
     : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas) {
-    matrizAdj.resize(ordem, vector<int>(ordem, 0));
+    matrizAdj = new int*[ordem];
+    for (int i = 0; i < ordem; ++i) {
+        matrizAdj[i] = new int[ordem];
+        for (int j = 0; j < ordem; ++j) {
+            matrizAdj[i][j] = 0;
+        }
+    }
 }
 
 GrafoMatriz::~GrafoMatriz() {}
@@ -34,47 +37,61 @@ bool GrafoMatriz::ehCompleto() {
 }
 
 bool GrafoMatriz::ehBipartido() {
-    vector<int> cores(numVertices, -1); // -1 significa não colorido
-    queue<int> fila;
+    int* cores = new int[numVertices];
+    for (int i = 0; i < numVertices; ++i) {
+        cores[i] = -1; 
+    }
 
-    cores[0] = 1; // Começa colorindo o primeiro vértice
-    fila.push(0);
+    int* fila = new int[numVertices];
+    int inicio = 0, fim = 0;
 
-    while (!fila.empty()) {
-        int u = fila.front();
-        fila.pop();
+    cores[0] = 1; 
+    fila[fim++] = 0;
 
+    while (inicio != fim) {
+        int u = fila[inicio++];
         for (int v = 0; v < numVertices; v++) {
             if (matrizAdj[u][v] && cores[v] == -1) {
                 cores[v] = 1 - cores[u];
-                fila.push(v);
+                fila[fim++] = v;
             } else if (matrizAdj[u][v] && cores[v] == cores[u]) {
+                delete[] cores;
+                delete[] fila;
                 return false;
             }
         }
     }
+
+    delete[] cores;
+    delete[] fila;
     return true;
 }
 
 int GrafoMatriz::nConexo() {
-    vector<bool> visitado(ordem, false);
+    bool* visitado = new bool[ordem];
+    for (int i = 0; i < ordem; ++i) {
+        visitado[i] = false;
+    }
+
     int componentes = 0;
 
     auto dfs = [&](int v, auto& dfsRef) -> void {
         visitado[v] = true;
-        for (int i = 0; i < ordem; i++) {
+        for (int i = 0; i < ordem; ++i) {
             if (matrizAdj[v][i] && !visitado[i]) {
                 dfsRef(i, dfsRef);
             }
         }
     };
 
-    for (int i = 0; i < ordem; i++) {
+    for (int i = 0; i < ordem; ++i) {
         if (!visitado[i]) {
             componentes++;
             dfs(i, dfs);
         }
     }
+
+    delete[] visitado;
     return componentes;
 }
 
@@ -99,12 +116,14 @@ bool GrafoMatriz::possuiPonte() {
 }
 
 bool GrafoMatriz::possuiArticulacao() {
-    vector<bool> visitado(numVertices);
+    bool* visitado = new bool[numVertices];
     int componentesOriginais = nConexo();
 
     for (int v = 0; v < numVertices; v++) {
-        fill(visitado.begin(), visitado.end(), false);
-        visitado[v] = true;
+        for (int i = 0; i < numVertices; ++i) {
+            visitado[i] = false;
+        }
+        visitado[v] = true; 
 
         int componentes = 0;
         for (int u = 0; u < numVertices; u++) {
@@ -123,12 +142,14 @@ bool GrafoMatriz::possuiArticulacao() {
         }
 
         if (componentes > componentesOriginais) {
+            delete[] visitado;
             return true;
         }
     }
+
+    delete[] visitado;
     return false;
 }
-
 void GrafoMatriz::carregaGrafo(const std::string& arquivo) {
     std::ifstream file(arquivo);
     if (!file.is_open()) {
@@ -153,7 +174,13 @@ void GrafoMatriz::carregaGrafo(const std::string& arquivo) {
         }
     }
 
-    matrizAdj.resize(numNos, std::vector<int>(numNos, 0));
+    matrizAdj = new int*[numNos];
+    for (int i = 0; i < numNos; ++i) {
+        matrizAdj[i] = new int[numNos];
+        for (int j = 0; j < numNos; ++j) {
+            matrizAdj[i][j] = 0;
+        }
+    }
 
     int origem, destino, peso;
     while (file >> origem >> destino >> peso) {
@@ -181,7 +208,13 @@ void GrafoMatriz::novoGrafo(const std::string& arquivoConfig) {
     file >> estrutura; // Lê a estrutura (matriz ou lista)
 
     file >> ordem >> direcionado >> ponderadoVertices >> ponderadoArestas;
-    matrizAdj.resize(ordem, std::vector<int>(ordem, 0));
+    matrizAdj = new int*[ordem];
+    for (int i = 0; i < ordem; ++i) {
+        matrizAdj[i] = new int[ordem];
+        for (int j = 0; j < ordem; ++j) {
+            matrizAdj[i][j] = 0;
+        }
+    }
 
     int origem, destino, peso;
     while (file >> origem >> destino >> peso) {

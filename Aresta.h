@@ -3,17 +3,19 @@
 
 class Aresta {
 private:
-    int origem;
-    int destino;
+    No* origem;
+    No* destino;
     float peso;
     Aresta* proxAresta;
 
 public:
-    Aresta(int origem, int destino, float peso = 1.0);
+    Aresta(No* origem, No* destino, float peso = 1.0);
     ~Aresta();
 
-    int getOrigem();
-    int getDestino();
+    int getIdDestino();
+    int getIdOrigem();
+    void setNoOrigem(No* no);
+    void setNoDestino(No* no); 
     float getPeso();
     Aresta* getProxAresta();
     void setProxAresta(Aresta* prox);

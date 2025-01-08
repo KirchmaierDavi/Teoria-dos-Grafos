@@ -2,14 +2,13 @@
 #define GRAFOLISTA_H
 
 #include "Grafo.h"
-#include <list>
-#include <vector>
+#include "ListaEncad.h"
 #include <string>
-#include <utility>
 
 class GrafoLista : public Grafo {
 private:
-    std::vector<std::list<std::pair<int, int>>> listaAdj;
+    Lista* listaAdj;
+    int numVertices;
 
 public:
     GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
