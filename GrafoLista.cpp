@@ -42,7 +42,7 @@ bool GrafoLista::ehBipartido() {
     while (inicio != fim) {
         int u = fila[inicio++];
         for (int i = 0; i < listaAdj[u].getTamanho(); ++i) {
-            int v = listaAdj[u].getElemento(i);
+            int v = listaAdj[u].getElemento(i)->getIdNo();
             if (cores[v] == -1) {
                 cores[v] = 1 - cores[u];
                 fila[fim++] = v;
@@ -70,7 +70,7 @@ int GrafoLista::nConexo() {
     auto dfs = [&](int v, auto& dfsRef) -> void {
         visitado[v] = true;
         for (int i = 0; i < listaAdj[v].getTamanho(); ++i) {
-            int adj = listaAdj[v].getElemento(i);
+            int adj = listaAdj[v].getElemento(i)->getIdNo();
             if (!visitado[adj]) {
                 dfsRef(adj, dfsRef);
             }
@@ -95,7 +95,7 @@ bool GrafoLista::ehArvore() {
 bool GrafoLista::possuiPonte() {
     for (int u = 0; u < ordem; u++) {
         for (int i = 0; i < listaAdj[u].getTamanho(); ++i) {
-            int v = listaAdj[u].getElemento(i);
+            int v = listaAdj[u].getElemento(i)->getIdNo();
 
             listaAdj[u].remover(v);
             if (!direcionado) {
@@ -109,7 +109,7 @@ bool GrafoLista::possuiPonte() {
             auto dfs = [&](int vertice, auto& dfsRef) -> void {
                 visitado[vertice] = true;
                 for (int k = 0; k < listaAdj[vertice].getTamanho(); ++k) {
-                    int adj = listaAdj[vertice].getElemento(k);
+                    int adj = listaAdj[vertice].getElemento(k)->getIdNo();
                     if (!visitado[adj]) {
                         dfsRef(adj, dfsRef);
                     }
@@ -156,7 +156,7 @@ bool GrafoLista::possuiArticulacao() {
                 auto dfs = [&](int x, auto& dfsRef) -> void {
                     visitado[x] = true;
                     for (int i = 0; i < listaAdj[x].getTamanho(); ++i) {
-                        int adj = listaAdj[x].getElemento(i);
+                        int adj = listaAdj[x].getElemento(i)->getIdNo();
                         if (!visitado[adj]) {
                             dfsRef(adj, dfsRef);
                         }
