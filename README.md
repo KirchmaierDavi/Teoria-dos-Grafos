@@ -57,7 +57,7 @@ Certifique-se de que você tenha um compilador C++ instalado, como o **g++**.
 
 1. Compile o projeto:
    ```bash
-   g++ -std=c++14 -Wall -o grafo_exec Grafo.cpp GrafoLista.cpp GrafoMatriz.cpp Aresta.cpp No.cpp main.cpp
+   g++ -std=c++14 -Wall -o grafo_exec Grafo.cpp GrafoLista.cpp GrafoMatriz.cpp Aresta.cpp No.cpp Lista.cpp main.cpp
    ```
 
 2. Execute o programa:
