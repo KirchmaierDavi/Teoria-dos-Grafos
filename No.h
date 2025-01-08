@@ -1,64 +1,33 @@
 #ifndef NO_H
 #define NO_H
-#include <iostream>
-#include <stdlib.h>
-#include <string>
+
 #include "Aresta.h"
 
-using namespace std;
-class Aresta;
-
 class No {
-
 private:
     int idNo;
     float pesoNo;
     unsigned int grauEntrada;
     unsigned int grauSaida;
-    int numArestas;
-    No *proxNo;
-    Aresta *primeiraAresta;
-    Aresta *ultimaAresta;
-    bool visitado;
+    Aresta* primeiraAresta;
+    Aresta* ultimaAresta;
+    No* proxNo;
 
 public:
-    No(int idNo);
+    No(int idNo, float pesoNo = 0.0);
     ~No();
 
+    int getIdNo();
+    float getPesoNo();
+    unsigned int getGrauEntrada();
+    unsigned int getGrauSaida();
     Aresta* getPrimeiraAresta();
-    Aresta* getUltimaAresta();
-
-    int getNumArestas();
-    void setPrimeiraAresta(Aresta *novaAresta);
-
-
     No* getProxNo();
 
-    int getIdNo();
-
-    int getPeso();
-
-    int getGrauEntrada();
-
-    int getGrauSaida();
-
-    void setProxNo(No *novoNo);
-    
+    void setProxNo(No* proxNo);
+    void adicionaAresta(int destino, float peso = 1.0, bool direcionado = false);
     void incGrauEntrada();
     void incGrauSaida();
-
-    void incGrau(bool direcionado);
-
-    
-    void setPeso(float valor);
-    int getPeso();
-
-    void setIdNo(int valor);
-
-    bool foiVisitado();
-    void desmarcarVisitado();
-    void marcarVisitado();
-
 };
 
 #endif // NO_H

@@ -2,33 +2,27 @@
 #define GRAFOMATRIZ_H
 
 #include "Grafo.h"
+#include <vector>
 
-class GrafoMatriz : public Grafo
-{
+class GrafoMatriz : public Grafo {
 private:
-    static const int MAX_VERTICES = 100;
-    int matriz[MAX_VERTICES][MAX_VERTICES];
+    std::vector<std::vector<int>> matrizAdj; // Matriz de adjacência
     int numVertices;
-    bool direcionado;
-    bool vertices_ponderados;
-    bool arestas_ponderadas;
 
 public:
-    GrafoMatriz(int num_vertices, bool direcionado, bool vertices_ponderados, bool arestas_ponderadas);
+    GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
+    ~GrafoMatriz();
 
+    int getGrau(int vertice) override;
+    bool ehCompleto() override;
     bool ehBipartido() override;
     int nConexo() override;
-    int getGrau() override;
-    int getOrdem() override;
-    bool ehDirecionado() override;
-    bool verticePonderado() override;
-    bool arestaPonderada() override;
-    bool ehCompleto() override;
     bool ehArvore() override;
-    bool possuiArticulacao() override;
     bool possuiPonte() override;
-    void carregaGrafo(std::string &filename);
-    void novoGrafo(std::string &config_filename);
+    bool possuiArticulacao() override;
+
+    void carregaGrafo(const std::string& arquivo) override;
+    void novoGrafo(const std::string& arquivoConfig) override;
 };
 
 #endif // GRAFOMATRIZ_H
