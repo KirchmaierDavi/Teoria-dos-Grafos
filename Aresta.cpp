@@ -1,16 +1,17 @@
 #include "Aresta.h"
+#include "No.h"
 
-Aresta::Aresta(int origem, int destino, float peso) 
+Aresta::Aresta(No* origem, No* destino, float peso) 
     : origem(origem), destino(destino), peso(peso), proxAresta(nullptr) {}
 
 Aresta::~Aresta() {}
 
-int Aresta::getOrigem() {
-    return origem;
+int Aresta::getIdOrigem() {
+    return origem->getIdNo();
 }
 
-int Aresta::getDestino() {
-    return destino;
+int Aresta::getIdDestino() {
+    return destino->getIdNo();
 }
 
 float Aresta::getPeso() {
@@ -23,4 +24,12 @@ Aresta* Aresta::getProxAresta() {
 
 void Aresta::setProxAresta(Aresta* prox) {
     proxAresta = prox;
+}
+
+void Aresta::setNoDestino(No *valor) {
+    this->destino = valor;
+}
+
+void Aresta::setNoOrigem(No *valor) {
+    this->origem = valor;
 }
