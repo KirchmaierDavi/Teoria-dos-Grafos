@@ -1,0 +1,218 @@
+\doxysection{No Class Reference}
+\hypertarget{class_no}{}\label{class_no}\index{No@{No}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}} (int id\+No, float peso\+No=0.\+0)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{class_no}{No}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_no_adf8ad7663b1e6056c15fb31afae896c6}{\texorpdfstring{$\sim$}{\string~}\+No}} ()
+\begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{class_no}{No}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_no_a16ed333794719748606fcd8a0824fa70}{get\+Id\+No}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o ID do nó. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_no_a7fbda2215755db3bbe344b26c4430898}{get\+Peso\+No}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o peso do nó. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{class_no_ab3692e21800b854f77b989185be896e6}{get\+Grau\+Entrada}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o grau de entrada do nó. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{class_no_ad14604b79c6cd3d68cb2d04ccfb257b4}{get\+Grau\+Saida}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o grau de saída do nó. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_aresta}{Aresta}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_no_a14d2358660f0ba29da7e33903b76595e}{get\+Primeira\+Aresta}} ()
+\begin{DoxyCompactList}\small\item\em Obtém a primeira aresta associada ao nó. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_no_adb76979d05343b5310993328661419c4}{get\+Prox\+No}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o próximo nó na lista de nós. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_no_a6db18b543f8f167bf60e320ada29bc49}{set\+Prox\+No}} (\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}prox\+No)
+\begin{DoxyCompactList}\small\item\em Define o próximo nó na lista de nós. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_no_a4e7a7aa2ecfec85acf208bae6f0c8561}{adiciona\+Aresta}} (int destino, float peso=1.\+0, bool direcionado=false)
+\begin{DoxyCompactList}\small\item\em Adiciona uma aresta ao nó. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_no_adead66787583df44768c8fc843b21d8b}{inc\+Grau\+Entrada}} ()
+\begin{DoxyCompactList}\small\item\em Incrementa o grau de entrada do nó. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_no_ac3728cb331f8aef149952f86dc451687}{inc\+Grau\+Saida}} ()
+\begin{DoxyCompactList}\small\item\em Incrementa o grau de saída do nó. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_no_aaf5b2aedbaede6ed59a1905727506a6d}\index{No@{No}!No@{No}}
+\index{No@{No}!No@{No}}
+\doxysubsubsection{\texorpdfstring{No()}{No()}}
+{\footnotesize\ttfamily \label{class_no_aaf5b2aedbaede6ed59a1905727506a6d} 
+No\+::\+No (\begin{DoxyParamCaption}\item[{int}]{id\+No}{, }\item[{float}]{peso\+No}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})}
+
+
+
+Construtor da classe \doxylink{class_no}{No}. 
+
+Este construtor inicializa um nó com o ID, peso, e valores iniciais para os graus de entrada e saída, além de inicializar os ponteiros para as arestas e o próximo nó.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No} & O ID do nó. \\
+\hline
+{\em peso\+No} & O peso do nó. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_no_adf8ad7663b1e6056c15fb31afae896c6}\index{No@{No}!````~No@{\texorpdfstring{$\sim$}{\string~}No}}
+\index{````~No@{\texorpdfstring{$\sim$}{\string~}No}!No@{No}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}No()}{\string~No()}}
+{\footnotesize\ttfamily \label{class_no_adf8ad7663b1e6056c15fb31afae896c6} 
+No\+::\texorpdfstring{$\sim$}{\string~}\+No (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destrutor da classe \doxylink{class_no}{No}. 
+
+O destrutor percorre a lista de arestas associadas ao nó e as libera corretamente. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_no_a4e7a7aa2ecfec85acf208bae6f0c8561}\index{No@{No}!adicionaAresta@{adicionaAresta}}
+\index{adicionaAresta@{adicionaAresta}!No@{No}}
+\doxysubsubsection{\texorpdfstring{adicionaAresta()}{adicionaAresta()}}
+{\footnotesize\ttfamily \label{class_no_a4e7a7aa2ecfec85acf208bae6f0c8561} 
+void No\+::adiciona\+Aresta (\begin{DoxyParamCaption}\item[{int}]{destino}{, }\item[{float}]{peso}{ = {\ttfamily 1.0}, }\item[{bool}]{direcionado}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Adiciona uma aresta ao nó. 
+
+Este método cria uma nova aresta com o nó de origem e destino, e o peso atribuído. A aresta é adicionada à lista de arestas do nó. Caso o grafo não seja direcionado, o grau de entrada também é atualizado.
+
+
+\begin{DoxyParams}{Parameters}
+{\em destino} & O ID do nó de destino da aresta. \\
+\hline
+{\em peso} & O peso da aresta. \\
+\hline
+{\em direcionado} & Se a aresta é direcionada ou não. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_no_ab3692e21800b854f77b989185be896e6}\index{No@{No}!getGrauEntrada@{getGrauEntrada}}
+\index{getGrauEntrada@{getGrauEntrada}!No@{No}}
+\doxysubsubsection{\texorpdfstring{getGrauEntrada()}{getGrauEntrada()}}
+{\footnotesize\ttfamily \label{class_no_ab3692e21800b854f77b989185be896e6} 
+unsigned int No\+::get\+Grau\+Entrada (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o grau de entrada do nó. 
+
+Este método retorna o número de arestas que entram no nó.
+
+\begin{DoxyReturn}{Returns}
+O grau de entrada do nó. 
+\end{DoxyReturn}
+\Hypertarget{class_no_ad14604b79c6cd3d68cb2d04ccfb257b4}\index{No@{No}!getGrauSaida@{getGrauSaida}}
+\index{getGrauSaida@{getGrauSaida}!No@{No}}
+\doxysubsubsection{\texorpdfstring{getGrauSaida()}{getGrauSaida()}}
+{\footnotesize\ttfamily \label{class_no_ad14604b79c6cd3d68cb2d04ccfb257b4} 
+unsigned int No\+::get\+Grau\+Saida (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o grau de saída do nó. 
+
+Este método retorna o número de arestas que saem do nó.
+
+\begin{DoxyReturn}{Returns}
+O grau de saída do nó. 
+\end{DoxyReturn}
+\Hypertarget{class_no_a16ed333794719748606fcd8a0824fa70}\index{No@{No}!getIdNo@{getIdNo}}
+\index{getIdNo@{getIdNo}!No@{No}}
+\doxysubsubsection{\texorpdfstring{getIdNo()}{getIdNo()}}
+{\footnotesize\ttfamily \label{class_no_a16ed333794719748606fcd8a0824fa70} 
+int No\+::get\+Id\+No (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o ID do nó. 
+
+Este método retorna o ID do nó.
+
+\begin{DoxyReturn}{Returns}
+O ID do nó. 
+\end{DoxyReturn}
+\Hypertarget{class_no_a7fbda2215755db3bbe344b26c4430898}\index{No@{No}!getPesoNo@{getPesoNo}}
+\index{getPesoNo@{getPesoNo}!No@{No}}
+\doxysubsubsection{\texorpdfstring{getPesoNo()}{getPesoNo()}}
+{\footnotesize\ttfamily \label{class_no_a7fbda2215755db3bbe344b26c4430898} 
+float No\+::get\+Peso\+No (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o peso do nó. 
+
+Este método retorna o peso associado ao nó.
+
+\begin{DoxyReturn}{Returns}
+O peso do nó. 
+\end{DoxyReturn}
+\Hypertarget{class_no_a14d2358660f0ba29da7e33903b76595e}\index{No@{No}!getPrimeiraAresta@{getPrimeiraAresta}}
+\index{getPrimeiraAresta@{getPrimeiraAresta}!No@{No}}
+\doxysubsubsection{\texorpdfstring{getPrimeiraAresta()}{getPrimeiraAresta()}}
+{\footnotesize\ttfamily \label{class_no_a14d2358660f0ba29da7e33903b76595e} 
+\mbox{\hyperlink{class_aresta}{Aresta}} \texorpdfstring{$\ast$}{*} No\+::get\+Primeira\+Aresta (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém a primeira aresta associada ao nó. 
+
+Este método retorna o ponteiro para a primeira aresta do nó.
+
+\begin{DoxyReturn}{Returns}
+Ponteiro para a primeira aresta do nó. 
+\end{DoxyReturn}
+\Hypertarget{class_no_adb76979d05343b5310993328661419c4}\index{No@{No}!getProxNo@{getProxNo}}
+\index{getProxNo@{getProxNo}!No@{No}}
+\doxysubsubsection{\texorpdfstring{getProxNo()}{getProxNo()}}
+{\footnotesize\ttfamily \label{class_no_adb76979d05343b5310993328661419c4} 
+\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*} No\+::get\+Prox\+No (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o próximo nó na lista de nós. 
+
+Este método retorna o ponteiro para o próximo nó.
+
+\begin{DoxyReturn}{Returns}
+Ponteiro para o próximo nó. 
+\end{DoxyReturn}
+\Hypertarget{class_no_adead66787583df44768c8fc843b21d8b}\index{No@{No}!incGrauEntrada@{incGrauEntrada}}
+\index{incGrauEntrada@{incGrauEntrada}!No@{No}}
+\doxysubsubsection{\texorpdfstring{incGrauEntrada()}{incGrauEntrada()}}
+{\footnotesize\ttfamily \label{class_no_adead66787583df44768c8fc843b21d8b} 
+void No\+::inc\+Grau\+Entrada (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Incrementa o grau de entrada do nó. 
+
+Este método incrementa o grau de entrada do nó em 1. \Hypertarget{class_no_ac3728cb331f8aef149952f86dc451687}\index{No@{No}!incGrauSaida@{incGrauSaida}}
+\index{incGrauSaida@{incGrauSaida}!No@{No}}
+\doxysubsubsection{\texorpdfstring{incGrauSaida()}{incGrauSaida()}}
+{\footnotesize\ttfamily \label{class_no_ac3728cb331f8aef149952f86dc451687} 
+void No\+::inc\+Grau\+Saida (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Incrementa o grau de saída do nó. 
+
+Este método incrementa o grau de saída do nó em 1. \Hypertarget{class_no_a6db18b543f8f167bf60e320ada29bc49}\index{No@{No}!setProxNo@{setProxNo}}
+\index{setProxNo@{setProxNo}!No@{No}}
+\doxysubsubsection{\texorpdfstring{setProxNo()}{setProxNo()}}
+{\footnotesize\ttfamily \label{class_no_a6db18b543f8f167bf60e320ada29bc49} 
+void No\+::set\+Prox\+No (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}}]{prox\+No}{}\end{DoxyParamCaption})}
+
+
+
+Define o próximo nó na lista de nós. 
+
+Este método define o próximo nó ao qual o nó atual está apontando.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prox\+No} & Ponteiro para o próximo nó. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/No.\+h\item 
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\mbox{\hyperlink{_no_8cpp}{No.\+cpp}}\end{DoxyCompactItemize}

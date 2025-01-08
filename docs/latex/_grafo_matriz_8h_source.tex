@@ -1,0 +1,33 @@
+\doxysection{C\+:/\+Users/\+Felipe Sant\textquotesingle{}Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\+Grafo\+Matriz.h}
+\hypertarget{_grafo_matriz_8h_source}{}\label{_grafo_matriz_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GRAFOMATRIZ\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GRAFOMATRIZ\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Grafo.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_grafo_matriz_ad9d29636f5816afb464e63366c258de9}{GrafoMatriz}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_grafo_aaf0b5d1ff5c80c5b69730749942ade87}{Grafo}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{int}**\ matrizAdj;\ \textcolor{comment}{//\ Matriz\ de\ adjacência}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ numVertices;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_grafo_matriz_ad9d29636f5816afb464e63366c258de9}{GrafoMatriz}}(\textcolor{keywordtype}{int}\ ordem,\ \textcolor{keywordtype}{bool}\ direcionado,\ \textcolor{keywordtype}{bool}\ ponderadoVertices,\ \textcolor{keywordtype}{bool}\ ponderadoArestas);}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_grafo_matriz_a2907ad8631e3bc21c34840cfbd7e0cbb}{\string~GrafoMatriz}}();}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_grafo_matriz_aa029b9787b7ffc573904a3e3a410b4dd}{getGrau}}(\textcolor{keywordtype}{int}\ vertice)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_matriz_aab75456c4c7962275edf89f9eb8326f6}{ehCompleto}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_matriz_a547f328a4c6e4cd89f7334b7a3b89287}{ehBipartido}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_grafo_matriz_ac0120941980b2566235b01b088099676}{nConexo}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_matriz_a7f966245ccac615a5bc69901ee5891ac}{ehArvore}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_matriz_ae8bccbd2f4c6029c0464f41448555995}{possuiPonte}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_matriz_a3112f0cbeaba34a8e49fcfce6bfb48f1}{possuiArticulacao}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_grafo_matriz_acaee0a6da7c38843b1d442f4f786c27d}{carregaGrafo}}(\textcolor{keyword}{const}\ std::string\&\ arquivo)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_grafo_matriz_a80b0b462997f135c5f1d903b6f6185d9}{novoGrafo}}(\textcolor{keyword}{const}\ std::string\&\ arquivoConfig)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAFOMATRIZ\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,43 @@
+\doxysection{C\+:/\+Users/\+Felipe Sant\textquotesingle{}Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\+Grafo.h}
+\hypertarget{_grafo_8h_source}{}\label{_grafo_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GRAFO\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GRAFO\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_grafo_aaf0b5d1ff5c80c5b69730749942ade87}{Grafo}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ ordem;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{int}\ numNos;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{bool}\ direcionado;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ ponderadoVertices;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{bool}\ ponderadoArestas;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_no}{No}}\ *primeiroNo;}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_no}{No}}\ *ultimoNo;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_grafo_aaf0b5d1ff5c80c5b69730749942ade87}{Grafo}}(\textcolor{keywordtype}{int}\ ordem,\ \textcolor{keywordtype}{bool}\ direcionado,\ \textcolor{keywordtype}{bool}\ ponderadoVertices,\ \textcolor{keywordtype}{bool}\ ponderadoArestas);}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_grafo_a16f3fbba0de2667dfba3b657cb7e95ff}{\string~Grafo}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_grafo_ab7c6a406cdef6a279c97a26e75e4c22f}{getGrau}}(\textcolor{keywordtype}{int}\ vertice);\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_grafo_ae189826770f445b4784d9752fe402026}{getOrdem}}();\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_grafo_aad54c4f80d7aefbc7ebcefbae4581bca}{getNumNos}}();\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_a180b9a1143b6d7a701bd63ec459c16af}{ehDirecionado}}();\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_ab7c8f199abd81e2a03a7b25cadc80cd9}{verticePonderado}}();\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_a4aee134a0b02458da203342d075d4b4c}{arestaPonderada}}();\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_ad447acf9572b8a19a482d17c5a19c1cd}{ehCompleto}}();\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_af32082e29d53fd8772c7d77576c2640c}{ehBipartido}}();\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_no}{No}}\ *\mbox{\hyperlink{class_grafo_a88c7f0fbf2be91a4e7a635d37ed53e0e}{getNoPeloId}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_grafo_a6c2912c868619e60ecd3f67035aa9fcd}{nConexo}}();\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_a62e09739bde38e7d49f0397e2d6487af}{ehArvore}}();\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_a7ecbc80d4dc5f26442df76b752d23059}{possuiPonte}}();\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_grafo_a241ec6b3ab7c8dcd2a198d84207afbb2}{possuiArticulacao}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ carregaGrafo(\textcolor{keyword}{const}\ std::string\&\ arquivo);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ novoGrafo(\textcolor{keyword}{const}\ std::string\&\ arquivoConfig);}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAFO\_H}}
+
+\end{DoxyCode}

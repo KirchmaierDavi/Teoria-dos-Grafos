@@ -1,0 +1,38 @@
+\doxysection{C\+:/\+Users/\+Felipe Sant\textquotesingle{}Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\+No.h}
+\hypertarget{_no_8h_source}{}\label{_no_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ NO\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ NO\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Aresta.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ idNo;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{float}\ pesoNo;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ grauEntrada;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ grauSaida;}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_aresta}{Aresta}}*\ primeiraAresta;}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_aresta}{Aresta}}*\ ultimaAresta;}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}*\ proxNo;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}(\textcolor{keywordtype}{int}\ idNo,\ \textcolor{keywordtype}{float}\ pesoNo\ =\ 0.0);}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_no_adf8ad7663b1e6056c15fb31afae896c6}{\string~No}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_no_a16ed333794719748606fcd8a0824fa70}{getIdNo}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_no_a7fbda2215755db3bbe344b26c4430898}{getPesoNo}}();}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_no_ab3692e21800b854f77b989185be896e6}{getGrauEntrada}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_no_ad14604b79c6cd3d68cb2d04ccfb257b4}{getGrauSaida}}();}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_aresta}{Aresta}}*\ \mbox{\hyperlink{class_no_a14d2358660f0ba29da7e33903b76595e}{getPrimeiraAresta}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}*\ \mbox{\hyperlink{class_no_adb76979d05343b5310993328661419c4}{getProxNo}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_a6db18b543f8f167bf60e320ada29bc49}{setProxNo}}(\mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}*\ proxNo);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_a4e7a7aa2ecfec85acf208bae6f0c8561}{adicionaAresta}}(\textcolor{keywordtype}{int}\ destino,\ \textcolor{keywordtype}{float}\ peso\ =\ 1.0,\ \textcolor{keywordtype}{bool}\ direcionado\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_adead66787583df44768c8fc843b21d8b}{incGrauEntrada}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_ac3728cb331f8aef149952f86dc451687}{incGrauSaida}}();}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NO\_H}}
+
+\end{DoxyCode}
