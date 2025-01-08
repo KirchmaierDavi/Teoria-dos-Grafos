@@ -1,52 +1,95 @@
+/**
+ * @file GrafoLista.cpp
+ * @brief Implementação das funções da classe GrafoLista.
+ */
+
 #include "GrafoLista.h"
 #include <fstream>
 #include <iostream>
 
-
 using namespace std;
 
+/**
+ * @brief Construtor da classe GrafoLista.
+ * @param ordem Número de vértices do grafo.
+ * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
+ * @param ponderadoVertices Indica se os vértices possuem pesos (true) ou não (false).
+ * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
+ */
 GrafoLista::GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
-    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas) {
+    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
+{
     listaAdj = new Lista[ordem];
 }
 
-GrafoLista::~GrafoLista() {
+/**
+ * @brief Destrutor da classe GrafoLista.
+ * Libera a memória alocada para a lista de adjacência.
+ */
+GrafoLista::~GrafoLista()
+{
     delete[] listaAdj;
 }
 
-int GrafoLista::getGrau(int vertice) {
+/**
+ * @brief Obtém o grau de um vértice.
+ * @param vertice Índice do vértice.
+ * @return Número de arestas conectadas ao vértice especificado.
+ */
+int GrafoLista::getGrau(int vertice)
+{
     return listaAdj[vertice].getTamanho();
 }
 
-bool GrafoLista::ehCompleto() {
-    for (int i = 0; i < ordem; i++) {
-        if (listaAdj[i].getTamanho() != ordem - 1) {
+/**
+ * @brief Verifica se o grafo é completo.
+ * Um grafo completo possui todas as combinações possíveis de arestas entre seus vértices.
+ * @return true se o grafo é completo; caso contrário, false.
+ */
+bool GrafoLista::ehCompleto()
+{
+    for (int i = 0; i < ordem; i++)
+    {
+        if (listaAdj[i].getTamanho() != ordem - 1)
+        {
             return false;
         }
     }
     return true;
 }
 
-bool GrafoLista::ehBipartido() {
-    int* cores = new int[ordem];
-    for (int i = 0; i < ordem; ++i) {
+/**
+ * @brief Verifica se o grafo é bipartido.
+ * Um grafo bipartido pode ser dividido em dois subconjuntos, onde não existem arestas entre vértices do mesmo subconjunto.
+ * @return true se o grafo é bipartido; caso contrário, false.
+ */
+bool GrafoLista::ehBipartido()
+{
+    int *cores = new int[ordem];
+    for (int i = 0; i < ordem; ++i)
+    {
         cores[i] = -1; // -1 significa não colorido
     }
 
-    int* fila = new int[ordem];
+    int *fila = new int[ordem];
     int inicio = 0, fim = 0;
 
     cores[0] = 1; // Começa colorindo o primeiro vértice
     fila[fim++] = 0;
 
-    while (inicio != fim) {
+    while (inicio != fim)
+    {
         int u = fila[inicio++];
-        for (int i = 0; i < listaAdj[u].getTamanho(); ++i) {
+        for (int i = 0; i < listaAdj[u].getTamanho(); ++i)
+        {
             int v = listaAdj[u].getElemento(i)->getIdNo();
-            if (cores[v] == -1) {
+            if (cores[v] == -1)
+            {
                 cores[v] = 1 - cores[u];
                 fila[fim++] = v;
-            } else if (cores[v] == cores[u]) {
+            }
+            else if (cores[v] == cores[u])
+            {
                 delete[] cores;
                 delete[] fila;
                 return false;
@@ -59,26 +102,38 @@ bool GrafoLista::ehBipartido() {
     return true;
 }
 
-int GrafoLista::nConexo() {
-    bool* visitado = new bool[ordem];
-    for (int i = 0; i < ordem; ++i) {
+/**
+ * @brief Determina o número de componentes conexos no grafo.
+ * Um componente conexo é um subconjunto de vértices onde existe pelo menos um caminho entre cada par de vértices.
+ * @return Número de componentes conexos no grafo.
+ */
+int GrafoLista::nConexo()
+{
+    bool *visitado = new bool[ordem];
+    for (int i = 0; i < ordem; ++i)
+    {
         visitado[i] = false;
     }
 
     int componentes = 0;
 
-    auto dfs = [&](int v, auto& dfsRef) -> void {
+    auto dfs = [&](int v, auto &dfsRef) -> void
+    {
         visitado[v] = true;
-        for (int i = 0; i < listaAdj[v].getTamanho(); ++i) {
+        for (int i = 0; i < listaAdj[v].getTamanho(); ++i)
+        {
             int adj = listaAdj[v].getElemento(i)->getIdNo();
-            if (!visitado[adj]) {
+            if (!visitado[adj])
+            {
                 dfsRef(adj, dfsRef);
             }
         }
     };
 
-    for (int i = 0; i < ordem; ++i) {
-        if (!visitado[i]) {
+    for (int i = 0; i < ordem; ++i)
+    {
+        if (!visitado[i])
+        {
             componentes++;
             dfs(i, dfs);
         }
@@ -88,37 +143,58 @@ int GrafoLista::nConexo() {
     return componentes;
 }
 
-bool GrafoLista::ehArvore() {
+/**
+ * @brief Verifica se o grafo é uma árvore.
+ * Uma árvore é um grafo conexo sem ciclos.
+ * @return true se o grafo é uma árvore; caso contrário, false.
+ */
+bool GrafoLista::ehArvore()
+{
     return (nConexo() == 1 && (ordem - 1) == numVertices);
 }
 
-bool GrafoLista::possuiPonte() {
-    for (int u = 0; u < ordem; u++) {
-        for (int i = 0; i < listaAdj[u].getTamanho(); ++i) {
+/**
+ * @brief Verifica se o grafo possui pontes.
+ * Uma ponte é uma aresta cuja remoção aumenta o número de componentes conexos do grafo.
+ * @return true se existe pelo menos uma ponte; caso contrário, false.
+ */
+bool GrafoLista::possuiPonte()
+{
+    for (int u = 0; u < ordem; u++)
+    {
+        for (int i = 0; i < listaAdj[u].getTamanho(); ++i)
+        {
             int v = listaAdj[u].getElemento(i)->getIdNo();
 
             listaAdj[u].remover(v);
-            if (!direcionado) {
+            if (!direcionado)
+            {
                 listaAdj[v].remover(u);
             }
-            bool* visitado = new bool[ordem];
-            for (int j = 0; j < ordem; ++j) {
+            bool *visitado = new bool[ordem];
+            for (int j = 0; j < ordem; ++j)
+            {
                 visitado[j] = false;
             }
 
-            auto dfs = [&](int vertice, auto& dfsRef) -> void {
+            auto dfs = [&](int vertice, auto &dfsRef) -> void
+            {
                 visitado[vertice] = true;
-                for (int k = 0; k < listaAdj[vertice].getTamanho(); ++k) {
+                for (int k = 0; k < listaAdj[vertice].getTamanho(); ++k)
+                {
                     int adj = listaAdj[vertice].getElemento(k)->getIdNo();
-                    if (!visitado[adj]) {
+                    if (!visitado[adj])
+                    {
                         dfsRef(adj, dfsRef);
                     }
                 }
             };
 
             int componentes = 0;
-            for (int j = 0; j < ordem; j++) {
-                if (!visitado[j]) {
+            for (int j = 0; j < ordem; j++)
+            {
+                if (!visitado[j])
+                {
                     componentes++;
                     dfs(j, dfs);
                 }
@@ -126,11 +202,13 @@ bool GrafoLista::possuiPonte() {
 
             delete[] visitado;
             listaAdj[u].adicionar(v);
-            if (!direcionado) {
+            if (!direcionado)
+            {
                 listaAdj[v].adicionar(u);
             }
 
-            if (componentes > 1) {
+            if (componentes > 1)
+            {
                 return true;
             }
         }
@@ -139,25 +217,38 @@ bool GrafoLista::possuiPonte() {
     return false;
 }
 
-bool GrafoLista::possuiArticulacao() {
-    bool* visitado = new bool[ordem];
+/**
+ * @brief Verifica se o grafo possui vértices de articulação.
+ * Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo.
+ * @return true se existe pelo menos um vértice de articulação; caso contrário, false.
+ */
+bool GrafoLista::possuiArticulacao()
+{
+    bool *visitado = new bool[ordem];
     int componentesOriginais = nConexo();
 
-    for (int v = 0; v < ordem; v++) {
-        for (int i = 0; i < ordem; ++i) {
+    for (int v = 0; v < ordem; v++)
+    {
+        for (int i = 0; i < ordem; ++i)
+        {
             visitado[i] = false;
         }
-        visitado[v] = true; 
+        visitado[v] = true;
 
         int componentes = 0;
-        for (int u = 0; u < ordem; u++) {
-            if (!visitado[u]) {
+        for (int u = 0; u < ordem; u++)
+        {
+            if (!visitado[u])
+            {
                 componentes++;
-                auto dfs = [&](int x, auto& dfsRef) -> void {
+                auto dfs = [&](int x, auto &dfsRef) -> void
+                {
                     visitado[x] = true;
-                    for (int i = 0; i < listaAdj[x].getTamanho(); ++i) {
+                    for (int i = 0; i < listaAdj[x].getTamanho(); ++i)
+                    {
                         int adj = listaAdj[x].getElemento(i)->getIdNo();
-                        if (!visitado[adj]) {
+                        if (!visitado[adj])
+                        {
                             dfsRef(adj, dfsRef);
                         }
                     }
@@ -166,7 +257,8 @@ bool GrafoLista::possuiArticulacao() {
             }
         }
 
-        if (componentes > componentesOriginais) {
+        if (componentes > componentesOriginais)
+        {
             delete[] visitado;
             return true;
         }
@@ -176,9 +268,16 @@ bool GrafoLista::possuiArticulacao() {
     return false;
 }
 
-void GrafoLista::carregaGrafo(const std::string& arquivo) {
+/**
+ * @brief Carrega o grafo a partir de um arquivo.
+ * O arquivo deve conter os dados do grafo, como número de nós, tipo de grafo e arestas.
+ * @param arquivo Caminho para o arquivo de entrada.
+ */
+void GrafoLista::carregaGrafo(const std::string &arquivo)
+{
     std::ifstream file(arquivo);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Erro ao abrir o arquivo " << arquivo << std::endl;
         return;
     }
@@ -191,9 +290,11 @@ void GrafoLista::carregaGrafo(const std::string& arquivo) {
     this->ponderadoVertices = ponderadoVertices;
     this->ponderadoArestas = ponderadoArestas;
 
-    if (ponderadoVertices) {
+    if (ponderadoVertices)
+    {
         std::cout << "Pesos dos vértices:" << std::endl;
-        for (int i = 0; i < numNos; i++) {
+        for (int i = 0; i < numNos; i++)
+        {
             int pesoVertice;
             file >> pesoVertice;
             std::cout << "Vértice " << i + 1 << ": Peso " << pesoVertice << std::endl;
@@ -204,11 +305,13 @@ void GrafoLista::carregaGrafo(const std::string& arquivo) {
     listaAdj = new Lista[numNos];
 
     int origem, destino, peso;
-    while (file >> origem >> destino >> peso) {
-        origem--; 
+    while (file >> origem >> destino >> peso)
+    {
+        origem--;
         destino--;
         listaAdj[origem].adicionar(destino);
-        if (!direcionado) {
+        if (!direcionado)
+        {
             listaAdj[destino].adicionar(origem);
         }
         std::cout << "Aresta adicionada: " << origem + 1 << " -> " << destino + 1 << " com peso " << peso << std::endl;
@@ -218,26 +321,36 @@ void GrafoLista::carregaGrafo(const std::string& arquivo) {
     std::cout << "Lista de Adjacência carregada com sucesso." << std::endl;
 }
 
-void GrafoLista::novoGrafo(const std::string& arquivoConfig) {
+/**
+ * @brief Cria um novo grafo a partir de um arquivo de configuração.
+ * O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas.
+ * @param arquivoConfig Caminho para o arquivo de configuração.
+ */
+void GrafoLista::novoGrafo(const std::string &arquivoConfig)
+{
     std::ifstream file(arquivoConfig);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Erro ao abrir o arquivo de configuração!" << std::endl;
         return;
     }
 
     std::string tipo;
-    file >> tipo;  // Ignora "matriz" ou "lista"
+    file >> tipo; // Ignora "matriz" ou "lista"
     file >> ordem >> direcionado >> ponderadoVertices >> ponderadoArestas;
     delete[] listaAdj;
     listaAdj = new Lista[ordem];
 
     int origem, destino, peso;
-    while (file >> origem >> destino >> peso) {
+    while (file >> origem >> destino >> peso)
+    {
         listaAdj[origem].adicionar(destino);
-        if (!direcionado) {
+        if (!direcionado)
+        {
             listaAdj[destino].adicionar(origem);
         }
     }
 
     file.close();
+    std::cout << "Novo grafo configurado como " << tipo << "." << std::endl;
 }

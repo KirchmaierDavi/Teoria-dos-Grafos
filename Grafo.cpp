@@ -1,23 +1,59 @@
+/**
+ * @file Grafo.cpp
+ * @brief Implementação das funções da classe abstrata Grafo.
+ */
+
 #include "Grafo.h"
 #include "No.h"
 #include "Aresta.h"
 #include <iostream>
 
+/**
+ * @brief Construtor da classe Grafo.
+ * 
+ * Este construtor inicializa um grafo com base na ordem (número de vértices),
+ * se o grafo é direcionado ou não, se os vértices são ponderados e se as arestas são ponderadas.
+ * 
+ * @param ordem Número de vértices do grafo.
+ * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
+ * @param ponderadoVertices Indica se os vértices são ponderados (true) ou não (false).
+ * @param ponderadoArestas Indica se as arestas são ponderadas (true) ou não (false).
+ */
 Grafo::Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
     : ordem(ordem), direcionado(direcionado), ponderadoVertices(ponderadoVertices), ponderadoArestas(ponderadoArestas) {}
 
+/**
+ * @brief Destrutor da classe Grafo.
+ * 
+ * Este destrutor é responsável por liberar os recursos alocados pelo grafo.
+ */
 Grafo::~Grafo() {}
 
+/**
+ * @brief Obtém a ordem do grafo.
+ * 
+ * @return A ordem (número de vértices) do grafo.
+ */
 int Grafo::getOrdem()
 {
     return ordem;
 }
 
+/**
+ * @brief Obtém o número de nós do grafo.
+ * 
+ * @return O número de nós do grafo.
+ */
 int Grafo::getNumNos()
 {
     return numNos;
 }
 
+/**
+ * @brief Verifica se o grafo é direcionado.
+ * 
+ * @return true se o grafo for direcionado, false caso contrário.
+ */
 bool Grafo::ehDirecionado()
 {
     if (direcionado == 1)
@@ -27,6 +63,11 @@ bool Grafo::ehDirecionado()
     return false;
 }
 
+/**
+ * @brief Verifica se o grafo possui vértices ponderados.
+ * 
+ * @return true se ao menos um vértice for ponderado, false caso contrário.
+ */
 bool Grafo::verticePonderado()
 {
     No *no = primeiroNo;
@@ -41,6 +82,11 @@ bool Grafo::verticePonderado()
     return false;
 }
 
+/**
+ * @brief Verifica se o grafo possui arestas ponderadas.
+ * 
+ * @return true se ao menos uma aresta for ponderada, false caso contrário.
+ */
 bool Grafo::arestaPonderada()
 {
     No *no = primeiroNo;
@@ -60,6 +106,13 @@ bool Grafo::arestaPonderada()
     return false;
 }
 
+/**
+ * @brief Obtém o nó pelo seu ID.
+ * 
+ * @param id O ID do nó a ser buscado.
+ * 
+ * @return O ponteiro para o nó com o ID especificado ou nullptr caso o nó não seja encontrado.
+ */
 No *Grafo::getNoPeloId(int id)
 {
     No *no = primeiroNo;
@@ -74,6 +127,11 @@ No *Grafo::getNoPeloId(int id)
     return nullptr;
 }
 
+/**
+ * @brief Obtém o grau de um vértice.
+ * @param vertice Índice do vértice.
+ * @return Número de arestas conectadas ao vértice especificado.
+ */
 int Grafo::getGrau(int vertice)
 {
     // No *no = primeiroNo;
@@ -89,6 +147,11 @@ int Grafo::getGrau(int vertice)
     return -1;
 }
 
+/**
+ * @brief Verifica se o grafo é bipartido.
+ * Um grafo bipartido pode ser dividido em dois subconjuntos, onde não existem arestas entre vértices do mesmo subconjunto.
+ * @return true se o grafo é bipartido; caso contrário, false.
+ */
 bool Grafo::ehBipartido()
 {
     // if (primeiroNo == nullptr)
@@ -177,6 +240,11 @@ bool Grafo::ehBipartido()
     return false;
 }
 
+/**
+ * @brief Determina o número de componentes conexos no grafo.
+ * Um componente conexo é um subconjunto de vértices onde existe pelo menos um caminho entre cada par de vértices.
+ * @return Número de componentes conexos no grafo.
+ */
 int Grafo::nConexo()
 {
     // bool* visitado = new bool[ordem];
@@ -213,6 +281,11 @@ int Grafo::nConexo()
     return 0;
 }
 
+/**
+ * @brief Verifica se o grafo é completo.
+ * Um grafo completo possui todas as combinações possíveis de arestas entre seus vértices.
+ * @return true se o grafo é completo; caso contrário, false.
+ */
 bool Grafo::ehCompleto()
 {
     // No* no = primeiroNo;
@@ -242,6 +315,11 @@ bool Grafo::ehCompleto()
     return false;
 }
 
+/**
+ * @brief Verifica se o grafo é uma árvore.
+ * Uma árvore é um grafo conexo sem ciclos.
+ * @return true se o grafo é uma árvore; caso contrário, false.
+ */
 bool Grafo::ehArvore()
 {
     // return (nConexo() == 1 && (ordem - 1) == getNumNos());
@@ -249,6 +327,11 @@ bool Grafo::ehArvore()
     return false;
 }
 
+/**
+ * @brief Verifica se o grafo possui pontes.
+ * Uma ponte é uma aresta cuja remoção aumenta o número de componentes conexos do grafo.
+ * @return true se existe pelo menos uma ponte; caso contrário, false.
+ */
 bool Grafo::possuiPonte()
 {
     // No* no = primeiroNo;
@@ -295,6 +378,11 @@ bool Grafo::possuiPonte()
     return false;
 }
 
+/**
+ * @brief Verifica se o grafo possui vértices de articulação.
+ * Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo.
+ * @return true se existe pelo menos um vértice de articulação; caso contrário, false.
+ */
 bool Grafo::possuiArticulacao()
 {
     // int componentesOriginais = nConexo();

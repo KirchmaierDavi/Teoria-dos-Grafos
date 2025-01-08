@@ -1,0 +1,177 @@
+\doxysection{Aresta Class Reference}
+\hypertarget{class_aresta}{}\label{class_aresta}\index{Aresta@{Aresta}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_aresta_a8f22bc992962ed37db023a09d7e83e99}{Aresta}} (\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}origem, \mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}destino, float peso=1.\+0)
+\begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{class_aresta}{Aresta}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_aresta_af790d948289beae339ac25a697decddb}{\texorpdfstring{$\sim$}{\string~}\+Aresta}} ()
+\begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{class_aresta}{Aresta}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_aresta_a49ff4c7d5220b48acacc75ba2945c11c}{get\+Id\+Destino}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o ID do nó de destino da aresta. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_aresta_ab3f00c37390cca6e6a0d2d78a8428dda}{get\+Id\+Origem}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o ID do nó de origem da aresta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aresta_aa0b131cda025178f234fbc54fb6356b2}{set\+No\+Origem}} (\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}no)
+\begin{DoxyCompactList}\small\item\em Define o nó de origem da aresta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aresta_a0e72b09c584b5ba1860584ed1c98dfbc}{set\+No\+Destino}} (\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}no)
+\begin{DoxyCompactList}\small\item\em Define o nó de destino da aresta. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_aresta_a488084ecc77cc7c93f6b871a65d8c314}{get\+Peso}} ()
+\begin{DoxyCompactList}\small\item\em Obtém o peso da aresta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_aresta}{Aresta}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_aresta_ad6ce7160f1262425587930cd3168b04b}{get\+Prox\+Aresta}} ()
+\begin{DoxyCompactList}\small\item\em Obtém a próxima aresta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_aresta_a54b71bab1beba9a1dfbf2809776ec960}{set\+Prox\+Aresta}} (\mbox{\hyperlink{class_aresta}{Aresta}} \texorpdfstring{$\ast$}{*}prox)
+\begin{DoxyCompactList}\small\item\em Define a próxima aresta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_aresta_a8f22bc992962ed37db023a09d7e83e99}\index{Aresta@{Aresta}!Aresta@{Aresta}}
+\index{Aresta@{Aresta}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{Aresta()}{Aresta()}}
+{\footnotesize\ttfamily \label{class_aresta_a8f22bc992962ed37db023a09d7e83e99} 
+Aresta\+::\+Aresta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}}]{origem}{, }\item[{\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}}]{destino}{, }\item[{float}]{peso}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})}
+
+
+
+Construtor da classe \doxylink{class_aresta}{Aresta}. 
+
+Este construtor inicializa uma aresta com os nós de origem e destino, o peso da aresta e o ponteiro para a próxima aresta.
+
+
+\begin{DoxyParams}{Parameters}
+{\em origem} & Ponteiro para o nó de origem da aresta. \\
+\hline
+{\em destino} & Ponteiro para o nó de destino da aresta. \\
+\hline
+{\em peso} & O peso da aresta. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aresta_af790d948289beae339ac25a697decddb}\index{Aresta@{Aresta}!````~Aresta@{\texorpdfstring{$\sim$}{\string~}Aresta}}
+\index{````~Aresta@{\texorpdfstring{$\sim$}{\string~}Aresta}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Aresta()}{\string~Aresta()}}
+{\footnotesize\ttfamily \label{class_aresta_af790d948289beae339ac25a697decddb} 
+Aresta\+::\texorpdfstring{$\sim$}{\string~}\+Aresta (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destrutor da classe \doxylink{class_aresta}{Aresta}. 
+
+O destrutor da classe \doxylink{class_aresta}{Aresta} é vazio, pois a liberação de memória dos nós (origem e destino) deve ser tratada em outra parte do código. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_aresta_a49ff4c7d5220b48acacc75ba2945c11c}\index{Aresta@{Aresta}!getIdDestino@{getIdDestino}}
+\index{getIdDestino@{getIdDestino}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{getIdDestino()}{getIdDestino()}}
+{\footnotesize\ttfamily \label{class_aresta_a49ff4c7d5220b48acacc75ba2945c11c} 
+int Aresta\+::get\+Id\+Destino (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o ID do nó de destino da aresta. 
+
+Este método retorna o ID do nó de destino da aresta.
+
+\begin{DoxyReturn}{Returns}
+O ID do nó de destino. 
+\end{DoxyReturn}
+\Hypertarget{class_aresta_ab3f00c37390cca6e6a0d2d78a8428dda}\index{Aresta@{Aresta}!getIdOrigem@{getIdOrigem}}
+\index{getIdOrigem@{getIdOrigem}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{getIdOrigem()}{getIdOrigem()}}
+{\footnotesize\ttfamily \label{class_aresta_ab3f00c37390cca6e6a0d2d78a8428dda} 
+int Aresta\+::get\+Id\+Origem (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o ID do nó de origem da aresta. 
+
+Este método retorna o ID do nó de origem da aresta.
+
+\begin{DoxyReturn}{Returns}
+O ID do nó de origem. 
+\end{DoxyReturn}
+\Hypertarget{class_aresta_a488084ecc77cc7c93f6b871a65d8c314}\index{Aresta@{Aresta}!getPeso@{getPeso}}
+\index{getPeso@{getPeso}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{getPeso()}{getPeso()}}
+{\footnotesize\ttfamily \label{class_aresta_a488084ecc77cc7c93f6b871a65d8c314} 
+float Aresta\+::get\+Peso (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém o peso da aresta. 
+
+Este método retorna o peso atribuído à aresta.
+
+\begin{DoxyReturn}{Returns}
+O peso da aresta. 
+\end{DoxyReturn}
+\Hypertarget{class_aresta_ad6ce7160f1262425587930cd3168b04b}\index{Aresta@{Aresta}!getProxAresta@{getProxAresta}}
+\index{getProxAresta@{getProxAresta}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{getProxAresta()}{getProxAresta()}}
+{\footnotesize\ttfamily \label{class_aresta_ad6ce7160f1262425587930cd3168b04b} 
+\mbox{\hyperlink{class_aresta}{Aresta}} \texorpdfstring{$\ast$}{*} Aresta\+::get\+Prox\+Aresta (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Obtém a próxima aresta. 
+
+Este método retorna o ponteiro para a próxima aresta na lista.
+
+\begin{DoxyReturn}{Returns}
+Ponteiro para a próxima aresta. 
+\end{DoxyReturn}
+\Hypertarget{class_aresta_a0e72b09c584b5ba1860584ed1c98dfbc}\index{Aresta@{Aresta}!setNoDestino@{setNoDestino}}
+\index{setNoDestino@{setNoDestino}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{setNoDestino()}{setNoDestino()}}
+{\footnotesize\ttfamily \label{class_aresta_a0e72b09c584b5ba1860584ed1c98dfbc} 
+void Aresta\+::set\+No\+Destino (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}}]{valor}{}\end{DoxyParamCaption})}
+
+
+
+Define o nó de destino da aresta. 
+
+Este método define o nó de destino da aresta.
+
+
+\begin{DoxyParams}{Parameters}
+{\em valor} & Ponteiro para o nó de destino. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aresta_aa0b131cda025178f234fbc54fb6356b2}\index{Aresta@{Aresta}!setNoOrigem@{setNoOrigem}}
+\index{setNoOrigem@{setNoOrigem}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{setNoOrigem()}{setNoOrigem()}}
+{\footnotesize\ttfamily \label{class_aresta_aa0b131cda025178f234fbc54fb6356b2} 
+void Aresta\+::set\+No\+Origem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*}}]{valor}{}\end{DoxyParamCaption})}
+
+
+
+Define o nó de origem da aresta. 
+
+Este método define o nó de origem da aresta.
+
+
+\begin{DoxyParams}{Parameters}
+{\em valor} & Ponteiro para o nó de origem. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_aresta_a54b71bab1beba9a1dfbf2809776ec960}\index{Aresta@{Aresta}!setProxAresta@{setProxAresta}}
+\index{setProxAresta@{setProxAresta}!Aresta@{Aresta}}
+\doxysubsubsection{\texorpdfstring{setProxAresta()}{setProxAresta()}}
+{\footnotesize\ttfamily \label{class_aresta_a54b71bab1beba9a1dfbf2809776ec960} 
+void Aresta\+::set\+Prox\+Aresta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_aresta}{Aresta}} \texorpdfstring{$\ast$}{*}}]{prox}{}\end{DoxyParamCaption})}
+
+
+
+Define a próxima aresta. 
+
+Este método define a próxima aresta na lista de arestas.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prox} & Ponteiro para a próxima aresta a ser associada. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/Aresta.\+h\item 
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\mbox{\hyperlink{_aresta_8cpp}{Aresta.\+cpp}}\end{DoxyCompactItemize}
