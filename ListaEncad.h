@@ -1,20 +1,22 @@
 #ifndef LISTA_H
 #define LISTA_H
 
+#include "No.h"
+
 class Lista {
 private:
-    int* data;
-    int capacidade;
+    No* cabeca;
     int tamanho;
 
 public:
-    Lista(int capacidadeInicial = 10);
+    Lista();
     ~Lista();
 
-    void adicionar(int valor);
-    void remover(int valor);
-    bool contem(int valor);
+    void adicionar(int idNo, float pesoNo = 0.0);
+    void remover(int idNo);
+    bool contem(int idNo);
     int getTamanho();
+    No* getElemento(int indice);
 };
 
 #endif // LISTA_H

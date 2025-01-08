@@ -1,44 +1,68 @@
 #include "ListaEncad.h"
+#include <iostream>
 
-Lista::Lista(int capacidadeInicial) : capacidade(capacidadeInicial), tamanho(0) {
-    data = new int[capacidade];
-}
+Lista::Lista() : cabeca(nullptr), tamanho(0) {}
 
 Lista::~Lista() {
-    delete[] data;
-}
-
-void Lista::adicionar(int valor) {
-    if (tamanho == capacidade) {
-        capacidade *= 2;
-        int* novoData = new int[capacidade];
-        for (int i = 0; i < tamanho; ++i) {
-            novoData[i] = data[i];
-        }
-        delete[] data;
-        data = novoData;
-    }
-    data[tamanho++] = valor;
-}
-
-void Lista::remover(int valor) {
-    for (int i = 0; i < tamanho; ++i) {
-        if (data[i] == valor) {
-            data[i] = data[--tamanho];
-            return;
-        }
+    No* atual = cabeca;
+    while (atual != nullptr) {
+        No* prox = atual->getProxNo();
+        delete atual;
+        atual = prox;
     }
 }
 
-bool Lista::contem(int valor) {
-    for (int i = 0; i < tamanho; ++i) {
-        if (data[i] == valor) {
+void Lista::adicionar(int idNo, float pesoNo) {
+    No* novoNo = new No(idNo, pesoNo);
+    novoNo->setProxNo(cabeca);
+    cabeca = novoNo;
+    tamanho++;
+}
+
+void Lista::remover(int idNo) {
+    No* atual = cabeca;
+    No* anterior = nullptr;
+
+    while (atual != nullptr && atual->getIdNo() != idNo) {
+        anterior = atual;
+        atual = atual->getProxNo();
+    }
+
+    if (atual != nullptr) {
+        if (anterior == nullptr) {
+            cabeca = atual->getProxNo();
+        } else {
+            anterior->setProxNo(atual->getProxNo());
+        }
+        delete atual;
+        tamanho--;
+    }
+}
+
+bool Lista::contem(int idNo) {
+    No* atual = cabeca;
+    while (atual != nullptr) {
+        if (atual->getIdNo() == idNo) {
             return true;
         }
+        atual = atual->getProxNo();
     }
     return false;
 }
 
 int Lista::getTamanho() {
     return tamanho;
+}
+
+No* Lista::getElemento(int indice) {
+    if (indice < 0 || indice >= tamanho) {
+        std::cout<< "Indice fora dos limites da lista";
+        return nullptr;
+    }
+
+    No* atual = cabeca;
+    for (int i = 0; i < indice; ++i) {
+        atual = atual->getProxNo();
+    }
+    return atual;
 }
