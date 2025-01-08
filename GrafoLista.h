@@ -2,7 +2,7 @@
 #define GRAFOLISTA_H
 
 #include "Grafo.h"
-#include "ListaEncad.h"
+#include "Lista.h"
 #include <string>
 
 class GrafoLista : public Grafo {

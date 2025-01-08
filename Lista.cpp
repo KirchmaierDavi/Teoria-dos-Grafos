@@ -3,7 +3,7 @@
  * @brief Implementação das funções da classe Lista.
  */
 
-#include "ListaEncad.h"
+#include "Lista.h"
 #include <iostream>
 
 /**

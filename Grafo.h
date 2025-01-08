@@ -1,7 +1,10 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
+#include "No.h"
+#include "Aresta.h"
 #include <string>
+#include <vector>
 
 class Grafo {
 protected:
@@ -31,8 +34,8 @@ public:
     virtual bool ehArvore(); 
     virtual bool possuiPonte(); 
     virtual bool possuiArticulacao();
-    virtual void carregaGrafo(const std::string& arquivo);
-    virtual void novoGrafo(const std::string& arquivoConfig);
+    virtual void carregaGrafo(const std::string& arquivo) = 0;
+    virtual void novoGrafo(const std::string& arquivoConfig) = 0;
 };
 
 #endif // GRAFO_H

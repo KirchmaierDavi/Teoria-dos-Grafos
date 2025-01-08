@@ -23,11 +23,13 @@ public:
     unsigned int getGrauSaida();
     Aresta* getPrimeiraAresta();
     No* getProxNo();
-
     void setProxNo(No* proxNo);
+
     void adicionaAresta(int destino, float peso = 1.0, bool direcionado = false);
     void incGrauEntrada();
     void incGrauSaida();
+
+    No* obterNoDestino(int destino);
 };
 
 #endif // NO_H

@@ -61,5 +61,6 @@
     ".prettierrc": "json",
     "*.css": "css",
     "ostream": "cpp"
-  }
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

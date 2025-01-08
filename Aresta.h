@@ -1,6 +1,9 @@
 #ifndef ARESTA_H
 #define ARESTA_H
 
+//#include "No.h"
+class No; 
+
 class Aresta {
 private:
     No* origem;

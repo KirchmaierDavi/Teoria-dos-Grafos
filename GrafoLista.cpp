@@ -4,6 +4,7 @@
  */
 
 #include "GrafoLista.h"
+#include "Lista.h"
 #include <fstream>
 #include <iostream>
 

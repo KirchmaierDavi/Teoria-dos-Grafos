@@ -2,8 +2,8 @@
  * @file No.cpp
  * @brief Implementação das funções da classe No.
  */
-
 #include "No.h"
+#include "Aresta.h"
 
 /**
  * @brief Construtor da classe No.
@@ -119,7 +119,11 @@ void No::setProxNo(No* proxNo) {
  * @param direcionado Se a aresta é direcionada ou não.
  */
 void No::adicionaAresta(int destino, float peso, bool direcionado) {
-    Aresta* novaAresta = new Aresta(this->idNo, destino, peso);
+    No* destinoNo = obterNoDestino(destino);  // Obtém o ponteiro do nó de destino
+
+    // Criação da nova aresta com os ponteiros para os nós
+    Aresta* novaAresta = new Aresta(this, destinoNo, peso);  // Passa os ponteiros para Aresta
+
     if (ultimaAresta != nullptr) {
         ultimaAresta->setProxAresta(novaAresta);
     } else {
@@ -150,4 +154,21 @@ void No::incGrauEntrada() {
  */
 void No::incGrauSaida() {
     this->grauSaida++;
+}
+
+/**
+ * @brief Obtém o ponteiro para o nó de destino.
+ * 
+ * Este método deve retornar o ponteiro para o nó de destino a partir do ID fornecido.
+ * 
+ * @param destino O ID do nó de destino.
+ * @return Ponteiro para o nó de destino.
+ */
+No* No::obterNoDestino(int destino) {
+    // Este método pode ser implementado para buscar o nó de destino a partir do ID
+    // Dependendo da sua estrutura de grafo, você pode buscar na lista de nós
+    // Exemplo de código fictício:
+    // return grafo->getNoById(destino);
+    
+    return nullptr;  // Substitua conforme a lógica do seu grafo
 }
