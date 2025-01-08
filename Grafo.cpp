@@ -1,6 +1,7 @@
 #include "Grafo.h"
 #include "No.h"
 #include "Aresta.h"
+#include <iostream>
 
 Grafo::Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
     : ordem(ordem), direcionado(direcionado), ponderadoVertices(ponderadoVertices), ponderadoArestas(ponderadoArestas) {}
@@ -17,20 +18,21 @@ int Grafo::getNumNos()
     return numNos;
 }
 
-int Grafo::getGrau()
+int Grafo::getGrau(int vertice)
 {
     No *no = primeiroNo;
-    int grau = no->getGrauEntrada();
     while (no != nullptr)
     {
-        if (no->getProxNo()->getGrauEntrada() > grau)
+        if (no->getIdNo() == vertice)
         {
-            grau = no->getProxNo()->getGrauEntrada();
+            return no->getGrauSaida();
         }
         no = no->getProxNo();
     }
-    return grau;
+    std::cout <<"Vértice não encontrado";
+    return -1;
 }
+
 
 bool Grafo::ehDirecionado()
 {

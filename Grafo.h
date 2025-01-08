@@ -18,7 +18,7 @@ public:
     Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     virtual ~Grafo();
 
-    virtual int getGrau(); 
+    virtual int getGrau(int vertice); 
     virtual int getOrdem(); 
     virtual int getNumNos(); 
     virtual bool ehDirecionado(); 
