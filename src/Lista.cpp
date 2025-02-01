@@ -3,7 +3,7 @@
  * @brief Implementação das funções da classe Lista.
  */
 
-#include "Lista.h"
+#include "../include/Lista.h"
 #include <iostream>
 
 /**

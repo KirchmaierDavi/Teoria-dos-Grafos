@@ -2,8 +2,8 @@
  * @file No.cpp
  * @brief Implementação das funções da classe No.
  */
-#include "No.h"
-#include "Aresta.h"
+#include "../include/No.h"
+#include "../include/Aresta.h"
 
 /**
  * @brief Construtor da classe No.
