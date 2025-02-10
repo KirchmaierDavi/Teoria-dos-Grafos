@@ -3,9 +3,9 @@
  * @brief Implementação das funções da classe abstrata Grafo.
  */
 
-#include "Grafo.h"
-#include "No.h"
-#include "Aresta.h"
+#include "../include/Grafo.h"
+#include "../include/No.h"
+#include "../include/Aresta.h"
 #include <iostream>
 
 /**

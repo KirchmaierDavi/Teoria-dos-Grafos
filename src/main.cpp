@@ -1,6 +1,6 @@
-#include "Grafo.h"
-#include "GrafoMatriz.h"
-#include "GrafoLista.h"
+#include "../include/Grafo.h"
+#include "../include/GrafoMatriz.h"
+#include "../include/GrafoLista.h"
 #include <iostream>
 #include <fstream>
 #include <string>
