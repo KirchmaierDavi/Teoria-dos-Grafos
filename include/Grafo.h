@@ -36,6 +36,7 @@ public:
     virtual bool possuiArticulacao();
     virtual void carregaGrafo(const std::string& arquivo) = 0;
     virtual void novoGrafo(const std::string& arquivoConfig) = 0;
+    virtual voide adicionaNo(int idNo, float pesoNo = 0.0) = 0;
 };
 
 #endif // GRAFO_H

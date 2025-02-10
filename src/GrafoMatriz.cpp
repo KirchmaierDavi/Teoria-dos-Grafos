@@ -347,3 +347,39 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
     file.close();
     std::cout << "Novo grafo configurado como " << estrutura << "." << std::endl;
 }
+
+/**
+ * @brief Adiciona um novo nó ao grafo.
+ * @param idNo Identificador do nó a ser adicionado.
+ * @param pesoNo Peso do nó a ser adicionado.
+ */
+void GrafoMatriz::adicionaNo(int idNo, float pesoNo)
+{
+    numVertices++;
+    int **novaMatriz = new int *[numVertices];
+    for (int i = 0; i < numVertices; ++i)
+    {
+        novaMatriz[i] = new int[numVertices];
+        for (int j = 0; j < numVertices; ++j)
+        {
+            novaMatriz[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < numVertices - 1; ++i)
+    {
+        for (int j = 0; j < numVertices - 1; ++j)
+        {
+            novaMatriz[i][j] = matrizAdj[i][j];
+        }
+    }
+
+    for (int i = 0; i < numVertices - 1; ++i)
+    {
+        delete[] matrizAdj[i];
+    }
+    delete[] matrizAdj;
+
+    matrizAdj = novaMatriz;
+}
+

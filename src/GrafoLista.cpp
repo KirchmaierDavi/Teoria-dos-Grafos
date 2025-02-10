@@ -355,3 +355,25 @@ void GrafoLista::novoGrafo(const std::string &arquivoConfig)
     file.close();
     std::cout << "Novo grafo configurado como " << tipo << "." << std::endl;
 }
+
+/**
+ * @brief Adiciona um novo nó na lista.
+ *
+ * Este método adiciona um novo nó no início da lista, com o ID e peso fornecidos.
+ *
+ * @param idNo O ID do nó a ser adicionado.
+ * @param pesoNo O peso do nó a ser adicionado.
+ */
+void GrafoLista::adicionarNo(int id) {
+    if (!getNoPeloId(id)) {  // Verifica se o nó já existe
+        No* novoNo = new No(id);
+        if (!primeiroNo) {
+            primeiroNo = novoNo;
+            ultimoNo = novoNo;
+        } else {
+            ultimoNo->setProx(novoNo);
+            ultimoNo = novoNo;
+        }
+        numNos++;
+    }
+}
