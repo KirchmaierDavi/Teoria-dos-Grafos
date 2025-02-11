@@ -10,10 +10,10 @@
 
 /**
  * @brief Construtor da classe Grafo.
- * 
+ *
  * Este construtor inicializa um grafo com base na ordem (número de vértices),
  * se o grafo é direcionado ou não, se os vértices são ponderados e se as arestas são ponderadas.
- * 
+ *
  * @param ordem Número de vértices do grafo.
  * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
  * @param ponderadoVertices Indica se os vértices são ponderados (true) ou não (false).
@@ -24,14 +24,14 @@ Grafo::Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderado
 
 /**
  * @brief Destrutor da classe Grafo.
- * 
+ *
  * Este destrutor é responsável por liberar os recursos alocados pelo grafo.
  */
 Grafo::~Grafo() {}
 
 /**
  * @brief Obtém a ordem do grafo.
- * 
+ *
  * @return A ordem (número de vértices) do grafo.
  */
 int Grafo::getOrdem()
@@ -41,7 +41,7 @@ int Grafo::getOrdem()
 
 /**
  * @brief Obtém o número de nós do grafo.
- * 
+ *
  * @return O número de nós do grafo.
  */
 int Grafo::getNumNos()
@@ -51,7 +51,7 @@ int Grafo::getNumNos()
 
 /**
  * @brief Verifica se o grafo é direcionado.
- * 
+ *
  * @return true se o grafo for direcionado, false caso contrário.
  */
 bool Grafo::ehDirecionado()
@@ -65,7 +65,7 @@ bool Grafo::ehDirecionado()
 
 /**
  * @brief Verifica se o grafo possui vértices ponderados.
- * 
+ *
  * @return true se ao menos um vértice for ponderado, false caso contrário.
  */
 bool Grafo::verticePonderado()
@@ -84,7 +84,7 @@ bool Grafo::verticePonderado()
 
 /**
  * @brief Verifica se o grafo possui arestas ponderadas.
- * 
+ *
  * @return true se ao menos uma aresta for ponderada, false caso contrário.
  */
 bool Grafo::arestaPonderada()
@@ -108,9 +108,9 @@ bool Grafo::arestaPonderada()
 
 /**
  * @brief Obtém o nó pelo seu ID.
- * 
+ *
  * @param id O ID do nó a ser buscado.
- * 
+ *
  * @return O ponteiro para o nó com o ID especificado ou nullptr caso o nó não seja encontrado.
  */
 No *Grafo::getNoPeloId(int id)
@@ -428,4 +428,78 @@ bool Grafo::possuiArticulacao()
     //     no = no->getProxNo();
     // }
     return false;
+}
+
+int Grafo::menorDistancia(int origem, int destino)
+{
+    int *distancia = new int[ordem];
+    bool *visitado = new bool[ordem];
+
+    for (int i = 0; i < ordem; i++)
+    {
+        distancia[i] = INT_MAX;
+        visitado[i] = false;
+    }
+
+    No *noOrigem = getNoPeloId(origem);
+    distancia[origem] = noOrigem->getPesoNo();
+
+    for (int count = 0; count < ordem - 1; count++)
+    {
+        int min = INT_MAX;
+        int minIndex = -1;
+
+        for (int v = 0; v < ordem; v++)
+        {
+            if (!visitado[v] && distancia[v] <= min)
+            {
+                min = distancia[v];
+                minIndex = v;
+            }
+        }
+
+        if (minIndex == -1)
+            break;
+        visitado[minIndex] = true;
+
+        No *noAtual = getNoPeloId(minIndex);
+        Aresta *aresta = noAtual->getPrimeiraAresta();
+
+        while (aresta)
+        {
+            int v = aresta->getIdDestino();
+            No *noDestino = getNoPeloId(v);
+
+            if (!visitado[v] &&
+                distancia[minIndex] != INT_MAX &&
+                distancia[minIndex] + aresta->getPeso() + noDestino->getPesoNo() < distancia[v])
+            {
+
+                distancia[v] = distancia[minIndex] + aresta->getPeso() + noDestino->getPesoNo();
+            }
+            aresta = aresta->getProxAresta();
+        }
+    }
+
+    int resultado = distancia[destino];
+    delete[] distancia;
+    delete[] visitado;
+
+    return resultado == INT_MAX ? -1 : resultado;
+}
+
+float Grafo::getPesoAresta(int origem, int destino)
+{
+    No *noOrigem = getNoPeloId(origem);
+    if (!noOrigem)
+        return -1;
+
+    Aresta *aresta = noOrigem->getPrimeiraAresta();
+    while (aresta)
+    {
+        if (aresta->getIdDestino() == destino)
+            return aresta->getPeso();
+        aresta = aresta->getProxAresta();
+    }
+    return -1;
 }
