@@ -445,6 +445,20 @@ void GrafoLista::adicionaNo(int idNo)
     cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
 }
 
+void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+{
+    if (!listaAdj[idNoOrigem].contem(idNoDestino))
+    {
+        std::cout << "Aresta inexistente" << std::endl;
+        return;
+    }
 
+    listaAdj[idNoOrigem].remover(idNoDestino);
+    listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoDestino, direcionado);
 
-
+    if (!direcionado)
+    {
+        listaAdj[idNoDestino].remover(idNoOrigem);
+        listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoOrigem, direcionado);
+    }
+}
