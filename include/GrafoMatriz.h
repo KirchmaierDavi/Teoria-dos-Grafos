@@ -11,8 +11,8 @@ private:
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
+    void deleta_no(int idNo);
     ~GrafoMatriz();
-
     int getGrau(int vertice) override;
     bool ehCompleto() override;
     bool ehBipartido() override;

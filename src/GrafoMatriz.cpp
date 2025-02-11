@@ -349,37 +349,50 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
 }
 
 /**
- * @brief Adiciona um novo nó ao grafo.
- * @param idNo Identificador do nó a ser adicionado.
- * @param pesoNo Peso do nó a ser adicionado.
+ * @brief Remove um nó do grafo representado por matriz de adjacência.
+ * @param idNo ID do nó a ser removido.
  */
-void GrafoMatriz::adicionaNo(int idNo, float pesoNo)
+void GrafoMatriz::deleta_no(int idNo)
 {
-    numVertices++;
-    int **novaMatriz = new int *[numVertices];
-    for (int i = 0; i < numVertices; ++i)
+    if (idNo < 0 || idNo >= ordem)
     {
-        novaMatriz[i] = new int[numVertices];
-        for (int j = 0; j < numVertices; ++j)
-        {
-            novaMatriz[i][j] = 0;
-        }
+        cout << "Erro: ID do nó inválido. Ordem atual: " << ordem << endl;
+        return;
     }
 
-    for (int i = 0; i < numVertices - 1; ++i)
+    cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
+
+    // Criar nova matriz reduzida
+    int novaOrdem = ordem - 1;
+    int** novaMatriz = new int*[novaOrdem];
+
+    for (int i = 0, ni = 0; i < ordem; i++)
     {
-        for (int j = 0; j < numVertices - 1; ++j)
+        if (i == idNo) continue;
+
+        novaMatriz[ni] = new int[novaOrdem];
+
+        for (int j = 0, nj = 0; j < ordem; j++)
         {
-            novaMatriz[i][j] = matrizAdj[i][j];
+            if (j == idNo) continue;
+            novaMatriz[ni][nj] = matrizAdj[i][j];
+            nj++;
         }
+        ni++;
     }
 
-    for (int i = 0; i < numVertices - 1; ++i)
+    // Liberar a matriz antiga
+    for (int i = 0; i < ordem; i++)
     {
         delete[] matrizAdj[i];
     }
     delete[] matrizAdj;
 
+    // Atualizar estrutura
     matrizAdj = novaMatriz;
+    ordem = novaOrdem;
+
+    cout << "Nó " << idNo << " removido com sucesso! Nova ordem: " << ordem << endl;
 }
+
 
