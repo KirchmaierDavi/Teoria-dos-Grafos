@@ -234,6 +234,10 @@ No *No::obterNoDestino(int destino)
     // Dependendo da sua estrutura de grafo, você pode buscar na lista de nós
     // Exemplo de código fictício:
     // return grafo->getNoById(destino);
+    
+    return nullptr;  // Substitua conforme a lógica do seu grafo
+}
 
-    return nullptr; // Substitua conforme a lógica do seu grafo
+void No::setIDNo(int idNo) {
+    this->idNo = idNo;
 }

@@ -382,6 +382,12 @@ void GrafoMatriz::deleta_no(int idNo)
 
     cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
 
+    // Atualizar IDs dos nós
+    for(int i = idNo; i < ordem - 1;i++){
+        No* no = getNoPeloId(i + 1);
+        no->setIDNo(i);
+    }
+
     // Criar nova matriz reduzida
     int novaOrdem = ordem - 1;
     int** novaMatriz = new int*[novaOrdem];

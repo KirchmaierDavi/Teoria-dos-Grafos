@@ -32,6 +32,8 @@ public:
     void incGrauSaida();
 
     No* obterNoDestino(int destino);
+
+    void setIDNo(int idNo);
 };
 
 #endif // NO_H
