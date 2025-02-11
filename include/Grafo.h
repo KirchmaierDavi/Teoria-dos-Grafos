@@ -36,6 +36,10 @@ public:
     virtual bool possuiArticulacao();
     virtual void carregaGrafo(const std::string& arquivo) = 0;
     virtual void novoGrafo(const std::string& arquivoConfig) = 0;
+
+    virtual float getPesoAresta(int origem, int destino);
+
+    virtual int menorDistancia(int origem, int destino);
 };
 
 #endif // GRAFO_H
