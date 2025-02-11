@@ -21,7 +21,7 @@ public:
     Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     virtual void deleta_no(int idNo) = 0;
     virtual ~Grafo();
-
+    
     virtual int getGrau(int vertice); 
     virtual int getOrdem(); 
     virtual int getNumNos(); 
@@ -37,6 +37,7 @@ public:
     virtual bool possuiArticulacao();
     virtual void carregaGrafo(const std::string& arquivo) = 0;
     virtual void novoGrafo(const std::string& arquivoConfig) = 0;
+    virtual void adicionaNo(int idNo) = 0;
 
 };
 

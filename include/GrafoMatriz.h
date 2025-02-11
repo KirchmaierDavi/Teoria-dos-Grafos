@@ -23,6 +23,7 @@ public:
 
     void carregaGrafo(const std::string& arquivo) override;
     void novoGrafo(const std::string& arquivoConfig) override;
+    void adicionaNo(int idNo) override;
 };
 
 #endif // GRAFOMATRIZ_H
