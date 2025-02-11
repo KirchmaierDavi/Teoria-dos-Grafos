@@ -355,3 +355,59 @@ void GrafoLista::novoGrafo(const std::string &arquivoConfig)
     file.close();
     std::cout << "Novo grafo configurado como " << tipo << "." << std::endl;
 }
+
+/**
+ * @brief Remove um nó do grafo representado por lista de adjacência.
+ * @param idNo ID do nó a ser removido (ajustado para índice zero-based).
+ */
+void GrafoLista::deleta_no(int idNo)
+{
+    if (idNo <= 0 || idNo > ordem)  // Ajustando a verificação de índice
+    {
+        cout << "Erro: ID do nó inválido." << endl;
+        return;
+    }
+
+    idNo--;  // Ajustar o ID para zero-based (o ID do arquivo começa em 1, mas a lista começa em 0)
+
+    cout << "Removendo nó " << idNo + 1 << " da lista de adjacência..." << endl;
+
+    // Remover todas as conexões do nó que será deletado
+    for (int i = 0; i < ordem; i++)
+    {
+        listaAdj[i].remover(idNo);
+    }
+
+    // Criar nova lista de adjacência sem o nó removido
+    Lista* novaListaAdj = new Lista[ordem - 1];
+
+    int novoIndice = 0;
+    for (int i = 0; i < ordem; i++)
+    {
+        if (i == idNo) continue; // Ignorar o nó que será removido
+
+        for (int j = 0; j < listaAdj[i].getTamanho(); j++)
+        {
+            int adj = listaAdj[i].getElemento(j)->getIdNo();
+            if (adj != idNo)
+            {
+                novaListaAdj[novoIndice].adicionar(adj);
+            }
+        }
+        novoIndice++;
+    }
+
+    // Liberar a memória da antiga lista de adjacência
+    delete[] listaAdj;
+
+    // Atualizar a estrutura do grafo
+    listaAdj = novaListaAdj;
+    ordem--;
+
+    cout << "Nó " << idNo + 1 << " removido com sucesso! Nova ordem: " << ordem << endl;
+}
+
+
+
+
+

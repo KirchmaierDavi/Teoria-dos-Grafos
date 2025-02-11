@@ -12,8 +12,8 @@ private:
 
 public:
     GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
+    void deleta_no(int idNo);
     ~GrafoLista();
-
     int getGrau(int vertice) override;
     bool ehCompleto() override;
     bool ehBipartido() override;

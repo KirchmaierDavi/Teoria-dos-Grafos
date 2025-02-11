@@ -347,3 +347,52 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
     file.close();
     std::cout << "Novo grafo configurado como " << estrutura << "." << std::endl;
 }
+
+/**
+ * @brief Remove um nó do grafo representado por matriz de adjacência.
+ * @param idNo ID do nó a ser removido.
+ */
+void GrafoMatriz::deleta_no(int idNo)
+{
+    if (idNo < 0 || idNo >= ordem)
+    {
+        cout << "Erro: ID do nó inválido. Ordem atual: " << ordem << endl;
+        return;
+    }
+
+    cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
+
+    // Criar nova matriz reduzida
+    int novaOrdem = ordem - 1;
+    int** novaMatriz = new int*[novaOrdem];
+
+    for (int i = 0, ni = 0; i < ordem; i++)
+    {
+        if (i == idNo) continue;
+
+        novaMatriz[ni] = new int[novaOrdem];
+
+        for (int j = 0, nj = 0; j < ordem; j++)
+        {
+            if (j == idNo) continue;
+            novaMatriz[ni][nj] = matrizAdj[i][j];
+            nj++;
+        }
+        ni++;
+    }
+
+    // Liberar a matriz antiga
+    for (int i = 0; i < ordem; i++)
+    {
+        delete[] matrizAdj[i];
+    }
+    delete[] matrizAdj;
+
+    // Atualizar estrutura
+    matrizAdj = novaMatriz;
+    ordem = novaOrdem;
+
+    cout << "Nó " << idNo << " removido com sucesso! Nova ordem: " << ordem << endl;
+}
+
+

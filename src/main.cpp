@@ -138,29 +138,55 @@ int main(int argc, char *argv[])
 {
     if (argc < 3)
     {
-        cerr << "Uso: " << argv[0] << " -[m|l|c] <arquivo>" << endl;
+        cerr << "Uso: " << argv[0] << " -[m|l|c] <arquivo> [-r <idNoRemover>]" << endl;
         return 1;
     }
 
     string tipoGrafo = argv[1];
     string arquivo = argv[2];
+    bool removerNo = false;
+    int idNoRemover = -1;
+
+    // Verificar se há a opção de remover nó (-r <idNo>)
+    if (argc == 5 && string(argv[3]) == "-r")
+    {
+        removerNo = true;
+        idNoRemover = stoi(argv[4]);  // Pegando corretamente o ID do nó para remoção
+    }
 
     Grafo *grafo = nullptr;
 
+    // Se for matriz de adjacência
     if (tipoGrafo == "-m")
     {
         cout << "Carregando grafo como matriz..." << endl;
         grafo = new GrafoMatriz(0, true, true, true);
         grafo->carregaGrafo(arquivo);
+
+        if (removerNo)
+        {
+            cout << "Removendo nó " << idNoRemover << "...\n";
+            grafo->deleta_no(idNoRemover);
+        }
+
         imprimeDescricao(grafo);
     }
+    // Se for lista de adjacência
     else if (tipoGrafo == "-l")
     {
         cout << "Carregando grafo como lista..." << endl;
         grafo = new GrafoLista(0, true, true, true);
         grafo->carregaGrafo(arquivo);
+
+        if (removerNo)
+        {
+            cout << "Removendo nó " << idNoRemover << "...\n";
+            grafo->deleta_no(idNoRemover);
+        }
+
         imprimeDescricao(grafo);
     }
+    // Se for carregar a partir de um arquivo de configuração
     else if (tipoGrafo == "-c")
     {
         ifstream descFile(arquivo);
@@ -188,8 +214,16 @@ int main(int argc, char *argv[])
         }
 
         grafo->novoGrafo(arquivo);
+
+        if (removerNo)
+        {
+            cout << "Removendo nó " << idNoRemover << "...\n";
+            grafo->deleta_no(idNoRemover);
+        }
+
         imprimeDescricao(grafo);
     }
+    // Caso a opção passada seja inválida
     else
     {
         cerr << "Tipo de execução inválido." << endl;
