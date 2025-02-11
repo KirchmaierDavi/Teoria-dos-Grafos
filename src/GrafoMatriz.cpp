@@ -395,4 +395,51 @@ void GrafoMatriz::deleta_no(int idNo)
     cout << "Nó " << idNo << " removido com sucesso! Nova ordem: " << ordem << endl;
 }
 
+/**
+ * @brief Adiciona um nó ao grafo representado por matriz de adjacência.
+ * @param idNo ID do nó a ser adicionado.
+ */
+void GrafoMatriz::adicionaNo(int idNo)
+{
+    if (idNo < 0 || idNo >= ordem)
+    {
+        cout << "Erro: ID do nó inválido." << endl;
+        return;
+    }
+
+    cout << "Adicionando nó " << idNo << " à matriz de adjacência...\n";
+
+    // Criar nova matriz expandida
+    int novaOrdem = ordem + 1;
+    int** novaMatriz = new int*[novaOrdem];
+
+    for (int i = 0; i < novaOrdem; i++)
+    {
+        novaMatriz[i] = new int[novaOrdem];
+        for (int j = 0; j < novaOrdem; j++)
+        {
+            if (i == ordem || j == ordem)
+            {
+                novaMatriz[i][j] = 0;
+            }
+            else
+            {
+                novaMatriz[i][j] = matrizAdj[i][j];
+            }
+        }
+    }
+
+    // Liberar a matriz antiga
+    for (int i = 0; i < ordem; i++)
+    {
+        delete[] matrizAdj[i];
+    }
+    delete[] matrizAdj;
+
+    // Atualizar estrutura
+    matrizAdj = novaMatriz;
+    ordem = novaOrdem;
+
+    cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
+}
 

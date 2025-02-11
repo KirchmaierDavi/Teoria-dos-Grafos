@@ -60,7 +60,8 @@
     ".env.*": "dotenv",
     ".prettierrc": "json",
     "*.css": "css",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "iostream": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
