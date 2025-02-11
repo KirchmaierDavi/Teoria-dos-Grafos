@@ -152,7 +152,7 @@ void No::adicionaAresta(int destino, float peso, bool direcionado)
     }
 }
 
-void No::removeAresta(int destino)
+void No::removeAresta(int destino, bool direcionado)
 {
     if (this->primeiraAresta == nullptr)
     {
@@ -184,8 +184,6 @@ void No::removeAresta(int destino)
             this->ultimaAresta = anterior;
         }
 
-        
-
         atual->setProxAresta(nullptr);
         atual->setNoOrigem(nullptr);
         atual->setNoDestino(nullptr);
@@ -193,7 +191,10 @@ void No::removeAresta(int destino)
         delete atual;
 
         this->grauSaida--;
-        this->grauEntrada--;
+        if (!direcionado)
+        {
+            this->grauEntrada--;
+        }
     }
 }
 
