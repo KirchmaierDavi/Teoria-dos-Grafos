@@ -380,6 +380,7 @@ void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado
     if (!direcionado)
     {
         matrizAdj[idNoDestino][idNoOrigem] = 0;
+        nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
     }
 
     nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
