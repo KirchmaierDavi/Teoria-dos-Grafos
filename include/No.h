@@ -25,6 +25,8 @@ public:
     No* getProxNo();
     void setProxNo(No* proxNo);
 
+    void setIDNo(int idNo);
+
     void adicionaAresta(int destino, float peso = 1.0, bool direcionado = false);
     void incGrauEntrada();
     void incGrauSaida();

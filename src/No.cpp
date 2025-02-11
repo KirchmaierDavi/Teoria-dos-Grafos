@@ -172,3 +172,7 @@ No* No::obterNoDestino(int destino) {
     
     return nullptr;  // Substitua conforme a lógica do seu grafo
 }
+
+void No::setIDNo(int idNo) {
+    this->idNo = idNo;
+}
