@@ -6,6 +6,8 @@
 #include "../include/GrafoMatriz.h"
 #include <fstream>
 #include <iostream>
+#include "../include/No.h"
+#include "../src/No.cpp"
 
 using namespace std;
 
@@ -332,6 +334,24 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
         }
     }
 
+    nos = new No*[ordem];
+    if (ponderadoVertices)
+    {
+        for (int i = 0; i < ordem; ++i)
+        {
+            float pesoNo;
+            file >> pesoNo; 
+            nos[i] = new No(i, pesoNo); 
+        }
+    }
+    else
+    {
+        for (int i = 0; i < ordem; ++i)
+        {
+            nos[i] = new No(i, 0.0f); 
+        }
+    }
+
     int origem, destino, peso;
     while (file >> origem >> destino >> peso)
     {
@@ -346,4 +366,21 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
 
     file.close();
     std::cout << "Novo grafo configurado como " << estrutura << "." << std::endl;
+}
+
+void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+{
+    if (matrizAdj[idNoOrigem][idNoDestino] == 0)
+    {
+        std::cout << "Aresta inexistente" << std::endl;
+        return;
+    }
+
+    matrizAdj[idNoOrigem][idNoDestino] = 0;
+    if (!direcionado)
+    {
+        matrizAdj[idNoDestino][idNoOrigem] = 0;
+    }
+
+    nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
 }

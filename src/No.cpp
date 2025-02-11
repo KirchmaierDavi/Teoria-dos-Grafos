@@ -4,6 +4,7 @@
  */
 #include "../include/No.h"
 #include "../include/Aresta.h"
+#include <iostream>
 
 /**
  * @brief Construtor da classe No.
@@ -156,13 +157,14 @@ void No::removeAresta(int destino, bool direcionado)
 {
     if (this->primeiraAresta == nullptr)
     {
-        throw std::runtime_error("Nao ha arestas para remover.");
+        std::cout << "Nó sem arestas";
+        return;
     }
 
     Aresta *atual = this->primeiraAresta;
     Aresta *anterior = nullptr;
 
-    while (atual != nullptr && atual->getIdDestino() != idDestino)
+    while (atual != nullptr && atual->getIdDestino() != destino)
     {
         anterior = atual;
         atual = atual->getProxAresta();
