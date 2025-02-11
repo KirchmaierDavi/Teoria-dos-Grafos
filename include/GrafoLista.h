@@ -22,6 +22,8 @@ public:
     bool possuiPonte() override;
     bool possuiArticulacao() override;
 
+    void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado);
+
     void carregaGrafo(const std::string& arquivo) override;
     void novoGrafo(const std::string& arquivoConfig) override;
 };

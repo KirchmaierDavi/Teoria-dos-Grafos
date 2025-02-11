@@ -355,3 +355,21 @@ void GrafoLista::novoGrafo(const std::string &arquivoConfig)
     file.close();
     std::cout << "Novo grafo configurado como " << tipo << "." << std::endl;
 }
+
+void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+{
+    if (!listaAdj[idNoOrigem].contem(idNoDestino))
+    {
+        std::cout << "Aresta inexistente" << std::endl;
+        return;
+    }
+
+    listaAdj[idNoOrigem].remover(idNoDestino);
+    listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoDestino, direcionado);
+
+    if (!direcionado)
+    {
+        listaAdj[idNoDestino].remover(idNoOrigem);
+        listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoOrigem, direcionado);
+    }
+}
