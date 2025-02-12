@@ -105,7 +105,7 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">Projeto de Implementação de Grafos </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__c_1_2_users_2_felipe_01_sant_0j_anna_2_one_drive_2_desktop_2_teoria-dos-_grafos_2_r_e_a_d_m_e"></a></p>
+<div class="textblock"><p><a class="anchor" id="md__c_1_2_users_2_felipe_01_sant_0j_anna_2_one_drive_2_desktop_2_trabalho_2_r_e_a_d_m_e"></a></p>
 <p>Este projeto é uma implementação de estruturas e funcionalidades relacionadas a grafos em C++. Ele permite carregar grafos a partir de arquivos, realizar análises como conexidade, verificação de árvores, detecção de arestas ponte, entre outras.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Funcionalidades</h1>
@@ -164,7 +164,7 @@ Exemplo de <code>descricao.txt</code></h2>
 Como Compilar</h1>
 <p>Certifique-se de que você tenha um compilador C++ instalado, como o <b>g++</b>.</p>
 <ol type="1">
-<li>Compile o projeto: <div class="fragment"><div class="line">g++ -std=c++14 -Wall -o grafo_exec Grafo.cpp GrafoLista.cpp GrafoMatriz.cpp Aresta.cpp No.cpp main.cpp</div>
+<li>Compile o projeto: <div class="fragment"><div class="line">g++ -std=c++14 -Wall -Iinclude -o grafo_exec src/*.cpp</div>
 </div><!-- fragment --></li>
 <li>Execute o programa:<ul>
 <li>Para carregar um grafo como <b>matriz</b>: <div class="fragment"><div class="line">.\grafo_exec.exe -m grafo.txt</div>

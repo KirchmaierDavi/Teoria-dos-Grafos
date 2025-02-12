@@ -11,6 +11,8 @@ Inheritance diagram for Grafo\+Matriz\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{class_grafo_matriz_ad9d29636f5816afb464e63366c258de9}{Grafo\+Matriz}} (int ordem, bool direcionado, bool ponderado\+Vertices, bool ponderado\+Arestas)
 \begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{class_grafo_matriz}{Grafo\+Matriz}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_matriz_a6a05c50f80dbffcca9d743b1c8a2a0a3}{deleta\+\_\+no}} (int id\+No)
+\begin{DoxyCompactList}\small\item\em Remove um nó do grafo representado por matriz de adjacência. \end{DoxyCompactList}\item 
 \Hypertarget{class_grafo_matriz_a2907ad8631e3bc21c34840cfbd7e0cbb}\label{class_grafo_matriz_a2907ad8631e3bc21c34840cfbd7e0cbb} 
 {\bfseries \texorpdfstring{$\sim$}{\string~}\+Grafo\+Matriz} ()
 \begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{class_grafo_matriz}{Grafo\+Matriz}. Libera a memória alocada para o grafo de matriz de adjacência. \end{DoxyCompactList}\item 
@@ -28,10 +30,16 @@ bool \mbox{\hyperlink{class_grafo_matriz_ae8bccbd2f4c6029c0464f41448555995}{poss
 \begin{DoxyCompactList}\small\item\em Verifica se o grafo possui pontes. Uma ponte é uma aresta cuja remoção aumenta o número de componentes conexos do grafo. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_grafo_matriz_a3112f0cbeaba34a8e49fcfce6bfb48f1}{possui\+Articulacao}} () override
 \begin{DoxyCompactList}\small\item\em Verifica se o grafo possui vértices de articulação. Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_matriz_a08275a1339691168328776d15f657050}{remove\+Aresta}} (int id\+No\+Origem, int id\+No\+Destino, bool direcionado)
+\begin{DoxyCompactList}\small\item\em Remove uma aresta do grafo. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_grafo_matriz_acaee0a6da7c38843b1d442f4f786c27d}{carrega\+Grafo}} (const std\+::string \&arquivo) override
 \begin{DoxyCompactList}\small\item\em Carrega o grafo a partir de um arquivo. O arquivo deve conter os dados do grafo, como número de nós, tipo de grafo e arestas. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_grafo_matriz_a80b0b462997f135c5f1d903b6f6185d9}{novo\+Grafo}} (const std\+::string \&arquivo\+Config) override
-\begin{DoxyCompactList}\small\item\em Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_matriz_a862570d31073014792331c9c4e645e06}{adiciona\+No}} (int id\+No) override
+\begin{DoxyCompactList}\small\item\em Adiciona um nó ao grafo representado por matriz de adjacência. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_matriz_a13e03fd50c1a52185b43282a0daf4334}{nova\+Aresta}} (int origem, int destino, float peso=1.\+0) override
+\begin{DoxyCompactList}\small\item\em Adiciona uma nova aresta ao grafo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_grafo}{Grafo}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,7 +58,11 @@ virtual bool \mbox{\hyperlink{class_grafo_ab7c8f199abd81e2a03a7b25cadc80cd9}{ver
 virtual bool \mbox{\hyperlink{class_grafo_a4aee134a0b02458da203342d075d4b4c}{aresta\+Ponderada}} ()
 \begin{DoxyCompactList}\small\item\em Verifica se o grafo possui arestas ponderadas. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_grafo_a88c7f0fbf2be91a4e7a635d37ed53e0e}{get\+No\+Pelo\+Id}} (int id)
-\begin{DoxyCompactList}\small\item\em Obtém o nó pelo seu ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Obtém o nó pelo seu ID. \end{DoxyCompactList}\item 
+virtual float \mbox{\hyperlink{class_grafo_aa6081d602b352a7997ed88cd6b4a1879}{get\+Peso\+Aresta}} (int origem, int destino)
+\begin{DoxyCompactList}\small\item\em Obtém o peso de uma aresta entre dois vértices. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_grafo_a12e23adc8b9a06e3071a568805043d87}{menor\+Distancia}} (int origem, int destino)
+\begin{DoxyCompactList}\small\item\em Calcula a menor distância entre dois vértices no grafo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_grafo}{Grafo}}}
 \begin{DoxyCompactItemize}
@@ -96,6 +108,25 @@ Construtor da classe \doxylink{class_grafo_matriz}{Grafo\+Matriz}.
 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{class_grafo_matriz_a862570d31073014792331c9c4e645e06}\index{GrafoMatriz@{GrafoMatriz}!adicionaNo@{adicionaNo}}
+\index{adicionaNo@{adicionaNo}!GrafoMatriz@{GrafoMatriz}}
+\doxysubsubsection{\texorpdfstring{adicionaNo()}{adicionaNo()}}
+{\footnotesize\ttfamily \label{class_grafo_matriz_a862570d31073014792331c9c4e645e06} 
+void Grafo\+Matriz\+::adiciona\+No (\begin{DoxyParamCaption}\item[{int}]{id\+No}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Adiciona um nó ao grafo representado por matriz de adjacência. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No} & ID do nó a ser adicionado. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
+
 \Hypertarget{class_grafo_matriz_acaee0a6da7c38843b1d442f4f786c27d}\index{GrafoMatriz@{GrafoMatriz}!carregaGrafo@{carregaGrafo}}
 \index{carregaGrafo@{carregaGrafo}!GrafoMatriz@{GrafoMatriz}}
 \doxysubsubsection{\texorpdfstring{carregaGrafo()}{carregaGrafo()}}
@@ -113,7 +144,26 @@ Carrega o grafo a partir de um arquivo. O arquivo deve conter os dados do grafo,
 \end{DoxyParams}
 
 
-Reimplemented from \mbox{\hyperlink{class_grafo}{Grafo}}.
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
+
+\Hypertarget{class_grafo_matriz_a6a05c50f80dbffcca9d743b1c8a2a0a3}\index{GrafoMatriz@{GrafoMatriz}!deleta\_no@{deleta\_no}}
+\index{deleta\_no@{deleta\_no}!GrafoMatriz@{GrafoMatriz}}
+\doxysubsubsection{\texorpdfstring{deleta\_no()}{deleta\_no()}}
+{\footnotesize\ttfamily \label{class_grafo_matriz_a6a05c50f80dbffcca9d743b1c8a2a0a3} 
+void Grafo\+Matriz\+::deleta\+\_\+no (\begin{DoxyParamCaption}\item[{int}]{id\+No}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove um nó do grafo representado por matriz de adjacência. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No} & ID do nó a ser removido. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
 
 \Hypertarget{class_grafo_matriz_a7f966245ccac615a5bc69901ee5891ac}\index{GrafoMatriz@{GrafoMatriz}!ehArvore@{ehArvore}}
 \index{ehArvore@{ehArvore}!GrafoMatriz@{GrafoMatriz}}
@@ -208,6 +258,37 @@ Número de componentes conexos no grafo.
 
 Reimplemented from \mbox{\hyperlink{class_grafo_a6c2912c868619e60ecd3f67035aa9fcd}{Grafo}}.
 
+\Hypertarget{class_grafo_matriz_a13e03fd50c1a52185b43282a0daf4334}\index{GrafoMatriz@{GrafoMatriz}!novaAresta@{novaAresta}}
+\index{novaAresta@{novaAresta}!GrafoMatriz@{GrafoMatriz}}
+\doxysubsubsection{\texorpdfstring{novaAresta()}{novaAresta()}}
+{\footnotesize\ttfamily \label{class_grafo_matriz_a13e03fd50c1a52185b43282a0daf4334} 
+void Grafo\+Matriz\+::nova\+Aresta (\begin{DoxyParamCaption}\item[{int}]{origem}{, }\item[{int}]{destino}{, }\item[{float}]{peso}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Adiciona uma nova aresta ao grafo. 
+
+Esta função adiciona uma aresta entre dois nós, atribuindo um peso caso o grafo seja ponderado. Se o grafo for não direcionado, a aresta é adicionada em ambos os sentidos.
+
+
+\begin{DoxyParams}{Parameters}
+{\em origem} & ID do nó de origem. \\
+\hline
+{\em destino} & ID do nó de destino. \\
+\hline
+{\em peso} & Peso da aresta (usado apenas se o grafo for ponderado).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+A função verifica se os índices dos nós são válidos e impede a criação de laços (arestas de um nó para ele mesmo). 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Se os parâmetros forem inválidos ou se origem e destino forem iguais, uma mensagem de erro será exibida. 
+\end{DoxyWarning}
+
+
+Reimplemented from \mbox{\hyperlink{class_grafo}{Grafo}}.
+
 \Hypertarget{class_grafo_matriz_a80b0b462997f135c5f1d903b6f6185d9}\index{GrafoMatriz@{GrafoMatriz}!novoGrafo@{novoGrafo}}
 \index{novoGrafo@{novoGrafo}!GrafoMatriz@{GrafoMatriz}}
 \doxysubsubsection{\texorpdfstring{novoGrafo()}{novoGrafo()}}
@@ -225,7 +306,7 @@ Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve cont
 \end{DoxyParams}
 
 
-Reimplemented from \mbox{\hyperlink{class_grafo}{Grafo}}.
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
 
 \Hypertarget{class_grafo_matriz_a3112f0cbeaba34a8e49fcfce6bfb48f1}\index{GrafoMatriz@{GrafoMatriz}!possuiArticulacao@{possuiArticulacao}}
 \index{possuiArticulacao@{possuiArticulacao}!GrafoMatriz@{GrafoMatriz}}
@@ -261,9 +342,33 @@ true se existe pelo menos uma ponte; caso contrário, false.
 
 Reimplemented from \mbox{\hyperlink{class_grafo_a7ecbc80d4dc5f26442df76b752d23059}{Grafo}}.
 
+\Hypertarget{class_grafo_matriz_a08275a1339691168328776d15f657050}\index{GrafoMatriz@{GrafoMatriz}!removeAresta@{removeAresta}}
+\index{removeAresta@{removeAresta}!GrafoMatriz@{GrafoMatriz}}
+\doxysubsubsection{\texorpdfstring{removeAresta()}{removeAresta()}}
+{\footnotesize\ttfamily \label{class_grafo_matriz_a08275a1339691168328776d15f657050} 
+void Grafo\+Matriz\+::remove\+Aresta (\begin{DoxyParamCaption}\item[{int}]{id\+No\+Origem}{, }\item[{int}]{id\+No\+Destino}{, }\item[{bool}]{direcionado}{}\end{DoxyParamCaption})}
+
+
+
+Remove uma aresta do grafo. 
+
+Esta função remove a aresta entre dois nós especificados. Se o grafo for não direcionado, a remoção ocorre nos dois sentidos. Além disso, a aresta correspondente é removida da estrutura de nós do grafo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No\+Origem} & ID do nó de origem da aresta. \\
+\hline
+{\em id\+No\+Destino} & ID do nó de destino da aresta. \\
+\hline
+{\em direcionado} & Indica se o grafo é direcionado (true) ou não (false).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Se a aresta não existir, a função exibe uma mensagem informativa e não realiza nenhuma alteração. 
+\end{DoxyNote}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/Grafo\+Matriz.\+h\item 
-C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\mbox{\hyperlink{_grafo_matriz_8cpp}{Grafo\+Matriz.\+cpp}}\end{DoxyCompactItemize}
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Trabalho/include/Grafo\+Matriz.\+h\item 
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Trabalho/src/\mbox{\hyperlink{_grafo_matriz_8cpp}{Grafo\+Matriz.\+cpp}}\end{DoxyCompactItemize}

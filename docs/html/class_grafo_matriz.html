@@ -123,6 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad9d29636f5816afb464e63366c258de9" id="r_ad9d29636f5816afb464e63366c258de9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9d29636f5816afb464e63366c258de9">GrafoMatriz</a> (int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)</td></tr>
 <tr class="memdesc:ad9d29636f5816afb464e63366c258de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor da classe <a class="el" href="class_grafo_matriz.html">GrafoMatriz</a>.  <br /></td></tr>
 <tr class="separator:ad9d29636f5816afb464e63366c258de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a05c50f80dbffcca9d743b1c8a2a0a3" id="r_a6a05c50f80dbffcca9d743b1c8a2a0a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a05c50f80dbffcca9d743b1c8a2a0a3">deleta_no</a> (int idNo)</td></tr>
+<tr class="memdesc:a6a05c50f80dbffcca9d743b1c8a2a0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove um nó do grafo representado por matriz de adjacência.  <br /></td></tr>
+<tr class="separator:a6a05c50f80dbffcca9d743b1c8a2a0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2907ad8631e3bc21c34840cfbd7e0cbb" id="r_a2907ad8631e3bc21c34840cfbd7e0cbb"><td class="memItemLeft" align="right" valign="top"><a id="a2907ad8631e3bc21c34840cfbd7e0cbb" name="a2907ad8631e3bc21c34840cfbd7e0cbb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~GrafoMatriz</b> ()</td></tr>
 <tr class="memdesc:a2907ad8631e3bc21c34840cfbd7e0cbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destrutor da classe <a class="el" href="class_grafo_matriz.html">GrafoMatriz</a>. Libera a memória alocada para o grafo de matriz de adjacência. <br /></td></tr>
@@ -148,12 +151,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3112f0cbeaba34a8e49fcfce6bfb48f1" id="r_a3112f0cbeaba34a8e49fcfce6bfb48f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3112f0cbeaba34a8e49fcfce6bfb48f1">possuiArticulacao</a> () override</td></tr>
 <tr class="memdesc:a3112f0cbeaba34a8e49fcfce6bfb48f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se o grafo possui vértices de articulação. Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo.  <br /></td></tr>
 <tr class="separator:a3112f0cbeaba34a8e49fcfce6bfb48f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08275a1339691168328776d15f657050" id="r_a08275a1339691168328776d15f657050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08275a1339691168328776d15f657050">removeAresta</a> (int idNoOrigem, int idNoDestino, bool direcionado)</td></tr>
+<tr class="memdesc:a08275a1339691168328776d15f657050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove uma aresta do grafo.  <br /></td></tr>
+<tr class="separator:a08275a1339691168328776d15f657050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaee0a6da7c38843b1d442f4f786c27d" id="r_acaee0a6da7c38843b1d442f4f786c27d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acaee0a6da7c38843b1d442f4f786c27d">carregaGrafo</a> (const std::string &amp;arquivo) override</td></tr>
 <tr class="memdesc:acaee0a6da7c38843b1d442f4f786c27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carrega o grafo a partir de um arquivo. O arquivo deve conter os dados do grafo, como número de nós, tipo de grafo e arestas.  <br /></td></tr>
 <tr class="separator:acaee0a6da7c38843b1d442f4f786c27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80b0b462997f135c5f1d903b6f6185d9" id="r_a80b0b462997f135c5f1d903b6f6185d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80b0b462997f135c5f1d903b6f6185d9">novoGrafo</a> (const std::string &amp;arquivoConfig) override</td></tr>
 <tr class="memdesc:a80b0b462997f135c5f1d903b6f6185d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas.  <br /></td></tr>
 <tr class="separator:a80b0b462997f135c5f1d903b6f6185d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a862570d31073014792331c9c4e645e06" id="r_a862570d31073014792331c9c4e645e06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a862570d31073014792331c9c4e645e06">adicionaNo</a> (int idNo) override</td></tr>
+<tr class="memdesc:a862570d31073014792331c9c4e645e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona um nó ao grafo representado por matriz de adjacência.  <br /></td></tr>
+<tr class="separator:a862570d31073014792331c9c4e645e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13e03fd50c1a52185b43282a0daf4334" id="r_a13e03fd50c1a52185b43282a0daf4334"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13e03fd50c1a52185b43282a0daf4334">novaAresta</a> (int origem, int destino, float peso=1.0) override</td></tr>
+<tr class="memdesc:a13e03fd50c1a52185b43282a0daf4334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona uma nova aresta ao grafo.  <br /></td></tr>
+<tr class="separator:a13e03fd50c1a52185b43282a0daf4334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_grafo"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_grafo')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_grafo.html">Grafo</a></td></tr>
 <tr class="memitem:aaf0b5d1ff5c80c5b69730749942ade87 inherit pub_methods_class_grafo" id="r_aaf0b5d1ff5c80c5b69730749942ade87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grafo.html#aaf0b5d1ff5c80c5b69730749942ade87">Grafo</a> (int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)</td></tr>
 <tr class="memdesc:aaf0b5d1ff5c80c5b69730749942ade87 inherit pub_methods_class_grafo"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor da classe <a class="el" href="class_grafo.html">Grafo</a>.  <br /></td></tr>
@@ -179,6 +191,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a88c7f0fbf2be91a4e7a635d37ed53e0e inherit pub_methods_class_grafo" id="r_a88c7f0fbf2be91a4e7a635d37ed53e0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_no.html">No</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grafo.html#a88c7f0fbf2be91a4e7a635d37ed53e0e">getNoPeloId</a> (int id)</td></tr>
 <tr class="memdesc:a88c7f0fbf2be91a4e7a635d37ed53e0e inherit pub_methods_class_grafo"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém o nó pelo seu ID.  <br /></td></tr>
 <tr class="separator:a88c7f0fbf2be91a4e7a635d37ed53e0e inherit pub_methods_class_grafo"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6081d602b352a7997ed88cd6b4a1879 inherit pub_methods_class_grafo" id="r_aa6081d602b352a7997ed88cd6b4a1879"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grafo.html#aa6081d602b352a7997ed88cd6b4a1879">getPesoAresta</a> (int origem, int destino)</td></tr>
+<tr class="memdesc:aa6081d602b352a7997ed88cd6b4a1879 inherit pub_methods_class_grafo"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém o peso de uma aresta entre dois vértices.  <br /></td></tr>
+<tr class="separator:aa6081d602b352a7997ed88cd6b4a1879 inherit pub_methods_class_grafo"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e23adc8b9a06e3071a568805043d87 inherit pub_methods_class_grafo" id="r_a12e23adc8b9a06e3071a568805043d87"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grafo.html#a12e23adc8b9a06e3071a568805043d87">menorDistancia</a> (int origem, int destino)</td></tr>
+<tr class="memdesc:a12e23adc8b9a06e3071a568805043d87 inherit pub_methods_class_grafo"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcula a menor distância entre dois vértices no grafo.  <br /></td></tr>
+<tr class="separator:a12e23adc8b9a06e3071a568805043d87 inherit pub_methods_class_grafo"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -249,6 +267,41 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a862570d31073014792331c9c4e645e06" name="a862570d31073014792331c9c4e645e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a862570d31073014792331c9c4e645e06">&#9670;&#160;</a></span>adicionaNo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GrafoMatriz::adicionaNo </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idNo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adiciona um nó ao grafo representado por matriz de adjacência. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idNo</td><td>ID do nó a ser adicionado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_grafo.html">Grafo</a>.</p>
+
+</div>
+</div>
 <a id="acaee0a6da7c38843b1d442f4f786c27d" name="acaee0a6da7c38843b1d442f4f786c27d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acaee0a6da7c38843b1d442f4f786c27d">&#9670;&#160;</a></span>carregaGrafo()</h2>
 
@@ -280,7 +333,42 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_grafo.html">Grafo</a>.</p>
+<p>Implements <a class="el" href="class_grafo.html">Grafo</a>.</p>
+
+</div>
+</div>
+<a id="a6a05c50f80dbffcca9d743b1c8a2a0a3" name="a6a05c50f80dbffcca9d743b1c8a2a0a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a05c50f80dbffcca9d743b1c8a2a0a3">&#9670;&#160;</a></span>deleta_no()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GrafoMatriz::deleta_no </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idNo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove um nó do grafo representado por matriz de adjacência. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idNo</td><td>ID do nó a ser removido. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_grafo.html">Grafo</a>.</p>
 
 </div>
 </div>
@@ -441,6 +529,55 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 
 </div>
 </div>
+<a id="a13e03fd50c1a52185b43282a0daf4334" name="a13e03fd50c1a52185b43282a0daf4334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13e03fd50c1a52185b43282a0daf4334">&#9670;&#160;</a></span>novaAresta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GrafoMatriz::novaAresta </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>origem</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>destino</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>peso</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1.0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adiciona uma nova aresta ao grafo. </p>
+<p>Esta função adiciona uma aresta entre dois nós, atribuindo um peso caso o grafo seja ponderado. Se o grafo for não direcionado, a aresta é adicionada em ambos os sentidos.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">origem</td><td>ID do nó de origem. </td></tr>
+    <tr><td class="paramname">destino</td><td>ID do nó de destino. </td></tr>
+    <tr><td class="paramname">peso</td><td>Peso da aresta (usado apenas se o grafo for ponderado).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>A função verifica se os índices dos nós são válidos e impede a criação de laços (arestas de um nó para ele mesmo). </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Se os parâmetros forem inválidos ou se origem e destino forem iguais, uma mensagem de erro será exibida. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_grafo.html">Grafo</a>.</p>
+
+</div>
+</div>
 <a id="a80b0b462997f135c5f1d903b6f6185d9" name="a80b0b462997f135c5f1d903b6f6185d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80b0b462997f135c5f1d903b6f6185d9">&#9670;&#160;</a></span>novoGrafo()</h2>
 
@@ -472,7 +609,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_grafo.html">Grafo</a>.</p>
+<p>Implements <a class="el" href="class_grafo.html">Grafo</a>.</p>
 
 </div>
 </div>
@@ -536,9 +673,47 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 
 </div>
 </div>
+<a id="a08275a1339691168328776d15f657050" name="a08275a1339691168328776d15f657050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08275a1339691168328776d15f657050">&#9670;&#160;</a></span>removeAresta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GrafoMatriz::removeAresta </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idNoOrigem</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idNoDestino</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>direcionado</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove uma aresta do grafo. </p>
+<p>Esta função remove a aresta entre dois nós especificados. Se o grafo for não direcionado, a remoção ocorre nos dois sentidos. Além disso, a aresta correspondente é removida da estrutura de nós do grafo.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idNoOrigem</td><td>ID do nó de origem da aresta. </td></tr>
+    <tr><td class="paramname">idNoDestino</td><td>ID do nó de destino da aresta. </td></tr>
+    <tr><td class="paramname">direcionado</td><td>Indica se o grafo é direcionado (true) ou não (false).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Se a aresta não existir, a função exibe uma mensagem informativa e não realiza nenhuma alteração. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Teoria-dos-Grafos/<a class="el" href="_grafo_matriz_8h_source.html">GrafoMatriz.h</a></li>
-<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Teoria-dos-Grafos/<a class="el" href="_grafo_matriz_8cpp.html">GrafoMatriz.cpp</a></li>
+<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Trabalho/include/<a class="el" href="_grafo_matriz_8h_source.html">GrafoMatriz.h</a></li>
+<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Trabalho/src/<a class="el" href="_grafo_matriz_8cpp.html">GrafoMatriz.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

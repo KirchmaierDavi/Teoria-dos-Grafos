@@ -446,6 +446,14 @@ void GrafoLista::adicionaNo(int idNo)
     cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
 }
 
+/**
+ * @brief Remove uma aresta do grafo.
+ * @param idNoOrigem ID do nó de origem da aresta.
+ * @param idNoDestino ID do nó de destino da aresta.
+ * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
+ *
+ * Se o grafo for não direcionado, a remoção da aresta ocorre nos dois sentidos.
+ */
 void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
 {
     if (!listaAdj[idNoOrigem].contem(idNoDestino))
@@ -464,6 +472,14 @@ void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
     }
 }
 
+/**
+ * @brief Adiciona uma nova aresta ao grafo.
+ * @param origem ID do nó de origem da aresta.
+ * @param destino ID do nó de destino da aresta.
+ * @param peso Peso da aresta (caso o grafo seja ponderado por arestas).
+ *
+ * Se o grafo for não direcionado, a aresta é adicionada nos dois sentidos.
+ */
 void GrafoLista::novaAresta(int origem, int destino, float peso)
 {
     if (origem < 0 || origem >= ordem || destino < 0 || destino >= ordem)

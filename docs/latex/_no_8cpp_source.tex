@@ -1,0 +1,156 @@
+\doxysection{No.\+cpp}
+\hypertarget{_no_8cpp_source}{}\label{_no_8cpp_source}\index{C:/Users/Felipe Sant\textquotesingle{}Anna/OneDrive/Desktop/Trabalho/src/No.cpp@{C:/Users/Felipe Sant\textquotesingle{}Anna/OneDrive/Desktop/Trabalho/src/No.cpp}}
+\mbox{\hyperlink{_no_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../include/No.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../include/Aresta.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00017\ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No::No}}(\textcolor{keywordtype}{int}\ idNo,\ \textcolor{keywordtype}{float}\ pesoNo)}
+\DoxyCodeLine{00018\ \ \ \ \ :\ idNo(idNo),\ pesoNo(pesoNo),\ grauEntrada(0),\ grauSaida(0),}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ primeiraAresta(nullptr),\ ultimaAresta(nullptr),\ proxNo(nullptr)\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \mbox{\hyperlink{class_no_adf8ad7663b1e6056c15fb31afae896c6}{No::\string~No}}()}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_aresta}{Aresta}}\ *arestaAtual\ =\ primeiraAresta;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{while}\ (arestaAtual\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_aresta}{Aresta}}\ *proxAresta\ =\ arestaAtual-\/>\mbox{\hyperlink{class_aresta_ad6ce7160f1262425587930cd3168b04b}{getProxAresta}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ arestaAtual;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ arestaAtual\ =\ proxAresta;}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_no_a16ed333794719748606fcd8a0824fa70}{No::getIdNo}}()}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ idNo;}
+\DoxyCodeLine{00047\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_no_a7fbda2215755db3bbe344b26c4430898}{No::getPesoNo}}()}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ pesoNo;}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_no_ab3692e21800b854f77b989185be896e6}{No::getGrauEntrada}}()}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ grauEntrada;}
+\DoxyCodeLine{00071\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_no_ad14604b79c6cd3d68cb2d04ccfb257b4}{No::getGrauSaida}}()}
+\DoxyCodeLine{00081\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ grauSaida;}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00092\ \mbox{\hyperlink{class_aresta}{Aresta}}\ *\mbox{\hyperlink{class_no_a14d2358660f0ba29da7e33903b76595e}{No::getPrimeiraAresta}}()}
+\DoxyCodeLine{00093\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ primeiraAresta;}
+\DoxyCodeLine{00095\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00104\ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}\ *\mbox{\hyperlink{class_no_adb76979d05343b5310993328661419c4}{No::getProxNo}}()}
+\DoxyCodeLine{00105\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{return}\ proxNo;}
+\DoxyCodeLine{00107\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00116\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_a6db18b543f8f167bf60e320ada29bc49}{No::setProxNo}}(\mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}\ *proxNo)}
+\DoxyCodeLine{00117\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ this-\/>proxNo\ =\ proxNo;}
+\DoxyCodeLine{00119\ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00131\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_a5484d6785dbb021a2c108c1afaeebcf1}{No::adicionaAresta}}(\textcolor{keywordtype}{int}\ destino,\ \textcolor{keywordtype}{float}\ peso,\ \textcolor{keywordtype}{bool}\ direcionado)}
+\DoxyCodeLine{00132\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}\ *destinoNo\ =\ \mbox{\hyperlink{class_no_abf3182d10657451d753d14f5ab05366f}{obterNoDestino}}(destino);\ \textcolor{comment}{//\ Obtém\ o\ ponteiro\ do\ nó\ de\ destino}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ Criação\ da\ nova\ aresta\ com\ os\ ponteiros\ para\ os\ nós}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{class_aresta}{Aresta}}\ *novaAresta\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_aresta}{Aresta}}(\textcolor{keyword}{this},\ destinoNo,\ peso);\ \textcolor{comment}{//\ Passa\ os\ ponteiros\ para\ Aresta}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (ultimaAresta\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00139\ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ ultimaAresta-\/>setProxAresta(novaAresta);}
+\DoxyCodeLine{00141\ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00143\ \ \ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ primeiraAresta\ =\ novaAresta;}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ \ \ \ \ ultimaAresta\ =\ novaAresta;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//\ Atualiza\ graus}}
+\DoxyCodeLine{00149\ \ \ \ \ this-\/>grauSaida++;}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{if}\ (!direcionado)}
+\DoxyCodeLine{00151\ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ this-\/>grauEntrada++;}
+\DoxyCodeLine{00153\ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{keywordtype}{void}\ No::removeAresta(\textcolor{keywordtype}{int}\ destino,\ \textcolor{keywordtype}{bool}\ direcionado)}
+\DoxyCodeLine{00157\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>primeiraAresta\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00159\ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Nó\ sem\ arestas"{}};}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ Aresta\ *atual\ =\ this-\/>primeiraAresta;}
+\DoxyCodeLine{00165\ \ \ \ \ Aresta\ *anterior\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{while}\ (atual\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ atual-\/>\mbox{\hyperlink{class_aresta_a49ff4c7d5220b48acacc75ba2945c11c}{getIdDestino}}()\ !=\ destino)}
+\DoxyCodeLine{00168\ \ \ \ \ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ anterior\ =\ atual;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ atual\ =\ atual-\/>\mbox{\hyperlink{class_aresta_ad6ce7160f1262425587930cd3168b04b}{getProxAresta}}();}
+\DoxyCodeLine{00171\ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (atual\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00174\ \ \ \ \ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (anterior\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>primeiraAresta\ =\ atual-\/>\mbox{\hyperlink{class_aresta_ad6ce7160f1262425587930cd3168b04b}{getProxAresta}}();}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ anterior-\/>\mbox{\hyperlink{class_aresta_a54b71bab1beba9a1dfbf2809776ec960}{setProxAresta}}(atual-\/>\mbox{\hyperlink{class_aresta_ad6ce7160f1262425587930cd3168b04b}{getProxAresta}}());}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (atual\ ==\ this-\/>ultimaAresta)}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>ultimaAresta\ =\ anterior;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ atual-\/>\mbox{\hyperlink{class_aresta_a54b71bab1beba9a1dfbf2809776ec960}{setProxAresta}}(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ atual-\/>\mbox{\hyperlink{class_aresta_aa0b131cda025178f234fbc54fb6356b2}{setNoOrigem}}(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ atual-\/>\mbox{\hyperlink{class_aresta_a0e72b09c584b5ba1860584ed1c98dfbc}{setNoDestino}}(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ atual;}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ this-\/>grauSaida-\/-\/;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!direcionado)}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>grauEntrada-\/-\/;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00200\ \ \ \ \ \}}
+\DoxyCodeLine{00201\ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00208\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_adead66787583df44768c8fc843b21d8b}{No::incGrauEntrada}}()}
+\DoxyCodeLine{00209\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ this-\/>grauEntrada++;}
+\DoxyCodeLine{00211\ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00218\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_no_ac3728cb331f8aef149952f86dc451687}{No::incGrauSaida}}()}
+\DoxyCodeLine{00219\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ this-\/>grauSaida++;}
+\DoxyCodeLine{00221\ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00231\ \mbox{\hyperlink{class_no_aaf5b2aedbaede6ed59a1905727506a6d}{No}}\ *\mbox{\hyperlink{class_no_abf3182d10657451d753d14f5ab05366f}{No::obterNoDestino}}(\textcolor{keywordtype}{int}\ destino)}
+\DoxyCodeLine{00232\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{//\ Este\ método\ pode\ ser\ implementado\ para\ buscar\ o\ nó\ de\ destino\ a\ partir\ do\ ID}}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{comment}{//\ Dependendo\ da\ sua\ estrutura\ de\ grafo,\ você\ pode\ buscar\ na\ lista\ de\ nós}}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{comment}{//\ Exemplo\ de\ código\ fictício:}}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//\ return\ grafo-\/>getNoById(destino);}}
+\DoxyCodeLine{00237\ \ \ \ \ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};\ \ \textcolor{comment}{//\ Substitua\ conforme\ a\ lógica\ do\ seu\ grafo}}
+\DoxyCodeLine{00239\ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{keywordtype}{void}\ No::setIDNo(\textcolor{keywordtype}{int}\ idNo)\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ this-\/>idNo\ =\ idNo;}
+\DoxyCodeLine{00243\ \}}
+
+\end{DoxyCode}
