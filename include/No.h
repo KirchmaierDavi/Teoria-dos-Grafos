@@ -25,11 +25,15 @@ public:
     No* getProxNo();
     void setProxNo(No* proxNo);
 
-    void adicionaAresta(int destino, float peso = 1.0, bool direcionado = false);
+    void adicionaAresta(int destino, float peso = 1.0, bool direcionado);
+    void removeAresta(int destino, bool direcionado);
+
     void incGrauEntrada();
     void incGrauSaida();
 
     No* obterNoDestino(int destino);
+
+    void setIDNo(int idNo);
 };
 
 #endif // NO_H

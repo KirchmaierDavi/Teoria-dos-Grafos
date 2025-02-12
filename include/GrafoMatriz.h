@@ -2,12 +2,14 @@
 #define GRAFOMATRIZ_H
 
 #include "Grafo.h"
+#include "No.h"
 
 class GrafoMatriz : public Grafo
 {
 private:
     int **matrizAdj; // Matriz de adjacência
     int numVertices;
+    No **nos;
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
@@ -20,9 +22,10 @@ public:
     bool ehArvore() override;
     bool possuiPonte() override;
     bool possuiArticulacao() override;
-
+    void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado);
     void carregaGrafo(const std::string &arquivo) override;
     void novoGrafo(const std::string &arquivoConfig) override;
+    void adicionaNo(int idNo) override;
     void novaAresta(int origem, int destino, float peso = 1.0) override;
 };
 

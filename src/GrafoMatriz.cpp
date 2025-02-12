@@ -6,6 +6,8 @@
 #include "../include/GrafoMatriz.h"
 #include <fstream>
 #include <iostream>
+#include "../include/No.h"
+#include "../src/No.cpp"
 
 using namespace std;
 
@@ -332,6 +334,24 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
         }
     }
 
+    nos = new No *[ordem];
+    if (ponderadoVertices)
+    {
+        for (int i = 0; i < ordem; ++i)
+        {
+            float pesoNo;
+            file >> pesoNo;
+            nos[i] = new No(i, pesoNo);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < ordem; ++i)
+        {
+            nos[i] = new No(i, 0.0f);
+        }
+    }
+
     int origem, destino, peso;
     while (file >> origem >> destino >> peso)
     {
@@ -361,6 +381,13 @@ void GrafoMatriz::deleta_no(int idNo)
     }
 
     cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
+
+    // Atualizar IDs dos nós
+    for (int i = idNo; i < ordem - 1; i++)
+    {
+        No *no = getNoPeloId(i + 1);
+        no->setIDNo(i);
+    }
 
     // Criar nova matriz reduzida
     int novaOrdem = ordem - 1;
@@ -395,6 +422,72 @@ void GrafoMatriz::deleta_no(int idNo)
     ordem = novaOrdem;
 
     cout << "Nó " << idNo << " removido com sucesso! Nova ordem: " << ordem << endl;
+}
+
+/**
+ * @brief Adiciona um nó ao grafo representado por matriz de adjacência.
+ * @param idNo ID do nó a ser adicionado.
+ */
+void GrafoMatriz::adicionaNo(int idNo)
+{
+    if (idNo < 0 || idNo >= ordem)
+    {
+        cout << "Erro: ID do nó inválido." << endl;
+        return;
+    }
+
+    cout << "Adicionando nó " << idNo << " à matriz de adjacência...\n";
+
+    // Criar nova matriz expandida
+    int novaOrdem = ordem + 1;
+    int **novaMatriz = new int *[novaOrdem];
+
+    for (int i = 0; i < novaOrdem; i++)
+    {
+        novaMatriz[i] = new int[novaOrdem];
+        for (int j = 0; j < novaOrdem; j++)
+        {
+            if (i == ordem || j == ordem)
+            {
+                novaMatriz[i][j] = 0;
+            }
+            else
+            {
+                novaMatriz[i][j] = matrizAdj[i][j];
+            }
+        }
+    }
+
+    // Liberar a matriz antiga
+    for (int i = 0; i < ordem; i++)
+    {
+        delete[] matrizAdj[i];
+    }
+    delete[] matrizAdj;
+
+    // Atualizar estrutura
+    matrizAdj = novaMatriz;
+    ordem = novaOrdem;
+
+    cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
+}
+
+void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+{
+    if (matrizAdj[idNoOrigem][idNoDestino] == 0)
+    {
+        std::cout << "Aresta inexistente" << std::endl;
+        return;
+    }
+
+    matrizAdj[idNoOrigem][idNoDestino] = 0;
+    if (!direcionado)
+    {
+        matrizAdj[idNoDestino][idNoOrigem] = 0;
+        nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
+    }
+
+    nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
 }
 
 void GrafoMatriz::novaAresta(int origem, int destino, float peso)

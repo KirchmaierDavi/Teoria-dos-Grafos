@@ -145,13 +145,22 @@ int main(int argc, char *argv[])
     string tipoGrafo = argv[1];
     string arquivo = argv[2];
     bool removerNo = false;
+    bool adicionarNo = false;
     int idNoRemover = -1;
+    int idNoAdicionar = -1;
 
     // Verificar se há a opção de remover nó (-r <idNo>)
     if (argc == 5 && string(argv[3]) == "-r")
     {
         removerNo = true;
         idNoRemover = stoi(argv[4]);  // Pegando corretamente o ID do nó para remoção
+    }
+
+    //Verificar se há a opção de adicionar nó (-a <idNo>)
+    if (argc == 5 && string(argv[3]) == "-a")
+    {
+        adicionarNo = true;
+        idNoAdicionar = stoi(argv[4]);  // Pegando corretamente o ID do nó para adição
     }
 
     Grafo *grafo = nullptr;
@@ -168,6 +177,11 @@ int main(int argc, char *argv[])
             cout << "Removendo nó " << idNoRemover << "...\n";
             grafo->deleta_no(idNoRemover);
         }
+        if(adicionarNo)
+        {
+            cout << "Adicionando nó " << idNoAdicionar << "...\n";
+            grafo->adicionaNo(idNoAdicionar);
+        }
 
         imprimeDescricao(grafo);
     }
@@ -182,6 +196,12 @@ int main(int argc, char *argv[])
         {
             cout << "Removendo nó " << idNoRemover << "...\n";
             grafo->deleta_no(idNoRemover);
+        }
+
+        if(adicionarNo)
+        {
+            cout << "Adicionando nó " << idNoAdicionar << "...\n";
+            grafo->adicionaNo(idNoAdicionar);
         }
 
         imprimeDescricao(grafo);
@@ -219,6 +239,12 @@ int main(int argc, char *argv[])
         {
             cout << "Removendo nó " << idNoRemover << "...\n";
             grafo->deleta_no(idNoRemover);
+        }
+
+        if(adicionarNo)
+        {
+            cout << "Adicionando nó " << idNoAdicionar << "...\n";
+            grafo->adicionaNo(idNoAdicionar);
         }
 
         imprimeDescricao(grafo);

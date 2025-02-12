@@ -408,6 +408,62 @@ void GrafoLista::deleta_no(int idNo)
     cout << "Nó " << idNo + 1 << " removido com sucesso! Nova ordem: " << ordem << endl;
 }
 
+/**
+ * @brief Adiciona um nó ao grafo representado por lista de adjacência.
+ * @param idNo ID do nó a ser adicionado.
+ */
+void GrafoLista::adicionaNo(int idNo)
+{
+    if (idNo < 0 || idNo >= ordem)
+    {
+        cout << "Erro: ID do nó inválido. " << endl;
+        return;
+    }
+
+    cout << "Adicionando nó " << idNo << " à lista de adjacência..." << endl;
+
+    // Criar nova lista de adjacência com o novo nó
+    Lista *novaListaAdj = new Lista[ordem + 1];
+
+    for (int i = 0; i < ordem; i++)
+    {
+        for (int j = 0; j < listaAdj[i].getTamanho(); j++)
+        {
+            novaListaAdj[i].adicionar(listaAdj[i].getElemento(j)->getIdNo());
+        }
+    }
+
+    // Adicionar o novo nó
+    novaListaAdj[ordem].adicionar(idNo);
+
+    // Liberar a memória da antiga lista de adjacência
+    delete[] listaAdj;
+
+    // Atualizar a estrutura do grafo
+    listaAdj = novaListaAdj;
+    ordem++;
+
+    cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
+}
+
+void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+{
+    if (!listaAdj[idNoOrigem].contem(idNoDestino))
+    {
+        std::cout << "Aresta inexistente" << std::endl;
+        return;
+    }
+
+    listaAdj[idNoOrigem].remover(idNoDestino);
+    listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoDestino, direcionado);
+
+    if (!direcionado)
+    {
+        listaAdj[idNoDestino].remover(idNoOrigem);
+        listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoOrigem, direcionado);
+    }
+}
+
 void GrafoLista::novaAresta(int origem, int destino, float peso)
 {
     if (origem < 0 || origem >= ordem || destino < 0 || destino >= ordem)
