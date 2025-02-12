@@ -3,10 +3,10 @@
 
 #include "Grafo.h"
 
-
-class GrafoMatriz : public Grafo {
+class GrafoMatriz : public Grafo
+{
 private:
-    int** matrizAdj; // Matriz de adjacência
+    int **matrizAdj; // Matriz de adjacência
     int numVertices;
 
 public:
@@ -21,8 +21,9 @@ public:
     bool possuiPonte() override;
     bool possuiArticulacao() override;
 
-    void carregaGrafo(const std::string& arquivo) override;
-    void novoGrafo(const std::string& arquivoConfig) override;
+    void carregaGrafo(const std::string &arquivo) override;
+    void novoGrafo(const std::string &arquivoConfig) override;
+    void novaAresta(int origem, int destino, float peso = 1.0) override;
 };
 
 #endif // GRAFOMATRIZ_H

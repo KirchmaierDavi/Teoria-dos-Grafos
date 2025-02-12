@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 
-class Grafo {
+class Grafo
+{
 protected:
     int ordem;
     int numNos;
@@ -22,22 +23,22 @@ public:
     virtual void deleta_no(int idNo) = 0;
     virtual ~Grafo();
 
-    virtual int getGrau(int vertice); 
-    virtual int getOrdem(); 
-    virtual int getNumNos(); 
-    virtual bool ehDirecionado(); 
-    virtual bool verticePonderado(); 
-    virtual bool arestaPonderada(); 
-    virtual bool ehCompleto(); 
-    virtual bool ehBipartido(); 
-    No *getNoPeloId(int id); 
-    virtual int nConexo(); 
-    virtual bool ehArvore(); 
-    virtual bool possuiPonte(); 
+    virtual int getGrau(int vertice);
+    virtual int getOrdem();
+    virtual int getNumNos();
+    virtual bool ehDirecionado();
+    virtual bool verticePonderado();
+    virtual bool arestaPonderada();
+    virtual bool ehCompleto();
+    virtual bool ehBipartido();
+    No *getNoPeloId(int id);
+    virtual int nConexo();
+    virtual bool ehArvore();
+    virtual bool possuiPonte();
     virtual bool possuiArticulacao();
-    virtual void carregaGrafo(const std::string& arquivo) = 0;
-    virtual void novoGrafo(const std::string& arquivoConfig) = 0;
-
+    virtual void carregaGrafo(const std::string &arquivo) = 0;
+    virtual void novoGrafo(const std::string &arquivoConfig) = 0;
+    virtual void novaAresta(int origem, int destino, float peso);
 };
 
 #endif // GRAFO_H

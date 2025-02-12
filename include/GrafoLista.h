@@ -5,9 +5,10 @@
 #include "Lista.h"
 #include <string>
 
-class GrafoLista : public Grafo {
+class GrafoLista : public Grafo
+{
 private:
-    Lista* listaAdj;
+    Lista *listaAdj;
     int numVertices;
 
 public:
@@ -22,8 +23,9 @@ public:
     bool possuiPonte() override;
     bool possuiArticulacao() override;
 
-    void carregaGrafo(const std::string& arquivo) override;
-    void novoGrafo(const std::string& arquivoConfig) override;
+    void carregaGrafo(const std::string &arquivo) override;
+    void novoGrafo(const std::string &arquivoConfig) override;
+    void novaAresta(int origem, int destino, float peso = 1.0) override;
 };
 
 #endif // GRAFOLISTA_H

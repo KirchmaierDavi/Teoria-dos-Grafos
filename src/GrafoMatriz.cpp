@@ -364,17 +364,19 @@ void GrafoMatriz::deleta_no(int idNo)
 
     // Criar nova matriz reduzida
     int novaOrdem = ordem - 1;
-    int** novaMatriz = new int*[novaOrdem];
+    int **novaMatriz = new int *[novaOrdem];
 
     for (int i = 0, ni = 0; i < ordem; i++)
     {
-        if (i == idNo) continue;
+        if (i == idNo)
+            continue;
 
         novaMatriz[ni] = new int[novaOrdem];
 
         for (int j = 0, nj = 0; j < ordem; j++)
         {
-            if (j == idNo) continue;
+            if (j == idNo)
+                continue;
             novaMatriz[ni][nj] = matrizAdj[i][j];
             nj++;
         }
@@ -395,4 +397,34 @@ void GrafoMatriz::deleta_no(int idNo)
     cout << "Nó " << idNo << " removido com sucesso! Nova ordem: " << ordem << endl;
 }
 
+void GrafoMatriz::novaAresta(int origem, int destino, float peso)
+{
+    if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
+    {
+        std::cout << "Parâmetros errados!" << std::endl;
+        return;
+    }
 
+    if (origem == destino)
+    {
+        std::cout << "Origem e destino iguais, erro!" << std::endl;
+        return;
+    }
+
+    if (ponderadoArestas)
+    {
+        matrizAdj[origem][destino] = peso;
+        if (!direcionado)
+        {
+            matrizAdj[destino][origem] = peso;
+        }
+    }
+    else
+    {
+        matrizAdj[origem][destino] = 1;
+        if (!direcionado)
+        {
+            matrizAdj[destino][origem] = 1;
+        }
+    }
+}
