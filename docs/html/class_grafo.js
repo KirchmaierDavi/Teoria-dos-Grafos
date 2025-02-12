@@ -11,6 +11,8 @@ var class_grafo =
     [ "getNoPeloId", "class_grafo.html#a88c7f0fbf2be91a4e7a635d37ed53e0e", null ],
     [ "getNumNos", "class_grafo.html#aad54c4f80d7aefbc7ebcefbae4581bca", null ],
     [ "getOrdem", "class_grafo.html#ae189826770f445b4784d9752fe402026", null ],
+    [ "getPesoAresta", "class_grafo.html#aa6081d602b352a7997ed88cd6b4a1879", null ],
+    [ "menorDistancia", "class_grafo.html#a12e23adc8b9a06e3071a568805043d87", null ],
     [ "nConexo", "class_grafo.html#a6c2912c868619e60ecd3f67035aa9fcd", null ],
     [ "possuiArticulacao", "class_grafo.html#a241ec6b3ab7c8dcd2a198d84207afbb2", null ],
     [ "possuiPonte", "class_grafo.html#a7ecbc80d4dc5f26442df76b752d23059", null ],

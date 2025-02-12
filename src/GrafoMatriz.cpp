@@ -403,6 +403,19 @@ void GrafoMatriz::adicionaNo(int idNo)
     cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
 }
 
+/**
+ * @brief Remove uma aresta do grafo.
+ *
+ * Esta função remove a aresta entre dois nós especificados. Se o grafo for não direcionado,
+ * a remoção ocorre nos dois sentidos. Além disso, a aresta correspondente é removida da estrutura
+ * de nós do grafo.
+ *
+ * @param idNoOrigem ID do nó de origem da aresta.
+ * @param idNoDestino ID do nó de destino da aresta.
+ * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
+ *
+ * @note Se a aresta não existir, a função exibe uma mensagem informativa e não realiza nenhuma alteração.
+ */
 void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
 {
     if (matrizAdj[idNoOrigem][idNoDestino] == 0)
@@ -421,6 +434,19 @@ void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado
     nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
 }
 
+/**
+ * @brief Adiciona uma nova aresta ao grafo.
+ *
+ * Esta função adiciona uma aresta entre dois nós, atribuindo um peso caso o grafo seja ponderado.
+ * Se o grafo for não direcionado, a aresta é adicionada em ambos os sentidos.
+ *
+ * @param origem ID do nó de origem.
+ * @param destino ID do nó de destino.
+ * @param peso Peso da aresta (usado apenas se o grafo for ponderado).
+ *
+ * @note A função verifica se os índices dos nós são válidos e impede a criação de laços (arestas de um nó para ele mesmo).
+ * @warning Se os parâmetros forem inválidos ou se origem e destino forem iguais, uma mensagem de erro será exibida.
+ */
 void GrafoMatriz::novaAresta(int origem, int destino, float peso)
 {
     if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
