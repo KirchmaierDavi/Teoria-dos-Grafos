@@ -4,20 +4,18 @@
 #include "Grafo.h"
 #include "No.h"
 
+// Evitar duplicar 'ordem' e 'numVertices'; usar 'ordem' como base
 class GrafoMatriz : public Grafo
 {
 private:
-    int **matrizAdj; // Matriz de adjacência
-    int numVertices;
+    int **matrizAdj;
     No **nos;
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
+    virtual ~GrafoMatriz();
     void deleta_no(int idNo);
-    ~GrafoMatriz();
-    int getGrau(int vertice) override;
     bool ehCompleto() override;
-    bool ehBipartido() override;
     int nConexo() override;
     bool ehArvore() override;
     bool possuiPonte() override;

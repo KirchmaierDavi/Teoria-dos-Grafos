@@ -8,16 +8,13 @@
 class GrafoLista : public Grafo
 {
 private:
-    Lista *listaAdj;
-    int numVertices;
+    Lista listaAdj;
 
 public:
     GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
+    virtual ~GrafoLista();
     void deleta_no(int idNo);
-    ~GrafoLista();
-    int getGrau(int vertice) override;
     bool ehCompleto() override;
-    bool ehBipartido() override;
     int nConexo() override;
     bool ehArvore() override;
     bool possuiPonte() override;

@@ -3,6 +3,7 @@
 
 #include "Aresta.h"
 
+// Ajuste de nomenclatura e agrupamento de atributos
 class No {
 private:
     int idNo;
@@ -32,7 +33,6 @@ public:
     void incGrauSaida();
 
     No* obterNoDestino(int destino);
-
     void setIDNo(int idNo);
 };
 
