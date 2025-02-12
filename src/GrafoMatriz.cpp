@@ -7,7 +7,6 @@
 #include <fstream>
 #include <iostream>
 #include "../include/No.h"
-#include "../src/No.cpp"
 
 using namespace std;
 
@@ -19,16 +18,10 @@ using namespace std;
  * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
  */
 GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
-    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
-{
-    matrizAdj = new int *[ordem];
-    for (int i = 0; i < ordem; ++i)
-    {
-        matrizAdj[i] = new int[ordem];
-        for (int j = 0; j < ordem; ++j)
-        {
-            matrizAdj[i][j] = 0;
-        }
+    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas), matrizAdj(nullptr), nos(nullptr) {
+    matrizAdj = new int*[this->ordem];
+    for (int i = 0; i < this->ordem; ++i) {
+        matrizAdj[i] = new int[this->ordem]();
     }
 }
 
@@ -37,25 +30,6 @@ GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bo
  * Libera a memória alocada para o grafo de matriz de adjacência.
  */
 GrafoMatriz::~GrafoMatriz() {}
-
-/**
- * @brief Calcula o grau de um vértice no grafo.
- * O grau de um vértice é a soma dos pesos das arestas conectadas a ele.
- *
- * @param vertice O índice do vértice cujo grau será calculado.
- * @return O grau do vértice especificado.
- *
- * @warning Certifique-se de que o índice do vértice está dentro do intervalo [0, ordem-1].
- */
-int GrafoMatriz::getGrau(int vertice)
-{
-    int grau = 0;
-    for (int i = 0; i < ordem; i++)
-    {
-        grau += matrizAdj[vertice][i];
-    }
-    return grau;
-}
 
 /**
  * @brief Verifica se o grafo é completo.
@@ -74,49 +48,6 @@ bool GrafoMatriz::ehCompleto()
             }
         }
     }
-    return true;
-}
-
-/**
- * @brief Verifica se o grafo é bipartido.
- * Um grafo bipartido pode ser dividido em dois subconjuntos, onde não existem arestas entre vértices do mesmo subconjunto.
- * @return true se o grafo é bipartido; caso contrário, false.
- */
-bool GrafoMatriz::ehBipartido()
-{
-    int *cores = new int[numVertices];
-    for (int i = 0; i < numVertices; ++i)
-    {
-        cores[i] = -1;
-    }
-
-    int *fila = new int[numVertices];
-    int inicio = 0, fim = 0;
-
-    cores[0] = 1;
-    fila[fim++] = 0;
-
-    while (inicio != fim)
-    {
-        int u = fila[inicio++];
-        for (int v = 0; v < numVertices; v++)
-        {
-            if (matrizAdj[u][v] && cores[v] == -1)
-            {
-                cores[v] = 1 - cores[u];
-                fila[fim++] = v;
-            }
-            else if (matrizAdj[u][v] && cores[v] == cores[u])
-            {
-                delete[] cores;
-                delete[] fila;
-                return false;
-            }
-        }
-    }
-
-    delete[] cores;
-    delete[] fila;
     return true;
 }
 

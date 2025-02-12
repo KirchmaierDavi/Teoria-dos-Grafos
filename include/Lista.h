@@ -3,6 +3,7 @@
 
 #include "No.h"
 
+// Simplificação; armazenar apenas ints, não objetos 'No'
 class Lista {
 private:
     No* cabeca;

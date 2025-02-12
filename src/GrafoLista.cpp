@@ -18,28 +18,15 @@ using namespace std;
  * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
  */
 GrafoLista::GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
-    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
-{
-    listaAdj = new Lista[ordem];
+    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas) {
 }
 
 /**
  * @brief Destrutor da classe GrafoLista.
  * Libera a memória alocada para a lista de adjacência.
  */
-GrafoLista::~GrafoLista()
-{
-    delete[] listaAdj;
-}
-
-/**
- * @brief Obtém o grau de um vértice.
- * @param vertice Índice do vértice.
- * @return Número de arestas conectadas ao vértice especificado.
- */
-int GrafoLista::getGrau(int vertice)
-{
-    return listaAdj[vertice].getTamanho();
+GrafoLista::~GrafoLista() {
+    // Se necessário, a limpeza é feita automaticamente em ~Lista()
 }
 
 /**
@@ -56,50 +43,6 @@ bool GrafoLista::ehCompleto()
             return false;
         }
     }
-    return true;
-}
-
-/**
- * @brief Verifica se o grafo é bipartido.
- * Um grafo bipartido pode ser dividido em dois subconjuntos, onde não existem arestas entre vértices do mesmo subconjunto.
- * @return true se o grafo é bipartido; caso contrário, false.
- */
-bool GrafoLista::ehBipartido()
-{
-    int *cores = new int[ordem];
-    for (int i = 0; i < ordem; ++i)
-    {
-        cores[i] = -1; // -1 significa não colorido
-    }
-
-    int *fila = new int[ordem];
-    int inicio = 0, fim = 0;
-
-    cores[0] = 1; // Começa colorindo o primeiro vértice
-    fila[fim++] = 0;
-
-    while (inicio != fim)
-    {
-        int u = fila[inicio++];
-        for (int i = 0; i < listaAdj[u].getTamanho(); ++i)
-        {
-            int v = listaAdj[u].getElemento(i)->getIdNo();
-            if (cores[v] == -1)
-            {
-                cores[v] = 1 - cores[u];
-                fila[fim++] = v;
-            }
-            else if (cores[v] == cores[u])
-            {
-                delete[] cores;
-                delete[] fila;
-                return false;
-            }
-        }
-    }
-
-    delete[] cores;
-    delete[] fila;
     return true;
 }
 
