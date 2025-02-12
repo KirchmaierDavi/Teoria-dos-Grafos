@@ -1,4 +1,3 @@
-
 # Projeto de Implementação de Grafos
 
 Este projeto é uma implementação de estruturas e funcionalidades relacionadas a grafos em C++. Ele permite carregar grafos a partir de arquivos, realizar análises como conexidade, verificação de árvores, detecção de arestas ponte, entre outras.
@@ -72,6 +71,22 @@ Certifique-se de que você tenha um compilador C++ instalado, como o **g++**.
    - Para carregar um grafo a partir de um arquivo de configuração:
      ```bash
      .\grafo_exec.exe -c descricao.txt
+     ```
+   - Para deletar um nó em um grafo como **matriz**:
+     ```bash
+     .\grafo_exec.exe -m grafo.txt -r 2
+     ```
+   - Para deletar um nó em um grafo como **lista**:
+     ```bash
+     .\grafo_exec.exe -l grafo.txt -r 3
+     ```
+   - Para adicionar um nó em um grafo como **matriz**:
+     ```bash
+     .\grafo_exec.exe -m grafo.txt -a 2
+     ```
+   - Para adicionar um nó em um grafo como **lista**:
+     ```bash
+     .\grafo_exec.exe -l grafo.txt -a 3
      ```
 
 ## Saída Esperada
