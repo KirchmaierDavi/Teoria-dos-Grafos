@@ -106,7 +106,7 @@ $(function(){initNavTree('class_grafo.html',''); initResizable(true); });
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_grafo-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Grafo Class Reference</div></div>
+  <div class="headertitle"><div class="title">Grafo Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
@@ -125,6 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf0b5d1ff5c80c5b69730749942ade87" id="r_aaf0b5d1ff5c80c5b69730749942ade87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf0b5d1ff5c80c5b69730749942ade87">Grafo</a> (int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)</td></tr>
 <tr class="memdesc:aaf0b5d1ff5c80c5b69730749942ade87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor da classe <a class="el" href="class_grafo.html">Grafo</a>.  <br /></td></tr>
 <tr class="separator:aaf0b5d1ff5c80c5b69730749942ade87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25300cc10fe5f1748a5574f6cbdbecc" id="r_af25300cc10fe5f1748a5574f6cbdbecc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af25300cc10fe5f1748a5574f6cbdbecc">deleta_no</a> (int idNo)=0</td></tr>
+<tr class="separator:af25300cc10fe5f1748a5574f6cbdbecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16f3fbba0de2667dfba3b657cb7e95ff" id="r_a16f3fbba0de2667dfba3b657cb7e95ff"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16f3fbba0de2667dfba3b657cb7e95ff">~Grafo</a> ()</td></tr>
 <tr class="memdesc:a16f3fbba0de2667dfba3b657cb7e95ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destrutor da classe <a class="el" href="class_grafo.html">Grafo</a>.  <br /></td></tr>
 <tr class="separator:a16f3fbba0de2667dfba3b657cb7e95ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,10 +169,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a241ec6b3ab7c8dcd2a198d84207afbb2" id="r_a241ec6b3ab7c8dcd2a198d84207afbb2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a241ec6b3ab7c8dcd2a198d84207afbb2">possuiArticulacao</a> ()</td></tr>
 <tr class="memdesc:a241ec6b3ab7c8dcd2a198d84207afbb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se o grafo possui vértices de articulação. Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo.  <br /></td></tr>
 <tr class="separator:a241ec6b3ab7c8dcd2a198d84207afbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88fc3bd93b6679672b52b97c2837dff7" id="r_a88fc3bd93b6679672b52b97c2837dff7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88fc3bd93b6679672b52b97c2837dff7">carregaGrafo</a> (const std::string &amp;arquivo)</td></tr>
-<tr class="separator:a88fc3bd93b6679672b52b97c2837dff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0deb8a2264d8d2abe7f7dd9d09a3f153" id="r_a0deb8a2264d8d2abe7f7dd9d09a3f153"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0deb8a2264d8d2abe7f7dd9d09a3f153">novoGrafo</a> (const std::string &amp;arquivoConfig)</td></tr>
-<tr class="separator:a0deb8a2264d8d2abe7f7dd9d09a3f153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb85e4400edfc4d9f62a6317698fed11" id="r_afb85e4400edfc4d9f62a6317698fed11"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb85e4400edfc4d9f62a6317698fed11">carregaGrafo</a> (const std::string &amp;arquivo)=0</td></tr>
+<tr class="separator:afb85e4400edfc4d9f62a6317698fed11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47ae7e7f38c7cf28de6c8555ef1c61cd" id="r_a47ae7e7f38c7cf28de6c8555ef1c61cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47ae7e7f38c7cf28de6c8555ef1c61cd">novoGrafo</a> (const std::string &amp;arquivoConfig)=0</td></tr>
+<tr class="separator:a47ae7e7f38c7cf28de6c8555ef1c61cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d70b464644a781f0fa4ede8e563391" id="r_ab0d70b464644a781f0fa4ede8e563391"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0d70b464644a781f0fa4ede8e563391">adicionaNo</a> (int idNo)=0</td></tr>
+<tr class="separator:ab0d70b464644a781f0fa4ede8e563391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6081d602b352a7997ed88cd6b4a1879" id="r_aa6081d602b352a7997ed88cd6b4a1879"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6081d602b352a7997ed88cd6b4a1879">getPesoAresta</a> (int origem, int destino)</td></tr>
+<tr class="memdesc:aa6081d602b352a7997ed88cd6b4a1879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém o peso de uma aresta entre dois vértices.  <br /></td></tr>
+<tr class="separator:aa6081d602b352a7997ed88cd6b4a1879"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e23adc8b9a06e3071a568805043d87" id="r_a12e23adc8b9a06e3071a568805043d87"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12e23adc8b9a06e3071a568805043d87">menorDistancia</a> (int origem, int destino)</td></tr>
+<tr class="memdesc:a12e23adc8b9a06e3071a568805043d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcula a menor distância entre dois vértices no grafo.  <br /></td></tr>
+<tr class="separator:a12e23adc8b9a06e3071a568805043d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508d6957482ffcd6c16f6230352a5aa3" id="r_a508d6957482ffcd6c16f6230352a5aa3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a508d6957482ffcd6c16f6230352a5aa3">novaAresta</a> (int origem, int destino, float peso)</td></tr>
+<tr class="separator:a508d6957482ffcd6c16f6230352a5aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -269,6 +281,33 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab0d70b464644a781f0fa4ede8e563391" name="ab0d70b464644a781f0fa4ede8e563391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d70b464644a781f0fa4ede8e563391">&#9670;&#160;</a></span>adicionaNo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Grafo::adicionaNo </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idNo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_grafo_lista.html#a8d7fa3be99f31d6c98072c6388bd4571">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#a862570d31073014792331c9c4e645e06">GrafoMatriz</a>.</p>
+
+</div>
+</div>
 <a id="a4aee134a0b02458da203342d075d4b4c" name="a4aee134a0b02458da203342d075d4b4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4aee134a0b02458da203342d075d4b4c">&#9670;&#160;</a></span>arestaPonderada()</h2>
 
@@ -297,8 +336,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 
 </div>
 </div>
-<a id="a88fc3bd93b6679672b52b97c2837dff7" name="a88fc3bd93b6679672b52b97c2837dff7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88fc3bd93b6679672b52b97c2837dff7">&#9670;&#160;</a></span>carregaGrafo()</h2>
+<a id="afb85e4400edfc4d9f62a6317698fed11" name="afb85e4400edfc4d9f62a6317698fed11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb85e4400edfc4d9f62a6317698fed11">&#9670;&#160;</a></span>carregaGrafo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,12 +354,39 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_grafo_lista.html#a07c89b90ab1be670e77db15cefcda529">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#acaee0a6da7c38843b1d442f4f786c27d">GrafoMatriz</a>.</p>
+<p>Implemented in <a class="el" href="class_grafo_lista.html#a07c89b90ab1be670e77db15cefcda529">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#acaee0a6da7c38843b1d442f4f786c27d">GrafoMatriz</a>.</p>
+
+</div>
+</div>
+<a id="af25300cc10fe5f1748a5574f6cbdbecc" name="af25300cc10fe5f1748a5574f6cbdbecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af25300cc10fe5f1748a5574f6cbdbecc">&#9670;&#160;</a></span>deleta_no()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Grafo::deleta_no </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idNo</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_grafo_lista.html#adf912eb815c9665013ca0e5b1cdca4ed">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#a6a05c50f80dbffcca9d743b1c8a2a0a3">GrafoMatriz</a>.</p>
 
 </div>
 </div>
@@ -560,6 +626,86 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 
 </div>
 </div>
+<a id="aa6081d602b352a7997ed88cd6b4a1879" name="aa6081d602b352a7997ed88cd6b4a1879"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6081d602b352a7997ed88cd6b4a1879">&#9670;&#160;</a></span>getPesoAresta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Grafo::getPesoAresta </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>origem</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>destino</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtém o peso de uma aresta entre dois vértices. </p>
+<p>Esta função busca a aresta entre os vértices especificados e retorna seu peso. Caso a aresta não exista, retorna -1.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">origem</td><td>O ID do vértice de origem. </td></tr>
+    <tr><td class="paramname">destino</td><td>O ID do vértice de destino. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>O peso da aresta entre os vértices ou -1 se a aresta não existir. </dd></dl>
+
+</div>
+</div>
+<a id="a12e23adc8b9a06e3071a568805043d87" name="a12e23adc8b9a06e3071a568805043d87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12e23adc8b9a06e3071a568805043d87">&#9670;&#160;</a></span>menorDistancia()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Grafo::menorDistancia </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>origem</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>destino</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calcula a menor distância entre dois vértices no grafo. </p>
+<p>Esta função implementa o algoritmo de Dijkstra para encontrar a menor distância entre um vértice de origem e um vértice de destino considerando os pesos das arestas e dos vértices.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">origem</td><td>O ID do vértice de origem. </td></tr>
+    <tr><td class="paramname">destino</td><td>O ID do vértice de destino. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A menor distância entre os vértices de origem e destino, ou -1 se não houver caminho. </dd></dl>
+
+</div>
+</div>
 <a id="a6c2912c868619e60ecd3f67035aa9fcd" name="a6c2912c868619e60ecd3f67035aa9fcd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6c2912c868619e60ecd3f67035aa9fcd">&#9670;&#160;</a></span>nConexo()</h2>
 
@@ -590,8 +736,44 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 
 </div>
 </div>
-<a id="a0deb8a2264d8d2abe7f7dd9d09a3f153" name="a0deb8a2264d8d2abe7f7dd9d09a3f153"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0deb8a2264d8d2abe7f7dd9d09a3f153">&#9670;&#160;</a></span>novoGrafo()</h2>
+<a id="a508d6957482ffcd6c16f6230352a5aa3" name="a508d6957482ffcd6c16f6230352a5aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a508d6957482ffcd6c16f6230352a5aa3">&#9670;&#160;</a></span>novaAresta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Grafo::novaAresta </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>origem</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>destino</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>peso</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_grafo_lista.html#a433cac3b34ade70f48bd2b234a47a735">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#a13e03fd50c1a52185b43282a0daf4334">GrafoMatriz</a>.</p>
+
+</div>
+</div>
+<a id="a47ae7e7f38c7cf28de6c8555ef1c61cd" name="a47ae7e7f38c7cf28de6c8555ef1c61cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ae7e7f38c7cf28de6c8555ef1c61cd">&#9670;&#160;</a></span>novoGrafo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -608,12 +790,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="class_grafo_lista.html#accdee5e1a9dbbd7ba674893f73975149">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#a80b0b462997f135c5f1d903b6f6185d9">GrafoMatriz</a>.</p>
+<p>Implemented in <a class="el" href="class_grafo_lista.html#accdee5e1a9dbbd7ba674893f73975149">GrafoLista</a>, and <a class="el" href="class_grafo_matriz.html#a80b0b462997f135c5f1d903b6f6185d9">GrafoMatriz</a>.</p>
 
 </div>
 </div>
@@ -706,8 +888,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ponderadoArestas</b><
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Teoria-dos-Grafos/<a class="el" href="_grafo_8h_source.html">Grafo.h</a></li>
-<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Teoria-dos-Grafos/<a class="el" href="_grafo_8cpp.html">Grafo.cpp</a></li>
+<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Trabalho/include/<a class="el" href="_grafo_8h_source.html">Grafo.h</a></li>
+<li>C:/Users/Felipe Sant'Anna/OneDrive/Desktop/Trabalho/src/<a class="el" href="_grafo_8cpp.html">Grafo.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

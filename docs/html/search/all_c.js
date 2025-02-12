@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['tt_0',['tt',['../index.html#autotoc_md4',1,'Exemplo de &lt;tt&gt;descricao.txt&lt;/tt&gt;'],['../index.html#autotoc_md3',1,'Exemplo de &lt;tt&gt;grafo.txt&lt;/tt&gt;']]],
-  ['tt_20descricao_20txt_20tt_1',['Exemplo de &lt;tt&gt;descricao.txt&lt;/tt&gt;',['../index.html#autotoc_md4',1,'']]],
-  ['tt_20grafo_20txt_20tt_2',['Exemplo de &lt;tt&gt;grafo.txt&lt;/tt&gt;',['../index.html#autotoc_md3',1,'']]],
-  ['txt_20tt_3',['txt tt',['../index.html#autotoc_md4',1,'Exemplo de &lt;tt&gt;descricao.txt&lt;/tt&gt;'],['../index.html#autotoc_md3',1,'Exemplo de &lt;tt&gt;grafo.txt&lt;/tt&gt;']]]
+  ['removearesta_0',['removeAresta',['../class_grafo_lista.html#a728f9926d13c4f7600a56b90a3900eb2',1,'GrafoLista::removeAresta()'],['../class_grafo_matriz.html#a08275a1339691168328776d15f657050',1,'GrafoMatriz::removeAresta()']]],
+  ['remover_1',['remover',['../class_lista.html#ae5906244ed266815d845dca8c93f8f3e',1,'Lista']]],
+  ['requisitos_2',['Requisitos',['../index.html#autotoc_md8',1,'']]]
 ];

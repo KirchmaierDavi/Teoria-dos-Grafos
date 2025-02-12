@@ -11,6 +11,8 @@ Inheritance diagram for Grafo\+Lista\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{class_grafo_lista_a94a65028318569dd3514e9d15926a9f8}{Grafo\+Lista}} (int ordem, bool direcionado, bool ponderado\+Vertices, bool ponderado\+Arestas)
 \begin{DoxyCompactList}\small\item\em Construtor da classe \doxylink{class_grafo_lista}{Grafo\+Lista}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_lista_adf912eb815c9665013ca0e5b1cdca4ed}{deleta\+\_\+no}} (int id\+No)
+\begin{DoxyCompactList}\small\item\em Remove um nó do grafo representado por lista de adjacência. \end{DoxyCompactList}\item 
 \Hypertarget{class_grafo_lista_a4fb6a8087a973f7061b069d1d38a1174}\label{class_grafo_lista_a4fb6a8087a973f7061b069d1d38a1174} 
 {\bfseries \texorpdfstring{$\sim$}{\string~}\+Grafo\+Lista} ()
 \begin{DoxyCompactList}\small\item\em Destrutor da classe \doxylink{class_grafo_lista}{Grafo\+Lista}. Libera a memória alocada para a lista de adjacência. \end{DoxyCompactList}\item 
@@ -28,10 +30,16 @@ bool \mbox{\hyperlink{class_grafo_lista_a5cf881710756e34a32443133eef3b215}{possu
 \begin{DoxyCompactList}\small\item\em Verifica se o grafo possui pontes. Uma ponte é uma aresta cuja remoção aumenta o número de componentes conexos do grafo. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_grafo_lista_a36938088086b71882f051eb80dd8b849}{possui\+Articulacao}} () override
 \begin{DoxyCompactList}\small\item\em Verifica se o grafo possui vértices de articulação. Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_lista_a728f9926d13c4f7600a56b90a3900eb2}{remove\+Aresta}} (int id\+No\+Origem, int id\+No\+Destino, bool direcionado)
+\begin{DoxyCompactList}\small\item\em Remove uma aresta do grafo. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_grafo_lista_a07c89b90ab1be670e77db15cefcda529}{carrega\+Grafo}} (const std\+::string \&arquivo) override
 \begin{DoxyCompactList}\small\item\em Carrega o grafo a partir de um arquivo. O arquivo deve conter os dados do grafo, como número de nós, tipo de grafo e arestas. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_grafo_lista_accdee5e1a9dbbd7ba674893f73975149}{novo\+Grafo}} (const std\+::string \&arquivo\+Config) override
-\begin{DoxyCompactList}\small\item\em Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_lista_a8d7fa3be99f31d6c98072c6388bd4571}{adiciona\+No}} (int id\+No) override
+\begin{DoxyCompactList}\small\item\em Adiciona um nó ao grafo representado por lista de adjacência. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_grafo_lista_a433cac3b34ade70f48bd2b234a47a735}{nova\+Aresta}} (int origem, int destino, float peso=1.\+0) override
+\begin{DoxyCompactList}\small\item\em Adiciona uma nova aresta ao grafo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_grafo}{Grafo}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -50,7 +58,11 @@ virtual bool \mbox{\hyperlink{class_grafo_ab7c8f199abd81e2a03a7b25cadc80cd9}{ver
 virtual bool \mbox{\hyperlink{class_grafo_a4aee134a0b02458da203342d075d4b4c}{aresta\+Ponderada}} ()
 \begin{DoxyCompactList}\small\item\em Verifica se o grafo possui arestas ponderadas. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_no}{No}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_grafo_a88c7f0fbf2be91a4e7a635d37ed53e0e}{get\+No\+Pelo\+Id}} (int id)
-\begin{DoxyCompactList}\small\item\em Obtém o nó pelo seu ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Obtém o nó pelo seu ID. \end{DoxyCompactList}\item 
+virtual float \mbox{\hyperlink{class_grafo_aa6081d602b352a7997ed88cd6b4a1879}{get\+Peso\+Aresta}} (int origem, int destino)
+\begin{DoxyCompactList}\small\item\em Obtém o peso de uma aresta entre dois vértices. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_grafo_a12e23adc8b9a06e3071a568805043d87}{menor\+Distancia}} (int origem, int destino)
+\begin{DoxyCompactList}\small\item\em Calcula a menor distância entre dois vértices no grafo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_grafo}{Grafo}}}
 \begin{DoxyCompactItemize}
@@ -96,6 +108,25 @@ Construtor da classe \doxylink{class_grafo_lista}{Grafo\+Lista}.
 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{class_grafo_lista_a8d7fa3be99f31d6c98072c6388bd4571}\index{GrafoLista@{GrafoLista}!adicionaNo@{adicionaNo}}
+\index{adicionaNo@{adicionaNo}!GrafoLista@{GrafoLista}}
+\doxysubsubsection{\texorpdfstring{adicionaNo()}{adicionaNo()}}
+{\footnotesize\ttfamily \label{class_grafo_lista_a8d7fa3be99f31d6c98072c6388bd4571} 
+void Grafo\+Lista\+::adiciona\+No (\begin{DoxyParamCaption}\item[{int}]{id\+No}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Adiciona um nó ao grafo representado por lista de adjacência. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No} & ID do nó a ser adicionado. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
+
 \Hypertarget{class_grafo_lista_a07c89b90ab1be670e77db15cefcda529}\index{GrafoLista@{GrafoLista}!carregaGrafo@{carregaGrafo}}
 \index{carregaGrafo@{carregaGrafo}!GrafoLista@{GrafoLista}}
 \doxysubsubsection{\texorpdfstring{carregaGrafo()}{carregaGrafo()}}
@@ -113,7 +144,26 @@ Carrega o grafo a partir de um arquivo. O arquivo deve conter os dados do grafo,
 \end{DoxyParams}
 
 
-Reimplemented from \mbox{\hyperlink{class_grafo}{Grafo}}.
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
+
+\Hypertarget{class_grafo_lista_adf912eb815c9665013ca0e5b1cdca4ed}\index{GrafoLista@{GrafoLista}!deleta\_no@{deleta\_no}}
+\index{deleta\_no@{deleta\_no}!GrafoLista@{GrafoLista}}
+\doxysubsubsection{\texorpdfstring{deleta\_no()}{deleta\_no()}}
+{\footnotesize\ttfamily \label{class_grafo_lista_adf912eb815c9665013ca0e5b1cdca4ed} 
+void Grafo\+Lista\+::deleta\+\_\+no (\begin{DoxyParamCaption}\item[{int}]{id\+No}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove um nó do grafo representado por lista de adjacência. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No} & ID do nó a ser removido (ajustado para índice zero-\/based). \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
 
 \Hypertarget{class_grafo_lista_a7cbd1f57490c4430c5119dcf30adfa2d}\index{GrafoLista@{GrafoLista}!ehArvore@{ehArvore}}
 \index{ehArvore@{ehArvore}!GrafoLista@{GrafoLista}}
@@ -205,6 +255,29 @@ Número de componentes conexos no grafo.
 
 Reimplemented from \mbox{\hyperlink{class_grafo_a6c2912c868619e60ecd3f67035aa9fcd}{Grafo}}.
 
+\Hypertarget{class_grafo_lista_a433cac3b34ade70f48bd2b234a47a735}\index{GrafoLista@{GrafoLista}!novaAresta@{novaAresta}}
+\index{novaAresta@{novaAresta}!GrafoLista@{GrafoLista}}
+\doxysubsubsection{\texorpdfstring{novaAresta()}{novaAresta()}}
+{\footnotesize\ttfamily \label{class_grafo_lista_a433cac3b34ade70f48bd2b234a47a735} 
+void Grafo\+Lista\+::nova\+Aresta (\begin{DoxyParamCaption}\item[{int}]{origem}{, }\item[{int}]{destino}{, }\item[{float}]{peso}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Adiciona uma nova aresta ao grafo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origem} & ID do nó de origem da aresta. \\
+\hline
+{\em destino} & ID do nó de destino da aresta. \\
+\hline
+{\em peso} & Peso da aresta (caso o grafo seja ponderado por arestas).\\
+\hline
+\end{DoxyParams}
+Se o grafo for não direcionado, a aresta é adicionada nos dois sentidos. 
+
+Reimplemented from \mbox{\hyperlink{class_grafo}{Grafo}}.
+
 \Hypertarget{class_grafo_lista_accdee5e1a9dbbd7ba674893f73975149}\index{GrafoLista@{GrafoLista}!novoGrafo@{novoGrafo}}
 \index{novoGrafo@{novoGrafo}!GrafoLista@{GrafoLista}}
 \doxysubsubsection{\texorpdfstring{novoGrafo()}{novoGrafo()}}
@@ -222,7 +295,7 @@ Cria um novo grafo a partir de um arquivo de configuração. O arquivo deve cont
 \end{DoxyParams}
 
 
-Reimplemented from \mbox{\hyperlink{class_grafo}{Grafo}}.
+Implements \mbox{\hyperlink{class_grafo}{Grafo}}.
 
 \Hypertarget{class_grafo_lista_a36938088086b71882f051eb80dd8b849}\index{GrafoLista@{GrafoLista}!possuiArticulacao@{possuiArticulacao}}
 \index{possuiArticulacao@{possuiArticulacao}!GrafoLista@{GrafoLista}}
@@ -258,9 +331,28 @@ true se existe pelo menos uma ponte; caso contrário, false.
 
 Reimplemented from \mbox{\hyperlink{class_grafo_a7ecbc80d4dc5f26442df76b752d23059}{Grafo}}.
 
+\Hypertarget{class_grafo_lista_a728f9926d13c4f7600a56b90a3900eb2}\index{GrafoLista@{GrafoLista}!removeAresta@{removeAresta}}
+\index{removeAresta@{removeAresta}!GrafoLista@{GrafoLista}}
+\doxysubsubsection{\texorpdfstring{removeAresta()}{removeAresta()}}
+{\footnotesize\ttfamily \label{class_grafo_lista_a728f9926d13c4f7600a56b90a3900eb2} 
+void Grafo\+Lista\+::remove\+Aresta (\begin{DoxyParamCaption}\item[{int}]{id\+No\+Origem}{, }\item[{int}]{id\+No\+Destino}{, }\item[{bool}]{direcionado}{}\end{DoxyParamCaption})}
 
+
+
+Remove uma aresta do grafo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+No\+Origem} & ID do nó de origem da aresta. \\
+\hline
+{\em id\+No\+Destino} & ID do nó de destino da aresta. \\
+\hline
+{\em direcionado} & Indica se o grafo é direcionado (true) ou não (false).\\
+\hline
+\end{DoxyParams}
+Se o grafo for não direcionado, a remoção da aresta ocorre nos dois sentidos. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/Grafo\+Lista.\+h\item 
-C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Teoria-\/dos-\/\+Grafos/\mbox{\hyperlink{_grafo_lista_8cpp}{Grafo\+Lista.\+cpp}}\end{DoxyCompactItemize}
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Trabalho/include/Grafo\+Lista.\+h\item 
+C\+:/\+Users/\+Felipe Sant\textquotesingle{}\+Anna/\+One\+Drive/\+Desktop/\+Trabalho/src/\mbox{\hyperlink{_grafo_lista_8cpp}{Grafo\+Lista.\+cpp}}\end{DoxyCompactItemize}

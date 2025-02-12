@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['_7earesta_0',['~Aresta',['../class_aresta.html#af790d948289beae339ac25a697decddb',1,'Aresta']]],
-  ['_7egrafo_1',['~Grafo',['../class_grafo.html#a16f3fbba0de2667dfba3b657cb7e95ff',1,'Grafo']]],
-  ['_7egrafolista_2',['~GrafoLista',['../class_grafo_lista.html#a4fb6a8087a973f7061b069d1d38a1174',1,'GrafoLista']]],
-  ['_7egrafomatriz_3',['~GrafoMatriz',['../class_grafo_matriz.html#a2907ad8631e3bc21c34840cfbd7e0cbb',1,'GrafoMatriz']]],
-  ['_7elista_4',['~Lista',['../class_lista.html#a4d7394b2728a00ad8404965b2e15d096',1,'Lista']]],
-  ['_7eno_5',['~No',['../class_no.html#adf8ad7663b1e6056c15fb31afae896c6',1,'No']]]
+  ['removearesta_0',['removeAresta',['../class_grafo_lista.html#a728f9926d13c4f7600a56b90a3900eb2',1,'GrafoLista::removeAresta()'],['../class_grafo_matriz.html#a08275a1339691168328776d15f657050',1,'GrafoMatriz::removeAresta()']]],
+  ['remover_1',['remover',['../class_lista.html#ae5906244ed266815d845dca8c93f8f3e',1,'Lista']]]
 ];
