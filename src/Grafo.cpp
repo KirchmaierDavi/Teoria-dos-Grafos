@@ -144,7 +144,7 @@ int Grafo::getGrau(int vertice)
         }
         no = no->getProxNo();
     }
-    std::cout <<"Vértice não encontrado";
+    std::cout << "Vértice não encontrado";
     return -1;
 }
 
@@ -155,88 +155,88 @@ int Grafo::getGrau(int vertice)
  */
 bool Grafo::ehBipartido()
 {
-     if (primeiroNo == nullptr)
-     {
-         return true;
-     }
+    if (primeiroNo == nullptr)
+    {
+        return true;
+    }
 
-     struct Fila
-     {
-         No *no;
-         Fila *prox;
-     };
+    struct Fila
+    {
+        No *no;
+        Fila *prox;
+    };
 
-     Fila *inicio = nullptr;
-     Fila *fim = nullptr;
+    Fila *inicio = nullptr;
+    Fila *fim = nullptr;
 
-     auto enfileirar = [&](No *no)
-     {
-         Fila *novo = new Fila;
-         novo->no = no;
-         novo->prox = nullptr;
-         if (inicio == nullptr)
-         {
-             inicio = novo;
-             fim = novo;
-         }
-         else
-         {
-             fim->prox = novo;
-             fim = novo;
-         }
-     };
+    auto enfileirar = [&](No *no)
+    {
+        Fila *novo = new Fila;
+        novo->no = no;
+        novo->prox = nullptr;
+        if (inicio == nullptr)
+        {
+            inicio = novo;
+            fim = novo;
+        }
+        else
+        {
+            fim->prox = novo;
+            fim = novo;
+        }
+    };
 
-     auto desenfileirar = [&]() -> No*
-     {
-         if (inicio == nullptr)
-         {
-             return nullptr;
-         }
-         No *no = inicio->no;
-         Fila *temp = inicio;
-         inicio = inicio->prox;
-         if (inicio == nullptr)
-         {
-             fim = nullptr;
-         }
-         delete temp;
-         return no;
-     };
+    auto desenfileirar = [&]() -> No *
+    {
+        if (inicio == nullptr)
+        {
+            return nullptr;
+        }
+        No *no = inicio->no;
+        Fila *temp = inicio;
+        inicio = inicio->prox;
+        if (inicio == nullptr)
+        {
+            fim = nullptr;
+        }
+        delete temp;
+        return no;
+    };
 
     // Utilizando coloração para verificar se é bipartido, nesse caso utilizaremos 2 cores, 0 e 1, -1 para não colorido
 
-     int cores[getNumNos()];
-     for (int i = 0; i < getNumNos(); i++)
-     {
-         cores[i] = -1;
-     }
+    int cores[getNumNos()];
+    for (int i = 0; i < getNumNos(); i++)
+    {
+        cores[i] = -1;
+    }
 
-     No *noInicial = primeiroNo;
-     enfileirar(noInicial);
-     cores[noInicial->getIdNo()] = 1;
+    No *noInicial = primeiroNo;
+    enfileirar(noInicial);
+    cores[noInicial->getIdNo()] = 1;
 
-     while (inicio != nullptr)
-     {
-         No *noAtual = desenfileirar();
+    while (inicio != nullptr)
+    {
+        No *noAtual = desenfileirar();
 
-         Aresta *aresta = noAtual->getPrimeiraAresta();
-         while (aresta != nullptr)
-         {
-             No *noAdjacente = getNoPeloId(aresta->getIdDestino());
-             if (cores[noAdjacente->getIdNo()] == -1)
-             {
-                 cores[noAdjacente->getIdNo()] = 1 - cores[noAtual->getIdNo()];
-                 enfileirar(noAdjacente);
-             }
-             else if (cores[noAdjacente->getIdNo()] == cores[noAtual->getIdNo()])
-             {
-                 return false;
-             }
-             aresta = aresta->getProxAresta();
-         }
-     }
+        Aresta *aresta = noAtual->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            No *noAdjacente = getNoPeloId(aresta->getIdDestino());
+            if (cores[noAdjacente->getIdNo()] == -1)
+            {
+                cores[noAdjacente->getIdNo()] = 1 - cores[noAtual->getIdNo()];
+                enfileirar(noAdjacente);
+            }
+            else if (cores[noAdjacente->getIdNo()] == cores[noAtual->getIdNo()])
+            {
+                return false;
+            }
+            aresta = aresta->getProxAresta();
+        }
+    }
 
-     return true;
+    return true;
 
     return false;
 }
@@ -248,36 +248,42 @@ bool Grafo::ehBipartido()
  */
 int Grafo::nConexo()
 {
-     bool* visitado = new bool[ordem];
-     for (int i = 0; i < ordem; i++) {
-         visitado[i] = false;
-     }
+    bool *visitado = new bool[ordem];
+    for (int i = 0; i < ordem; i++)
+    {
+        visitado[i] = false;
+    }
 
-     int componentes = 0;
+    int componentes = 0;
 
-     auto dfs = [&](No* no, auto& dfsRef) -> void {
-         visitado[no->getIdNo()] = true;
-         Aresta* aresta = no->getPrimeiraAresta();
-         while (aresta != nullptr) {
-             No* noAdjacente = getNoPeloId(aresta->getIdDestino());
-             if (!visitado[noAdjacente->getIdNo()]) {
-                 dfsRef(noAdjacente, dfsRef);
-             }
-             aresta = aresta->getProxAresta();
-         }
-     };
+    auto dfs = [&](No *no, auto &dfsRef) -> void
+    {
+        visitado[no->getIdNo()] = true;
+        Aresta *aresta = no->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            No *noAdjacente = getNoPeloId(aresta->getIdDestino());
+            if (!visitado[noAdjacente->getIdNo()])
+            {
+                dfsRef(noAdjacente, dfsRef);
+            }
+            aresta = aresta->getProxAresta();
+        }
+    };
 
-     No* no = primeiroNo;
-     while (no != nullptr) {
-         if (!visitado[no->getIdNo()]) {
-             componentes++;
-             dfs(no, dfs);
-         }
-         no = no->getProxNo();
-     }
+    No *no = primeiroNo;
+    while (no != nullptr)
+    {
+        if (!visitado[no->getIdNo()])
+        {
+            componentes++;
+            dfs(no, dfs);
+        }
+        no = no->getProxNo();
+    }
 
-     delete[] visitado;
-     return componentes;
+    delete[] visitado;
+    return componentes;
 
     return 0;
 }
@@ -289,29 +295,35 @@ int Grafo::nConexo()
  */
 bool Grafo::ehCompleto()
 {
-     No* no = primeiroNo;
-     while (no != nullptr) {
-         No* noAdjacente = primeiroNo;
-         while (noAdjacente != nullptr) {
-             if (no != noAdjacente) {
-                 Aresta* aresta = no->getPrimeiraAresta();
-                 bool conectado = false;
-                 while (aresta != nullptr) {
-                     if (aresta->getIdDestino() == noAdjacente->getIdNo()) {
-                         conectado = true;
-                         break;
-                     }
-                     aresta = aresta->getProxAresta();
-                 }
-                 if (!conectado) {
-                     return false;
-                 }
-             }
-             noAdjacente = noAdjacente->getProxNo();
-         }
-         no = no->getProxNo();
-     }
-     return true;
+    No *no = primeiroNo;
+    while (no != nullptr)
+    {
+        No *noAdjacente = primeiroNo;
+        while (noAdjacente != nullptr)
+        {
+            if (no != noAdjacente)
+            {
+                Aresta *aresta = no->getPrimeiraAresta();
+                bool conectado = false;
+                while (aresta != nullptr)
+                {
+                    if (aresta->getIdDestino() == noAdjacente->getIdNo())
+                    {
+                        conectado = true;
+                        break;
+                    }
+                    aresta = aresta->getProxAresta();
+                }
+                if (!conectado)
+                {
+                    return false;
+                }
+            }
+            noAdjacente = noAdjacente->getProxNo();
+        }
+        no = no->getProxNo();
+    }
+    return true;
 
     return false;
 }
@@ -323,7 +335,7 @@ bool Grafo::ehCompleto()
  */
 bool Grafo::ehArvore()
 {
-     return (nConexo() == 1 && (ordem - 1) == getNumNos());
+    return (nConexo() == 1 && (ordem - 1) == getNumNos());
 
     return false;
 }
@@ -335,47 +347,55 @@ bool Grafo::ehArvore()
  */
 bool Grafo::possuiPonte()
 {
-     No* no = primeiroNo;
-     while (no != nullptr) {
-         Aresta* aresta = no->getPrimeiraAresta();
-         while (aresta != nullptr) {
-             int origem = no->getIdNo();
-             int destino = aresta->getIdDestino();
+    No *no = primeiroNo;
+    while (no != nullptr)
+    {
+        Aresta *aresta = no->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            int origem = no->getIdNo();
+            int destino = aresta->getIdDestino();
 
-             bool* visitado = new bool[ordem];
-             for (int i = 0; i < ordem; i++) {
-                 visitado[i] = false;
-             }
+            bool *visitado = new bool[ordem];
+            for (int i = 0; i < ordem; i++)
+            {
+                visitado[i] = false;
+            }
 
-             auto dfs = [&](No* noAtual, auto& dfsRef) -> void {
-                 visitado[noAtual->getIdNo()] = true;
-                 Aresta* arestaAtual = noAtual->getPrimeiraAresta();
-                 while (arestaAtual != nullptr) {
-                     int adj = arestaAtual->getIdDestino();
-                     if ((noAtual->getIdNo() == origem && adj == destino) || (noAtual->getIdNo() == destino && adj == origem)) {
-                         arestaAtual = arestaAtual->getProxAresta();
-                         continue;
-                     }
-                     No* noAdjacente = getNoPeloId(adj);
-                     if (!visitado[noAdjacente->getIdNo()]) {
-                         dfsRef(noAdjacente, dfsRef);
-                     }
-                     arestaAtual = arestaAtual->getProxAresta();
-                 }
-             };
+            auto dfs = [&](No *noAtual, auto &dfsRef) -> void
+            {
+                visitado[noAtual->getIdNo()] = true;
+                Aresta *arestaAtual = noAtual->getPrimeiraAresta();
+                while (arestaAtual != nullptr)
+                {
+                    int adj = arestaAtual->getIdDestino();
+                    if ((noAtual->getIdNo() == origem && adj == destino) || (noAtual->getIdNo() == destino && adj == origem))
+                    {
+                        arestaAtual = arestaAtual->getProxAresta();
+                        continue;
+                    }
+                    No *noAdjacente = getNoPeloId(adj);
+                    if (!visitado[noAdjacente->getIdNo()])
+                    {
+                        dfsRef(noAdjacente, dfsRef);
+                    }
+                    arestaAtual = arestaAtual->getProxAresta();
+                }
+            };
 
-             dfs(no, dfs);
+            dfs(no, dfs);
 
-             if (!visitado[destino]) {
-                 delete[] visitado;
-                 return true;
-             }
+            if (!visitado[destino])
+            {
+                delete[] visitado;
+                return true;
+            }
 
-             delete[] visitado;
-             aresta = aresta->getProxAresta();
-         }
-         no = no->getProxNo();
-     }
+            delete[] visitado;
+            aresta = aresta->getProxAresta();
+        }
+        no = no->getProxNo();
+    }
     return false;
 }
 
@@ -386,51 +406,69 @@ bool Grafo::possuiPonte()
  */
 bool Grafo::possuiArticulacao()
 {
-     int componentesOriginais = nConexo();
+    int componentesOriginais = nConexo();
 
-     No* no = primeiroNo;
-     while (no != nullptr) {
-         int idNo = no->getIdNo();
+    No *no = primeiroNo;
+    while (no != nullptr)
+    {
+        int idNo = no->getIdNo();
 
-         bool* visitado = new bool[ordem];
-         for (int i = 0; i < ordem; i++) {
-             visitado[i] = false;
-         }
+        bool *visitado = new bool[ordem];
+        for (int i = 0; i < ordem; i++)
+        {
+            visitado[i] = false;
+        }
 
-         No* noInicial = (no == primeiroNo) ? no->getProxNo() : primeiroNo;
-         auto dfs = [&](No* noAtual, auto& dfsRef) -> void {
-             visitado[noAtual->getIdNo()] = true;
-             Aresta* aresta = noAtual->getPrimeiraAresta();
-             while (aresta != nullptr) {
-                 No* noAdjacente = getNoPeloId(aresta->getIdDestino());
-                 if (noAdjacente->getIdNo() != idNo && !visitado[noAdjacente->getIdNo()]) {
-                     dfsRef(noAdjacente, dfsRef);
-                 }
-                 aresta = aresta->getProxAresta();
-             }
-         };
+        No *noInicial = (no == primeiroNo) ? no->getProxNo() : primeiroNo;
+        auto dfs = [&](No *noAtual, auto &dfsRef) -> void
+        {
+            visitado[noAtual->getIdNo()] = true;
+            Aresta *aresta = noAtual->getPrimeiraAresta();
+            while (aresta != nullptr)
+            {
+                No *noAdjacente = getNoPeloId(aresta->getIdDestino());
+                if (noAdjacente->getIdNo() != idNo && !visitado[noAdjacente->getIdNo()])
+                {
+                    dfsRef(noAdjacente, dfsRef);
+                }
+                aresta = aresta->getProxAresta();
+            }
+        };
 
-         dfs(noInicial, dfs);
+        dfs(noInicial, dfs);
 
-         int componentes = 0;
-         for (int i = 0; i < ordem; i++) {
-             if (!visitado[i] && getNoPeloId(i) != nullptr) {
-                 componentes++;
-                 dfs(getNoPeloId(i), dfs);
-             }
-         }
+        int componentes = 0;
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!visitado[i] && getNoPeloId(i) != nullptr)
+            {
+                componentes++;
+                dfs(getNoPeloId(i), dfs);
+            }
+        }
 
-         delete[] visitado;
+        delete[] visitado;
 
-         if (componentes > componentesOriginais) {
-             return true;
-         }
+        if (componentes > componentesOriginais)
+        {
+            return true;
+        }
 
-         no = no->getProxNo();
-     }
+        no = no->getProxNo();
+    }
     return false;
 }
 
+/**
+ * @brief Calcula a menor distância entre dois vértices no grafo.
+ *
+ * Esta função implementa o algoritmo de Dijkstra para encontrar a menor distância entre
+ * um vértice de origem e um vértice de destino considerando os pesos das arestas e dos vértices.
+ *
+ * @param origem O ID do vértice de origem.
+ * @param destino O ID do vértice de destino.
+ * @return A menor distância entre os vértices de origem e destino, ou -1 se não houver caminho.
+ */
 int Grafo::menorDistancia(int origem, int destino)
 {
     int *distancia = new int[ordem];
@@ -489,6 +527,16 @@ int Grafo::menorDistancia(int origem, int destino)
     return resultado == INT_MAX ? -1 : resultado;
 }
 
+/**
+ * @brief Obtém o peso de uma aresta entre dois vértices.
+ *
+ * Esta função busca a aresta entre os vértices especificados e retorna seu peso.
+ * Caso a aresta não exista, retorna -1.
+ *
+ * @param origem O ID do vértice de origem.
+ * @param destino O ID do vértice de destino.
+ * @return O peso da aresta entre os vértices ou -1 se a aresta não existir.
+ */
 float Grafo::getPesoAresta(int origem, int destino)
 {
     No *noOrigem = getNoPeloId(origem);
