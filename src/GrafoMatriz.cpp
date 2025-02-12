@@ -334,21 +334,21 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
         }
     }
 
-    nos = new No*[ordem];
+    nos = new No *[ordem];
     if (ponderadoVertices)
     {
         for (int i = 0; i < ordem; ++i)
         {
             float pesoNo;
-            file >> pesoNo; 
-            nos[i] = new No(i, pesoNo); 
+            file >> pesoNo;
+            nos[i] = new No(i, pesoNo);
         }
     }
     else
     {
         for (int i = 0; i < ordem; ++i)
         {
-            nos[i] = new No(i, 0.0f); 
+            nos[i] = new No(i, 0.0f);
         }
     }
 
@@ -383,24 +383,27 @@ void GrafoMatriz::deleta_no(int idNo)
     cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
 
     // Atualizar IDs dos nós
-    for(int i = idNo; i < ordem - 1;i++){
-        No* no = getNoPeloId(i + 1);
+    for (int i = idNo; i < ordem - 1; i++)
+    {
+        No *no = getNoPeloId(i + 1);
         no->setIDNo(i);
     }
 
     // Criar nova matriz reduzida
     int novaOrdem = ordem - 1;
-    int** novaMatriz = new int*[novaOrdem];
+    int **novaMatriz = new int *[novaOrdem];
 
     for (int i = 0, ni = 0; i < ordem; i++)
     {
-        if (i == idNo) continue;
+        if (i == idNo)
+            continue;
 
         novaMatriz[ni] = new int[novaOrdem];
 
         for (int j = 0, nj = 0; j < ordem; j++)
         {
-            if (j == idNo) continue;
+            if (j == idNo)
+                continue;
             novaMatriz[ni][nj] = matrizAdj[i][j];
             nj++;
         }
@@ -437,7 +440,7 @@ void GrafoMatriz::adicionaNo(int idNo)
 
     // Criar nova matriz expandida
     int novaOrdem = ordem + 1;
-    int** novaMatriz = new int*[novaOrdem];
+    int **novaMatriz = new int *[novaOrdem];
 
     for (int i = 0; i < novaOrdem; i++)
     {
@@ -485,4 +488,36 @@ void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado
     }
 
     nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
+}
+
+void GrafoMatriz::novaAresta(int origem, int destino, float peso)
+{
+    if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
+    {
+        std::cout << "Parâmetros errados!" << std::endl;
+        return;
+    }
+
+    if (origem == destino)
+    {
+        std::cout << "Origem e destino iguais, erro!" << std::endl;
+        return;
+    }
+
+    if (ponderadoArestas)
+    {
+        matrizAdj[origem][destino] = peso;
+        if (!direcionado)
+        {
+            matrizAdj[destino][origem] = peso;
+        }
+    }
+    else
+    {
+        matrizAdj[origem][destino] = 1;
+        if (!direcionado)
+        {
+            matrizAdj[destino][origem] = 1;
+        }
+    }
 }

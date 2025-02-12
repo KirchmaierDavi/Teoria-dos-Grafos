@@ -6,7 +6,8 @@
 #include <string>
 #include <vector>
 
-class Grafo {
+class Grafo
+{
 protected:
     int ordem;
     int numNos;
@@ -40,6 +41,7 @@ public:
     virtual void adicionaNo(int idNo) = 0;
     virtual float getPesoAresta(int origem, int destino);
     virtual int menorDistancia(int origem, int destino);
+    virtual void novaAresta(int origem, int destino, float peso);
 };
 
 #endif // GRAFO_H

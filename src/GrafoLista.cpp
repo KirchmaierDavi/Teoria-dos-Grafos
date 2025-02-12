@@ -362,13 +362,13 @@ void GrafoLista::novoGrafo(const std::string &arquivoConfig)
  */
 void GrafoLista::deleta_no(int idNo)
 {
-    if (idNo <= 0 || idNo > ordem)  // Ajustando a verificação de índice
+    if (idNo <= 0 || idNo > ordem) // Ajustando a verificação de índice
     {
         cout << "Erro: ID do nó inválido." << endl;
         return;
     }
 
-    idNo--;  // Ajustar o ID para zero-based (o ID do arquivo começa em 1, mas a lista começa em 0)
+    idNo--; // Ajustar o ID para zero-based (o ID do arquivo começa em 1, mas a lista começa em 0)
 
     cout << "Removendo nó " << idNo + 1 << " da lista de adjacência..." << endl;
 
@@ -379,12 +379,13 @@ void GrafoLista::deleta_no(int idNo)
     }
 
     // Criar nova lista de adjacência sem o nó removido
-    Lista* novaListaAdj = new Lista[ordem - 1];
+    Lista *novaListaAdj = new Lista[ordem - 1];
 
     int novoIndice = 0;
     for (int i = 0; i < ordem; i++)
     {
-        if (i == idNo) continue; // Ignorar o nó que será removido
+        if (i == idNo)
+            continue; // Ignorar o nó que será removido
 
         for (int j = 0; j < listaAdj[i].getTamanho(); j++)
         {
@@ -422,7 +423,7 @@ void GrafoLista::adicionaNo(int idNo)
     cout << "Adicionando nó " << idNo << " à lista de adjacência..." << endl;
 
     // Criar nova lista de adjacência com o novo nó
-    Lista* novaListaAdj = new Lista[ordem + 1];
+    Lista *novaListaAdj = new Lista[ordem + 1];
 
     for (int i = 0; i < ordem; i++)
     {
@@ -461,4 +462,27 @@ void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
         listaAdj[idNoDestino].remover(idNoOrigem);
         listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoOrigem, direcionado);
     }
+}
+
+void GrafoLista::novaAresta(int origem, int destino, float peso)
+{
+    if (origem < 0 || origem >= ordem || destino < 0 || destino >= ordem)
+    {
+        std::cerr << "Erro: Índices de vértices inválidos." << std::endl;
+        return;
+    }
+
+    listaAdj[origem].adicionar(destino, peso);
+
+    if (!direcionado)
+    {
+        listaAdj[destino].adicionar(origem, peso);
+    }
+
+    std::cout << "Aresta adicionada: " << origem << " -> " << destino;
+    if (ponderadoArestas)
+    {
+        std::cout << " com peso: " << peso;
+    }
+    std::cout << std::endl;
 }
