@@ -327,34 +327,50 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
  */
 void GrafoMatriz::deleta_no(int idNo)
 {
-    if (idNo < 0 || idNo >= ordem)
-    {
+    if (idNo < 0 || idNo >= ordem) {
         cout << "Erro: ID do nó inválido. Ordem atual: " << ordem << endl;
         return;
     }
 
     cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
 
-    // Atualizar IDs dos nós
-    for (int i = idNo; i < ordem - 1; i++)
-    {
-        No *no = getNoPeloId(i + 1);
+    // Atualizar IDs dos nós e suas arestas
+    for (int i = idNo; i < ordem - 1; i++) {
+        No* no = getNoPeloId(i + 1);
         no->setIDNo(i);
+        
+        // Atualizar IDs das arestas que apontam para nós com índices maiores que idNo
+        Aresta* aresta = no->getPrimeiraAresta();
+        while (aresta != nullptr) {
+            int destino = aresta->getIdDestino();
+            if (destino > idNo) {
+                // Atualiza o ID de destino da aresta
+                No* novoDestino = getNoPeloId(destino - 1);
+                aresta->setNoDestino(novoDestino);
+            }
+            aresta = aresta->getProxAresta();
+        }
+    }
+
+    // Remover todas as arestas que apontam para o nó a ser removido
+    for (int i = 0; i < ordem; i++) {
+        if (i != idNo) {
+            No* no = getNoPeloId(i);
+            no->removeAresta(idNo, direcionado);
+        }
     }
 
     // Criar nova matriz reduzida
     int novaOrdem = ordem - 1;
     int **novaMatriz = new int *[novaOrdem];
 
-    for (int i = 0, ni = 0; i < ordem; i++)
-    {
+    for (int i = 0, ni = 0; i < ordem; i++) {
         if (i == idNo)
             continue;
 
         novaMatriz[ni] = new int[novaOrdem];
 
-        for (int j = 0, nj = 0; j < ordem; j++)
-        {
+        for (int j = 0, nj = 0; j < ordem; j++) {
             if (j == idNo)
                 continue;
             novaMatriz[ni][nj] = matrizAdj[i][j];
@@ -364,8 +380,7 @@ void GrafoMatriz::deleta_no(int idNo)
     }
 
     // Liberar a matriz antiga
-    for (int i = 0; i < ordem; i++)
-    {
+    for (int i = 0; i < ordem; i++) {
         delete[] matrizAdj[i];
     }
     delete[] matrizAdj;

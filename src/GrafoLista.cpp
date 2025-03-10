@@ -303,38 +303,48 @@ void GrafoLista::novoGrafo(const std::string &arquivoConfig)
  * @brief Remove um nó do grafo representado por lista de adjacência.
  * @param idNo ID do nó a ser removido (ajustado para índice zero-based).
  */
-void GrafoLista::deleta_no(int idNo)
-{
-    if (idNo <= 0 || idNo > ordem) // Ajustando a verificação de índice
-    {
+void GrafoLista::deleta_no(int idNo) {
+    if (idNo <= 0 || idNo > ordem) {
         cout << "Erro: ID do nó inválido." << endl;
         return;
     }
 
-    idNo--; // Ajustar o ID para zero-based (o ID do arquivo começa em 1, mas a lista começa em 0)
+    idNo--; // Ajustar para zero-based
 
     cout << "Removendo nó " << idNo + 1 << " da lista de adjacência..." << endl;
 
     // Remover todas as conexões do nó que será deletado
-    for (int i = 0; i < ordem; i++)
-    {
-        listaAdj[i].remover(idNo);
+    for (int i = 0; i < ordem; i++) {
+        if (i != idNo) {
+            listaAdj[i].remover(idNo);
+            
+            // Atualizar os IDs das conexões maiores que idNo
+            for (int j = 0; j < listaAdj[i].getTamanho(); j++) {
+                No* no = listaAdj[i].getElemento(j);
+                if (no->getIdNo() > idNo) {
+                    no->setIDNo(no->getIdNo() - 1);
+                }
+            }
+        }
     }
 
     // Criar nova lista de adjacência sem o nó removido
-    Lista *novaListaAdj = new Lista[ordem - 1];
+    Lista* novaListaAdj = new Lista[ordem - 1];
 
+    // Copiar e ajustar os IDs
     int novoIndice = 0;
-    for (int i = 0; i < ordem; i++)
-    {
-        if (i == idNo)
-            continue; // Ignorar o nó que será removido
+    for (int i = 0; i < ordem; i++) {
+        if (i == idNo) {
+            continue;
+        }
 
-        for (int j = 0; j < listaAdj[i].getTamanho(); j++)
-        {
+        // Copiar as conexões ajustando os IDs
+        for (int j = 0; j < listaAdj[i].getTamanho(); j++) {
             int adj = listaAdj[i].getElemento(j)->getIdNo();
-            if (adj != idNo)
-            {
+            if (adj > idNo) {
+                adj--; // Decrementar IDs maiores que o nó removido
+            }
+            if (adj != idNo) {
                 novaListaAdj[novoIndice].adicionar(adj);
             }
         }
