@@ -327,7 +327,8 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
  */
 void GrafoMatriz::deleta_no(int idNo)
 {
-    if (idNo < 0 || idNo >= ordem) {
+    if (idNo < 0 || idNo >= ordem)
+    {
         cout << "Erro: ID do nó inválido. Ordem atual: " << ordem << endl;
         return;
     }
@@ -335,17 +336,20 @@ void GrafoMatriz::deleta_no(int idNo)
     cout << "Removendo nó " << idNo << " da matriz de adjacência...\n";
 
     // Atualizar IDs dos nós e suas arestas
-    for (int i = idNo; i < ordem - 1; i++) {
-        No* no = getNoPeloId(i + 1);
+    for (int i = idNo; i < ordem - 1; i++)
+    {
+        No *no = getNoPeloId(i + 1);
         no->setIDNo(i);
-        
+
         // Atualizar IDs das arestas que apontam para nós com índices maiores que idNo
-        Aresta* aresta = no->getPrimeiraAresta();
-        while (aresta != nullptr) {
+        Aresta *aresta = no->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
             int destino = aresta->getIdDestino();
-            if (destino > idNo) {
+            if (destino > idNo)
+            {
                 // Atualiza o ID de destino da aresta
-                No* novoDestino = getNoPeloId(destino - 1);
+                No *novoDestino = getNoPeloId(destino - 1);
                 aresta->setNoDestino(novoDestino);
             }
             aresta = aresta->getProxAresta();
@@ -353,9 +357,11 @@ void GrafoMatriz::deleta_no(int idNo)
     }
 
     // Remover todas as arestas que apontam para o nó a ser removido
-    for (int i = 0; i < ordem; i++) {
-        if (i != idNo) {
-            No* no = getNoPeloId(i);
+    for (int i = 0; i < ordem; i++)
+    {
+        if (i != idNo)
+        {
+            No *no = getNoPeloId(i);
             no->removeAresta(idNo, direcionado);
         }
     }
@@ -364,13 +370,15 @@ void GrafoMatriz::deleta_no(int idNo)
     int novaOrdem = ordem - 1;
     int **novaMatriz = new int *[novaOrdem];
 
-    for (int i = 0, ni = 0; i < ordem; i++) {
+    for (int i = 0, ni = 0; i < ordem; i++)
+    {
         if (i == idNo)
             continue;
 
         novaMatriz[ni] = new int[novaOrdem];
 
-        for (int j = 0, nj = 0; j < ordem; j++) {
+        for (int j = 0, nj = 0; j < ordem; j++)
+        {
             if (j == idNo)
                 continue;
             novaMatriz[ni][nj] = matrizAdj[i][j];
@@ -380,7 +388,8 @@ void GrafoMatriz::deleta_no(int idNo)
     }
 
     // Liberar a matriz antiga
-    for (int i = 0; i < ordem; i++) {
+    for (int i = 0; i < ordem; i++)
+    {
         delete[] matrizAdj[i];
     }
     delete[] matrizAdj;
@@ -519,4 +528,120 @@ void GrafoMatriz::novaAresta(int origem, int destino, float peso)
             matrizAdj[destino][origem] = 1;
         }
     }
+}
+
+int *GrafoMatriz::coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCobertura)
+{
+    int *melhorSolucao = nullptr;
+    int melhorTamanho = ordem + 1; // Inicializa com valor maior que possível
+
+    for (int i = 0; i < maxIteracoes; i++)
+    {
+        // Fase de Construção
+        int tamanhoAtual;
+        int *solucaoAtual = construcaoGulosaRandomizada(alpha, &tamanhoAtual);
+
+        // Fase de Busca Local
+        int tamanhoMelhorada;
+        int *solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
+
+        // Atualiza melhor solução
+        if (tamanhoMelhorada < melhorTamanho)
+        {
+            delete[] melhorSolucao;
+            melhorSolucao = solucaoMelhorada;
+            melhorTamanho = tamanhoMelhorada;
+            solucaoMelhorada = nullptr; // Evita delete duplo
+        }
+        else
+        {
+            delete[] solucaoMelhorada;
+        }
+
+        delete[] solucaoAtual;
+    }
+
+    *tamanhoCobertura = melhorTamanho;
+    return melhorSolucao;
+}
+
+bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
+{
+    // Marca os vértices que fazem parte da cobertura
+    bool *verticesNaCobertura = new bool[ordem];
+    for (int i = 0; i < ordem; i++)
+    {
+        verticesNaCobertura[i] = false;
+    }
+
+    for (int i = 0; i < tamanhoCobertura; i++)
+    {
+        verticesNaCobertura[cobertura[i]] = true;
+    }
+
+    // Verifica se todas as arestas têm pelo menos uma extremidade na cobertura
+    for (int i = 0; i < ordem; i++)
+    {
+        Aresta *aresta = nos[i]->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            int destino = aresta->getIdDestino();
+            if (!verticesNaCobertura[i] && !verticesNaCobertura[destino])
+            {
+                delete[] verticesNaCobertura;
+                return false; // Encontrou uma aresta não coberta
+            }
+            aresta = aresta->getProxAresta();
+        }
+    }
+
+    delete[] verticesNaCobertura;
+    return true;
+}
+
+int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
+{
+    int *melhorVizinho = new int[tamanhoSolucao];
+    for (int i = 0; i < tamanhoSolucao; i++)
+    {
+        melhorVizinho[i] = solucao[i];
+    }
+    *tamanhoMelhorSolucao = tamanhoSolucao;
+
+    bool melhorou;
+    do
+    {
+        melhorou = false;
+
+        // Tenta remover cada vértice da solução
+        for (int i = 0; i < *tamanhoMelhorSolucao; i++)
+        {
+            int removido = melhorVizinho[i];
+
+            // Remove temporariamente o vértice
+            for (int j = i; j < *tamanhoMelhorSolucao - 1; j++)
+            {
+                melhorVizinho[j] = melhorVizinho[j + 1];
+            }
+
+            // Verifica se ainda é uma cobertura válida
+            if (verificarCobertura(melhorVizinho, *tamanhoMelhorSolucao - 1))
+            {
+                (*tamanhoMelhorSolucao)--;
+                melhorou = true;
+                break;
+            }
+            else
+            {
+                // Desfaz a remoção
+                for (int j = *tamanhoMelhorSolucao - 1; j > i; j--)
+                {
+                    melhorVizinho[j] = melhorVizinho[j - 1];
+                }
+                melhorVizinho[i] = removido;
+            }
+        }
+    } while (melhorou);
+
+    return melhorVizinho;
 }

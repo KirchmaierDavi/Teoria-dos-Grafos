@@ -18,14 +18,16 @@ using namespace std;
  * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
  */
 GrafoLista::GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
-    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas) {
+    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
+{
 }
 
 /**
  * @brief Destrutor da classe GrafoLista.
  * Libera a memória alocada para a lista de adjacência.
  */
-GrafoLista::~GrafoLista() {
+GrafoLista::~GrafoLista()
+{
     // Se necessário, a limpeza é feita automaticamente em ~Lista()
 }
 
@@ -303,8 +305,10 @@ void GrafoLista::novoGrafo(const std::string &arquivoConfig)
  * @brief Remove um nó do grafo representado por lista de adjacência.
  * @param idNo ID do nó a ser removido (ajustado para índice zero-based).
  */
-void GrafoLista::deleta_no(int idNo) {
-    if (idNo <= 0 || idNo > ordem) {
+void GrafoLista::deleta_no(int idNo)
+{
+    if (idNo <= 0 || idNo > ordem)
+    {
         cout << "Erro: ID do nó inválido." << endl;
         return;
     }
@@ -314,14 +318,18 @@ void GrafoLista::deleta_no(int idNo) {
     cout << "Removendo nó " << idNo + 1 << " da lista de adjacência..." << endl;
 
     // Remover todas as conexões do nó que será deletado
-    for (int i = 0; i < ordem; i++) {
-        if (i != idNo) {
+    for (int i = 0; i < ordem; i++)
+    {
+        if (i != idNo)
+        {
             listaAdj[i].remover(idNo);
-            
+
             // Atualizar os IDs das conexões maiores que idNo
-            for (int j = 0; j < listaAdj[i].getTamanho(); j++) {
-                No* no = listaAdj[i].getElemento(j);
-                if (no->getIdNo() > idNo) {
+            for (int j = 0; j < listaAdj[i].getTamanho(); j++)
+            {
+                No *no = listaAdj[i].getElemento(j);
+                if (no->getIdNo() > idNo)
+                {
                     no->setIDNo(no->getIdNo() - 1);
                 }
             }
@@ -329,22 +337,27 @@ void GrafoLista::deleta_no(int idNo) {
     }
 
     // Criar nova lista de adjacência sem o nó removido
-    Lista* novaListaAdj = new Lista[ordem - 1];
+    Lista *novaListaAdj = new Lista[ordem - 1];
 
     // Copiar e ajustar os IDs
     int novoIndice = 0;
-    for (int i = 0; i < ordem; i++) {
-        if (i == idNo) {
+    for (int i = 0; i < ordem; i++)
+    {
+        if (i == idNo)
+        {
             continue;
         }
 
         // Copiar as conexões ajustando os IDs
-        for (int j = 0; j < listaAdj[i].getTamanho(); j++) {
+        for (int j = 0; j < listaAdj[i].getTamanho(); j++)
+        {
             int adj = listaAdj[i].getElemento(j)->getIdNo();
-            if (adj > idNo) {
+            if (adj > idNo)
+            {
                 adj--; // Decrementar IDs maiores que o nó removido
             }
-            if (adj != idNo) {
+            if (adj != idNo)
+            {
                 novaListaAdj[novoIndice].adicionar(adj);
             }
         }
@@ -454,4 +467,208 @@ void GrafoLista::novaAresta(int origem, int destino, float peso)
         std::cout << " com peso: " << peso;
     }
     std::cout << std::endl;
+}
+
+bool GrafoLista::verificarCobertura(int *cobertura, int tamanhoCobertura)
+{
+    // Marca os vértices que fazem parte da cobertura
+    bool *verticesNaCobertura = new bool[ordem];
+    for (int i = 0; i < ordem; i++)
+    {
+        verticesNaCobertura[i] = false;
+    }
+
+    for (int i = 0; i < tamanhoCobertura; i++)
+    {
+        verticesNaCobertura[cobertura[i]] = true;
+    }
+
+    // Verifica se todas as arestas têm pelo menos uma extremidade na cobertura
+    for (int i = 0; i < ordem; i++)
+    {
+        Aresta *aresta = nos[i]->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            int destino = aresta->getIdDestino();
+            if (!verticesNaCobertura[i] && !verticesNaCobertura[destino])
+            {
+                delete[] verticesNaCobertura;
+                return false; // Encontrou uma aresta não coberta
+            }
+            aresta = aresta->getProxAresta();
+        }
+    }
+
+    delete[] verticesNaCobertura;
+    return true;
+}
+
+int *GrafoLista::coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCobertura)
+{
+    int *melhorSolucao = nullptr;
+    int melhorTamanho = ordem + 1;
+
+    for (int i = 0; i < maxIteracoes; i++)
+    {
+        // Fase de Construção
+        int tamanhoAtual;
+        int *solucaoAtual = construcaoGulosaRandomizada(alpha, &tamanhoAtual);
+
+        // Fase de Busca Local
+        int tamanhoMelhorada;
+        int *solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
+
+        // Atualiza melhor solução encontrada
+        if (tamanhoMelhorada < melhorTamanho)
+        {
+            delete[] melhorSolucao;
+            melhorSolucao = solucaoMelhorada;
+            melhorTamanho = tamanhoMelhorada;
+            solucaoMelhorada = nullptr;
+        }
+        else
+        {
+            delete[] solucaoMelhorada;
+        }
+
+        delete[] solucaoAtual;
+    }
+
+    *tamanhoCobertura = melhorTamanho;
+    return melhorSolucao;
+}
+
+int *GrafoLista::construcaoGulosaRandomizada(float alpha, int *tamanhoCobertura)
+{
+    bool *verticesCobertos = new bool[ordem];
+    int *graus = new int[ordem];
+    int *cobertura = new int[ordem];
+    *tamanhoCobertura = 0;
+
+    // Inicialização
+    for (int i = 0; i < ordem; i++)
+    {
+        verticesCobertos[i] = false;
+        graus[i] = listaAdj[i].getTamanho();
+    }
+
+    while (true)
+    {
+        // Encontra maior e menor grau
+        int maxGrau = -1;
+        int minGrau = ordem + 1;
+
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i] && graus[i] > 0)
+            {
+                if (graus[i] > maxGrau)
+                    maxGrau = graus[i];
+                if (graus[i] < minGrau)
+                    minGrau = graus[i];
+            }
+        }
+
+        if (maxGrau == -1)
+            break;
+
+        // Define o limiar para a LRC
+        int limiar = minGrau + (int)(alpha * (maxGrau - minGrau));
+
+        // Conta candidatos
+        int numCandidatos = 0;
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i] && graus[i] >= limiar)
+            {
+                numCandidatos++;
+            }
+        }
+
+        if (numCandidatos == 0)
+            break;
+
+        // Cria lista de candidatos
+        int *candidatos = new int[numCandidatos];
+        int idx = 0;
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i] && graus[i] >= limiar)
+            {
+                candidatos[idx++] = i;
+            }
+        }
+
+        // Escolhe candidato aleatoriamente
+        int escolhido = candidatos[rand() % numCandidatos];
+        cobertura[(*tamanhoCobertura)++] = escolhido;
+        verticesCobertos[escolhido] = true;
+
+        // Atualiza graus
+        No *no = getNoPeloId(escolhido);
+        Aresta *aresta = no->getPrimeiraAresta();
+        while (aresta != nullptr)
+        {
+            int adj = aresta->getIdDestino();
+            if (!verticesCobertos[adj])
+            {
+                graus[adj]--;
+            }
+            aresta = aresta->getProxAresta();
+        }
+        graus[escolhido] = 0;
+
+        delete[] candidatos;
+    }
+
+    delete[] verticesCobertos;
+    delete[] graus;
+    return cobertura;
+}
+
+int *GrafoLista::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
+{
+    int *melhorVizinho = new int[tamanhoSolucao];
+    for (int i = 0; i < tamanhoSolucao; i++)
+    {
+        melhorVizinho[i] = solucao[i];
+    }
+    *tamanhoMelhorSolucao = tamanhoSolucao;
+
+    bool melhorou;
+    do
+    {
+        melhorou = false;
+
+        // Tenta remover cada vértice da solução
+        for (int i = 0; i < *tamanhoMelhorSolucao; i++)
+        {
+            int removido = melhorVizinho[i];
+
+            // Remove temporariamente o vértice
+            for (int j = i; j < *tamanhoMelhorSolucao - 1; j++)
+            {
+                melhorVizinho[j] = melhorVizinho[j + 1];
+            }
+
+            // Verifica se ainda é uma cobertura válida
+            if (verificarCobertura(melhorVizinho, *tamanhoMelhorSolucao - 1))
+            {
+                (*tamanhoMelhorSolucao)--;
+                melhorou = true;
+                break;
+            }
+            else
+            {
+                // Desfaz a remoção
+                for (int j = *tamanhoMelhorSolucao - 1; j > i; j--)
+                {
+                    melhorVizinho[j] = melhorVizinho[j - 1];
+                }
+                melhorVizinho[i] = removido;
+            }
+        }
+    } while (melhorou);
+
+    return melhorVizinho;
 }
