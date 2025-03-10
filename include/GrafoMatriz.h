@@ -10,6 +10,7 @@ class GrafoMatriz : public Grafo
 private:
     int **matrizAdj;
     No **nos;
+    int capacidade;
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);

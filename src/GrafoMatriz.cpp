@@ -18,10 +18,13 @@ using namespace std;
  * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
  */
 GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
-    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas), matrizAdj(nullptr), nos(nullptr) {
-    matrizAdj = new int*[this->ordem];
-    for (int i = 0; i < this->ordem; ++i) {
-        matrizAdj[i] = new int[this->ordem]();
+    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas), matrizAdj(nullptr), nos(nullptr)
+{
+    this->capacidade = 10;
+    matrizAdj = new int *[capacidade];
+    for (int i = 0; i < capacidade; ++i)
+    {
+        matrizAdj[i] = new int[capacidade]();
     }
 }
 
@@ -29,7 +32,26 @@ GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bo
  * @brief Destrutor da classe GrafoMatriz.
  * Libera a memória alocada para o grafo de matriz de adjacência.
  */
-GrafoMatriz::~GrafoMatriz() {}
+GrafoMatriz::~GrafoMatriz()
+{
+    if (matrizAdj != nullptr)
+    {
+        for (int i = 0; i < capacidade; ++i)
+        {
+            delete[] matrizAdj[i];
+        }
+        delete[] matrizAdj;
+    }
+
+    if (nos != nullptr)
+    {
+        for (int i = 0; i < ordem; ++i)
+        {
+            delete nos[i];
+        }
+        delete[] nos;
+    }
+}
 
 /**
  * @brief Verifica se o grafo é completo.
@@ -369,37 +391,42 @@ void GrafoMatriz::adicionaNo(int idNo)
 
     cout << "Adicionando nó " << idNo << " à matriz de adjacência...\n";
 
-    // Criar nova matriz expandida
-    int novaOrdem = ordem + 1;
-    int **novaMatriz = new int *[novaOrdem];
-
-    for (int i = 0; i < novaOrdem; i++)
+    // Verifica se precisa aumentar a capacidade
+    if (ordem >= capacidade)
     {
-        novaMatriz[i] = new int[novaOrdem];
-        for (int j = 0; j < novaOrdem; j++)
+        int novaCapacidade = capacidade * 2;
+        cout << "Expandindo matriz de " << capacidade << " para " << novaCapacidade << endl;
+
+        // Cria nova matriz com capacidade dobrada
+        int **novaMatriz = new int *[novaCapacidade];
+        for (int i = 0; i < novaCapacidade; ++i)
         {
-            if (i == ordem || j == ordem)
+            novaMatriz[i] = new int[novaCapacidade]();
+
+            // Copia dados existentes
+            if (i < ordem)
             {
-                novaMatriz[i][j] = 0;
-            }
-            else
-            {
-                novaMatriz[i][j] = matrizAdj[i][j];
+                for (int j = 0; j < ordem; ++j)
+                {
+                    novaMatriz[i][j] = matrizAdj[i][j];
+                }
             }
         }
+
+        // Libera matriz antiga
+        for (int i = 0; i < capacidade; ++i)
+        {
+            delete[] matrizAdj[i];
+        }
+        delete[] matrizAdj;
+
+        // Atualiza para nova matriz
+        matrizAdj = novaMatriz;
+        capacidade = novaCapacidade;
     }
 
-    // Liberar a matriz antiga
-    for (int i = 0; i < ordem; i++)
-    {
-        delete[] matrizAdj[i];
-    }
-    delete[] matrizAdj;
-
-    // Atualizar estrutura
-    matrizAdj = novaMatriz;
-    ordem = novaOrdem;
-
+    // Incrementa a ordem do grafo
+    ordem++;
     cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
 }
 
