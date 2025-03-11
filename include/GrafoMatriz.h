@@ -12,6 +12,10 @@ private:
     No **nos;
     int capacidade;
 
+    virtual int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) override;
+    virtual int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao) override;
+    virtual bool verificarCobertura(int* cobertura, int tamanhoCobertura) override;
+
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     virtual ~GrafoMatriz();
@@ -26,6 +30,8 @@ public:
     void novoGrafo(const std::string &arquivoConfig) override;
     void adicionaNo(int idNo) override;
     void novaAresta(int origem, int destino, float peso = 1.0) override;
+
+    virtual int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura) override;
 };
 
 #endif // GRAFOMATRIZ_H

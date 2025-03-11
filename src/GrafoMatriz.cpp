@@ -120,7 +120,7 @@ int GrafoMatriz::nConexo()
  */
 bool GrafoMatriz::ehArvore()
 {
-    return (nConexo() == 1 && (numVertices - 1) == getOrdem());
+    return (nConexo() == 1 && (numNos - 1) == getOrdem());
 }
 
 /**
@@ -130,9 +130,9 @@ bool GrafoMatriz::ehArvore()
  */
 bool GrafoMatriz::possuiPonte()
 {
-    for (int u = 0; u < numVertices; u++)
+    for (int u = 0; u < numNos; u++)
     {
-        for (int v = 0; v < numVertices; v++)
+        for (int v = 0; v < numNos; v++)
         {
             if (matrizAdj[u][v])
             {
@@ -156,19 +156,19 @@ bool GrafoMatriz::possuiPonte()
  */
 bool GrafoMatriz::possuiArticulacao()
 {
-    bool *visitado = new bool[numVertices];
+    bool *visitado = new bool[numNos];
     int componentesOriginais = nConexo();
 
-    for (int v = 0; v < numVertices; v++)
+    for (int v = 0; v < numNos; v++)
     {
-        for (int i = 0; i < numVertices; ++i)
+        for (int i = 0; i < numNos; ++i)
         {
             visitado[i] = false;
         }
         visitado[v] = true;
 
         int componentes = 0;
-        for (int u = 0; u < numVertices; u++)
+        for (int u = 0; u < numNos; u++)
         {
             if (!visitado[u])
             {
@@ -176,7 +176,7 @@ bool GrafoMatriz::possuiArticulacao()
                 auto dfs = [&](int x, auto &dfsRef) -> void
                 {
                     visitado[x] = true;
-                    for (int i = 0; i < numVertices; i++)
+                    for (int i = 0; i < numNos; i++)
                     {
                         if (matrizAdj[x][i] && !visitado[i])
                         {
@@ -500,7 +500,7 @@ void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado
  */
 void GrafoMatriz::novaAresta(int origem, int destino, float peso)
 {
-    if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
+    if (origem < 0 || origem >= numNos || destino < 0 || destino >= numNos)
     {
         std::cout << "Parâmetros errados!" << std::endl;
         return;

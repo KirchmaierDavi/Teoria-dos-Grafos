@@ -3,27 +3,37 @@
 
 #include "Grafo.h"
 #include "Lista.h"
+#include "No.h"
 #include <string>
 
-class GrafoLista : public Grafo
-{
+class GrafoLista : public Grafo {
 private:
-    Lista listaAdj;
+    Lista* listaAdj;
+    No** nos;
+    int numArestas;
 
 public:
     GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
-    virtual ~GrafoLista();
+    ~GrafoLista();
+
+    bool ehCompleto();
+    int nConexo();
+    bool ehArvore();
+    bool possuiPonte();
+    bool possuiArticulacao();
+    void carregaGrafo(const std::string& arquivo);
+    void novoGrafo(const std::string& arquivoConfig);
     void deleta_no(int idNo);
-    bool ehCompleto() override;
-    int nConexo() override;
-    bool ehArvore() override;
-    bool possuiPonte() override;
-    bool possuiArticulacao() override;
+    void adicionaNo(int idNo);
     void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado);
-    void carregaGrafo(const std::string& arquivo) override;
-    void novoGrafo(const std::string& arquivoConfig) override;
-    void adicionaNo(int idNo) override;
-    void novaAresta(int origem, int destino, float peso = 1.0) override;
+    void novaAresta(int origem, int destino, float peso);
+    bool verificarCobertura(int* cobertura, int tamanhoCobertura);
+    int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura);
+
+private:
+    int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura);
+    int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao);
+    No* getNoPeloId(int id) { return nos[id]; }
 };
 
-#endif // GRAFOLISTA_H
+#endif

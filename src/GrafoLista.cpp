@@ -20,6 +20,12 @@ using namespace std;
 GrafoLista::GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
     : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
 {
+    listaAdj = new Lista[ordem];
+    nos = new No*[ordem];
+    for (int i = 0; i < ordem; i++) {
+        nos[i] = new No(i);
+    }
+    numArestas = 0;
 }
 
 /**
@@ -88,15 +94,14 @@ int GrafoLista::nConexo()
     delete[] visitado;
     return componentes;
 }
-
-/**
- * @brief Verifica se o grafo é uma árvore.
- * Uma árvore é um grafo conexo sem ciclos.
- * @return true se o grafo é uma árvore; caso contrário, false.
- */
 bool GrafoLista::ehArvore()
 {
-    return (nConexo() == 1 && (ordem - 1) == numVertices);
+    return (nConexo() == 1 && (ordem - 1) == numArestas);
+}
+
+bool GrafoLista::ehArvore()
+{
+    return (nConexo() == 1 && (ordem - 1) == numNos);
 }
 
 /**

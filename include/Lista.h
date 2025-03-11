@@ -3,21 +3,45 @@
 
 #include "No.h"
 
-// Simplificação; armazenar apenas ints, não objetos 'No'
 class Lista {
 private:
     No* cabeca;
     int tamanho;
 
 public:
-    Lista();
-    ~Lista();
+    Lista() : cabeca(nullptr), tamanho(0) {}
+    ~Lista() {
+        while(cabeca != nullptr) {
+            No* temp = cabeca;
+            cabeca = cabeca->getProxNo();
+            delete temp;
+        }
+    }
+    
+    Lista& operator=(const Lista& other) {
+        if (this != &other) {
+            // Clear current list
+            while(cabeca != nullptr) {
+                No* temp = cabeca;
+                cabeca = cabeca->getProxNo();
+                delete temp;
+            }
+            
+            // Copy from other list
+            No* current = other.cabeca;
+            while(current != nullptr) {
+                adicionar(current->getIdNo());
+                current = current->getProxNo();
+            }
+        }
+        return *this;
+    }
 
-    void adicionar(int idNo, float pesoNo = 0.0);
-    void remover(int idNo);
-    bool contem(int idNo);
-    int getTamanho();
-    No* getElemento(int indice);
+    void adicionar(int id, float peso = 0.0);
+    void remover(int id);
+    bool contem(int id) const;
+    No* getElemento(int posicao) const;
+    int getTamanho() const { return tamanho; }
 };
 
-#endif // LISTA_H
+#endif
