@@ -565,6 +565,41 @@ int *GrafoMatriz::coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCo
     return melhorSolucao;
 }
 
+
+/**
+ * @brief Implementa um algoritmo guloso para encontrar uma cobertura de vértices.
+ * @param tamanhoCobertura Ponteiro para armazenar o tamanho da cobertura encontrada.
+ * @return Um array contendo os vértices que fazem parte da cobertura.
+ */
+ int *GrafoMatriz::construcaoGulosa(int *tamanhoCobertura)
+ {
+     bool *coberto = new bool[ordem];
+     for (int i = 0; i < ordem; i++)
+     {
+         coberto[i] = false;
+     }
+ 
+     int *cobertura = new int[ordem];
+     int tamanhoAtual = 0;
+ 
+     for (int i = 0; i < ordem; i++)
+     {
+         for (int j = 0; j < ordem; j++)
+         {
+             if (matrizAdj[i][j] && !coberto[i] && !coberto[j])
+             {
+                 cobertura[tamanhoAtual++] = i;
+                 cobertura[tamanhoAtual++] = j;
+                 coberto[i] = true;
+                 coberto[j] = true;
+             }
+         }
+     }
+ 
+     *tamanhoCobertura = tamanhoAtual;
+     return cobertura;
+ }
+
 bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
 {
     // Marca os vértices que fazem parte da cobertura

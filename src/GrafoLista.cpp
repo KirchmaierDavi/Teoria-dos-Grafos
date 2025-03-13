@@ -631,6 +631,62 @@ int *GrafoLista::construcaoGulosaRandomizada(float alpha, int *tamanhoCobertura)
     return cobertura;
 }
 
+/**
+ * @brief Implementa um algoritmo guloso para encontrar uma cobertura de vértices.
+ * @param tamanhoCobertura Ponteiro para armazenar o tamanho da cobertura encontrada.
+ * @return Um array contendo os vértices que fazem parte da cobertura.
+ */
+ int *GrafoLista::algoritmoGuloso(int *tamanhoCobertura)
+ {
+     bool *verticesCobertos = new bool[ordem];
+     int *cobertura = new int[ordem];
+     *tamanhoCobertura = 0;
+ 
+     // Inicialização
+     for (int i = 0; i < ordem; i++)
+     {
+         verticesCobertos[i] = false;
+     }
+ 
+     while (true)
+     {
+         // Encontra o vértice com o maior grau não coberto
+         int maxGrau = -1;
+         int verticeEscolhido = -1;
+ 
+         for (int i = 0; i < ordem; i++)
+         {
+             if (!verticesCobertos[i])
+             {
+                 int grau = listaAdj[i].getTamanho();
+                 if (grau > maxGrau)
+                 {
+                     maxGrau = grau;
+                     verticeEscolhido = i;
+                 }
+             }
+         }
+ 
+         if (verticeEscolhido == -1)
+             break;
+ 
+         // Adiciona o vértice escolhido à cobertura
+         cobertura[(*tamanhoCobertura)++] = verticeEscolhido;
+         verticesCobertos[verticeEscolhido] = true;
+ 
+         // Marca todos os vértices adjacentes como cobertos
+         for (int i = 0; i < listaAdj[verticeEscolhido].getTamanho(); i++)
+         {
+             int adj = listaAdj[verticeEscolhido].getElemento(i)->getIdNo();
+             verticesCobertos[adj] = true;
+         }
+     }
+ 
+     delete[] verticesCobertos;
+     return cobertura;
+ }
+ 
+
 int *GrafoLista::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
 {
     int *melhorVizinho = new int[tamanhoSolucao];

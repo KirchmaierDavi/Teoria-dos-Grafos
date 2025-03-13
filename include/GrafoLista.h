@@ -34,6 +34,7 @@ private:
     int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura);
     int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao);
     No* getNoPeloId(int id) { return nos[id]; }
+    int* algoritmoGuloso(int* tamanhoCobertura);
 };
 
 #endif
