@@ -680,3 +680,78 @@ int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelho
 
     return melhorVizinho;
 }
+
+int* GrafoMatriz::construcaoGulosaReativa(int maxIteracoes, int *tamanhoCobertura)
+{
+    int *melhorSolucao = nullptr;
+    int melhorTamanho = ordem + 1;
+
+    // Conjunto de valores de alpha e suas probabilidades iniciais
+    float alphas[] = {0.1, 0.2, 0.3, 0.4, 0.5};
+    float probabilidades[] = {0.2, 0.2, 0.2, 0.2, 0.2}; // Inicialmente uniformes
+    int qtdAlphas = sizeof(alphas) / sizeof(alphas[0]);
+
+    // Histórico de desempenho dos alphas
+    float desempenhoAlphas[qtdAlphas] = {0};
+
+    for (int iter = 0; iter < maxIteracoes; iter++)
+    {
+        // Seleciona um alpha com base nas probabilidades
+        float r = (rand() % 100) / 100.0;
+        float acumulado = 0.0;
+        int indiceAlpha = 0;
+        for (int j = 0; j < qtdAlphas; j++)
+        {
+            acumulado += probabilidades[j];
+            if (r <= acumulado)
+            {
+                indiceAlpha = j;
+                break;
+            }
+        }
+        float alpha = alphas[indiceAlpha];
+
+        // Fase de Construção
+        int tamanhoAtual;
+        int *solucaoAtual = construcaoGulosaRandomizada(alpha, &tamanhoAtual);
+        if (!solucaoAtual) continue;
+
+        // Fase de Busca Local
+        int tamanhoMelhorada;
+        int *solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
+        if (!solucaoMelhorada)
+        {
+            delete[] solucaoAtual;
+            continue;
+        }
+
+        // Atualiza melhor solução encontrada
+        if (tamanhoMelhorada < melhorTamanho)
+        {
+            delete[] melhorSolucao;
+            melhorSolucao = solucaoMelhorada;
+            melhorTamanho = tamanhoMelhorada;
+            desempenhoAlphas[indiceAlpha] += 1; // Incrementa sucesso desse alpha
+        }
+        else
+        {
+            delete[] solucaoMelhorada;
+        }
+
+        delete[] solucaoAtual;
+
+        // Atualiza probabilidades de escolha de alpha baseado no desempenho
+        float somaDesempenho = 0;
+        for (int j = 0; j < qtdAlphas; j++)
+        {
+            somaDesempenho += desempenhoAlphas[j] + 1; // Evita zeros
+        }
+        for (int j = 0; j < qtdAlphas; j++)
+        {
+            probabilidades[j] = (desempenhoAlphas[j] + 1) / somaDesempenho;
+        }
+    }
+
+    *tamanhoCobertura = melhorTamanho;
+    return melhorSolucao;
+}

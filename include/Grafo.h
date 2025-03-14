@@ -21,6 +21,7 @@ protected:
     virtual int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) = 0;
     virtual int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao) = 0;
     virtual bool verificarCobertura(int* cobertura, int tamanhoCobertura) = 0;
+    virtual int* construcaoGulosaReativa(int maxIteracoes, int* tamanhoCobertura) = 0;
 
 public:
     Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
