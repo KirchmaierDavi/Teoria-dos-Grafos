@@ -36,6 +36,10 @@ GrafoLista::~GrafoLista()
 {
     // Se necessário, a limpeza é feita automaticamente em ~Lista()
 }
+int* GrafoLista::construcaoGulosa(int* tamanhoCobertura) {
+
+    return nullptr;
+}
 
 /**
  * @brief Verifica se o grafo é completo.
@@ -99,10 +103,6 @@ bool GrafoLista::ehArvore()
     return (nConexo() == 1 && (ordem - 1) == numArestas);
 }
 
-bool GrafoLista::ehArvore()
-{
-    return (nConexo() == 1 && (ordem - 1) == numNos);
-}
 
 /**
  * @brief Verifica se o grafo possui pontes.
@@ -425,7 +425,7 @@ void GrafoLista::adicionaNo(int idNo)
  *
  * Se o grafo for não direcionado, a remoção da aresta ocorre nos dois sentidos.
  */
-void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) 
 {
     if (!listaAdj[idNoOrigem].contem(idNoDestino))
     {

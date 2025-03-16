@@ -6,6 +6,8 @@
 #include "../include/Aresta.h"
 #include <iostream>
 
+using namespace std;
+
 /**
  * @brief Construtor da classe No.
  *

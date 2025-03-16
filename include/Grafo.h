@@ -21,9 +21,13 @@ protected:
     virtual int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) = 0;
     virtual int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao) = 0;
     virtual bool verificarCobertura(int* cobertura, int tamanhoCobertura) = 0;
+    
 
 public:
     Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
+    Grafo() : ordem(0), numNos(0), direcionado(false), ponderadoVertices(false), ponderadoArestas(false) {}
+
+    virtual int* construcaoGulosa(int* tamanhoCobertura) = 0;
     virtual void deleta_no(int idNo) = 0;
     virtual ~Grafo();
     
@@ -47,6 +51,7 @@ public:
     virtual int menorDistancia(int origem, int destino);
     virtual void novaAresta(int origem, int destino, float peso);
     virtual int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura) = 0;
+    virtual void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) = 0;
 };
 
 #endif // GRAFO_H

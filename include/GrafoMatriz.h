@@ -12,27 +12,27 @@ private:
     No **nos;
     int capacidade;
 
-    virtual int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) override;
-    virtual int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao) override;
-    virtual bool verificarCobertura(int* cobertura, int tamanhoCobertura) override;
-    virtual int* construcaoGulosa(int* tamanhoCobertura) override;
+    virtual int *construcaoGulosaRandomizada(float alpha, int *tamanhoCobertura) override;
+    virtual int *buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao) override;
+    virtual bool verificarCobertura(int *cobertura, int tamanhoCobertura) override;
+    int *construcaoGulosa(int *tamanhoCobertura) override;
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     virtual ~GrafoMatriz();
-    void deleta_no(int idNo);
+    void deleta_no(int idNo) override;
     bool ehCompleto() override;
     int nConexo() override;
     bool ehArvore() override;
     bool possuiPonte() override;
     bool possuiArticulacao() override;
-    void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado);
+    void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) override;
     void carregaGrafo(const std::string &arquivo) override;
     void novoGrafo(const std::string &arquivoConfig) override;
     void adicionaNo(int idNo) override;
-    void novaAresta(int origem, int destino, float peso = 1.0) override;
+    virtual void novaAresta(int origem, int destino, float peso) override;
 
-    virtual int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura) override;
+    virtual int *coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCobertura) override;
 };
 
 #endif // GRAFOMATRIZ_H

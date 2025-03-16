@@ -6,6 +6,8 @@
 #include "../include/Lista.h"
 #include <iostream>
 
+using namespace std;
+
 /**
  * @brief Construtor da classe Lista.
  *
@@ -86,7 +88,7 @@ void Lista::remover(int idNo)
  * @param idNo O ID do nó a ser buscado.
  * @return true Se o nó com o ID fornecido for encontrado, false caso contrário.
  */
-bool Lista::contem(int idNo)
+bool Lista::contem(int idNo) const
 {
     No *atual = cabeca;
     while (atual != nullptr)
@@ -107,7 +109,7 @@ bool Lista::contem(int idNo)
  *
  * @return O número de elementos (tamanho) na lista.
  */
-int Lista::getTamanho()
+int Lista::getTamanho() const
 {
     return tamanho;
 }
@@ -120,7 +122,7 @@ int Lista::getTamanho()
  * @param indice O índice do elemento desejado.
  * @return O ponteiro para o nó na posição especificada, ou nullptr caso o índice esteja fora dos limites.
  */
-No *Lista::getElemento(int indice)
+No* Lista::getElemento(int indice) const
 {
     if (indice < 0 || indice >= tamanho)
     {

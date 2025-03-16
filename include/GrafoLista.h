@@ -16,23 +16,24 @@ public:
     GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
     ~GrafoLista();
 
-    bool ehCompleto();
-    int nConexo();
-    bool ehArvore();
-    bool possuiPonte();
-    bool possuiArticulacao();
-    void carregaGrafo(const std::string& arquivo);
-    void novoGrafo(const std::string& arquivoConfig);
-    void deleta_no(int idNo);
-    void adicionaNo(int idNo);
-    void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado);
-    void novaAresta(int origem, int destino, float peso);
-    bool verificarCobertura(int* cobertura, int tamanhoCobertura);
-    int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura);
-
+    bool ehCompleto() override;
+    int nConexo() override;
+    bool ehArvore() override;
+    bool possuiPonte() override;
+    bool possuiArticulacao() override;
+    void carregaGrafo(const std::string& arquivo) override;
+    void novoGrafo(const std::string& arquivoConfig) override;
+    void deleta_no(int idNo) override;
+    void adicionaNo(int idNo) override;
+    void novaAresta(int origem, int destino, float peso) override;
+    bool verificarCobertura(int* cobertura, int tamanhoCobertura) override;
+    int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura) override;
+    int* construcaoGulosa(int* tamanhoCobertura) override;
+    void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) override;
+    
 private:
-    int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura);
-    int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao);
+    int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) override;
+    int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao) override;
     No* getNoPeloId(int id) { return nos[id]; }
     int* algoritmoGuloso(int* tamanhoCobertura);
 };

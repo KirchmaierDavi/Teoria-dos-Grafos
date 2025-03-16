@@ -3,33 +3,32 @@
 
 #include "No.h"
 
-class Lista {
+class Lista
+{
 private:
-    No* cabeca;
+    No *cabeca;
     int tamanho;
 
 public:
-    Lista() : cabeca(nullptr), tamanho(0) {}
-    ~Lista() {
-        while(cabeca != nullptr) {
-            No* temp = cabeca;
-            cabeca = cabeca->getProxNo();
-            delete temp;
-        }
-    }
-    
-    Lista& operator=(const Lista& other) {
-        if (this != &other) {
+    Lista();
+    ~Lista();
+
+    Lista &operator=(const Lista &other)
+    {
+        if (this != &other)
+        {
             // Clear current list
-            while(cabeca != nullptr) {
-                No* temp = cabeca;
+            while (cabeca != nullptr)
+            {
+                No *temp = cabeca;
                 cabeca = cabeca->getProxNo();
                 delete temp;
             }
-            
+
             // Copy from other list
-            No* current = other.cabeca;
-            while(current != nullptr) {
+            No *current = other.cabeca;
+            while (current != nullptr)
+            {
                 adicionar(current->getIdNo());
                 current = current->getProxNo();
             }
@@ -40,8 +39,7 @@ public:
     void adicionar(int id, float peso = 0.0);
     void remover(int id);
     bool contem(int id) const;
-    No* getElemento(int posicao) const;
-    int getTamanho() const { return tamanho; }
+    No *getElemento(int posicao) const;
+    int getTamanho() const;
 };
-
 #endif

@@ -17,8 +17,7 @@ using namespace std;
  * @param ponderadoVertices Indica se os vértices possuem pesos (true) ou não (false).
  * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
  */
-GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
-    : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas), matrizAdj(nullptr), nos(nullptr)
+GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas) : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas), matrizAdj(nullptr), nos(nullptr)
 {
     this->capacidade = 10;
     matrizAdj = new int *[capacidade];
@@ -467,7 +466,7 @@ void GrafoMatriz::adicionaNo(int idNo)
  *
  * @note Se a aresta não existir, a função exibe uma mensagem informativa e não realiza nenhuma alteração.
  */
-void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
+void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) 
 {
     if (matrizAdj[idNoOrigem][idNoDestino] == 0)
     {
@@ -632,6 +631,10 @@ bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
 
     delete[] verticesNaCobertura;
     return true;
+}
+
+int* GrafoMatriz::construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) {
+    return nullptr;  
 }
 
 int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)

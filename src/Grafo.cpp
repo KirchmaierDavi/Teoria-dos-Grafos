@@ -9,6 +9,8 @@
 #include <iostream>
 #include <climits>
 
+using namespace std;
+
 /**
  * @brief Construtor da classe Grafo.
  *
@@ -29,6 +31,14 @@ Grafo::Grafo(int ordem, bool direcionado, bool ponderadoVertices, bool ponderado
  * Este destrutor é responsável por liberar os recursos alocados pelo grafo.
  */
 Grafo::~Grafo() {}
+
+int* Grafo::construcaoGulosa(int* tamanhoCobertura) {
+    return nullptr; // Implementação vazia para evitar erro de vtable
+}
+
+void Grafo::deleta_no(int idNo) {
+    // Implementação vazia
+}
 
 /**
  * @brief Obtém a ordem do grafo.
@@ -147,7 +157,7 @@ int Grafo::getGrau(int vertice)
     std::cout << "Vértice não encontrado";
     return -1;
 }
-
+void Grafo::novaAresta(int origem, int destino, float peso){    }
 /**
  * @brief Verifica se o grafo é bipartido.
  * Um grafo bipartido pode ser dividido em dois subconjuntos, onde não existem arestas entre vértices do mesmo subconjunto.
