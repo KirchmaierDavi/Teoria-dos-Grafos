@@ -16,7 +16,9 @@ private:
     virtual int *buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao) override;
     virtual bool verificarCobertura(int *cobertura, int tamanhoCobertura) override;
     int *construcaoGulosa(int *tamanhoCobertura) override;
-    virtual void atualizaProbabilidades(float* alphas, float* probabilidades, float* valores, int tamanhoLista) override;
+    virtual void atualizaProbabilidades(float* alphas, float* probabilidades, 
+        float* valores, int* contadores, 
+        int tamanhoLista, float melhorValor) override;
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
