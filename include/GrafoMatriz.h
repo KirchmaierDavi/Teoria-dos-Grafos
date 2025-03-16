@@ -16,6 +16,7 @@ private:
     virtual int *buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao) override;
     virtual bool verificarCobertura(int *cobertura, int tamanhoCobertura) override;
     int *construcaoGulosa(int *tamanhoCobertura) override;
+    virtual void atualizaProbabilidades(float* alphas, float* probabilidades, float* valores, int tamanhoLista) override;
 
 public:
     GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas);
@@ -33,6 +34,7 @@ public:
     virtual void novaAresta(int origem, int destino, float peso) override;
 
     virtual int *coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCobertura) override;
+    virtual int* coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlpha, int* tamanhoCobertura) override;
 };
 
 #endif // GRAFOMATRIZ_H

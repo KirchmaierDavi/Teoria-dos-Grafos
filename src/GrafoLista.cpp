@@ -733,3 +733,102 @@ int *GrafoLista::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhor
 
     return melhorVizinho;
 }
+
+int* GrafoLista::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlpha, int* tamanhoCobertura) {
+    // Inicialização dos valores de alpha e suas probabilidades
+    float* alphas = new float[tamanhoListaAlpha];
+    float* probabilidades = new float[tamanhoListaAlpha];
+    float* valores = new float[tamanhoListaAlpha];
+    int* contadores = new int[tamanhoListaAlpha];
+    
+    // Inicializa os valores de alpha uniformemente distribuídos
+    for(int i = 0; i < tamanhoListaAlpha; i++) {
+        alphas[i] = (i + 1.0f) / tamanhoListaAlpha;
+        probabilidades[i] = 1.0f / tamanhoListaAlpha;
+        valores[i] = 0;
+        contadores[i] = 0;
+    }
+
+    int* melhorSolucao = nullptr;
+    int melhorTamanho = ordem + 1;
+    
+    // Fase de reação
+    for(int iter = 0; iter < maxIteracoes; iter++) {
+        // Escolhe um valor de alpha baseado nas probabilidades
+        float r = (float)rand() / RAND_MAX;
+        float soma = 0;
+        int indexAlpha = 0;
+        
+        for(int i = 0; i < tamanhoListaAlpha; i++) {
+            soma += probabilidades[i];
+            if(r <= soma) {
+                indexAlpha = i;
+                break;
+            }
+        }
+
+        // Constrói solução usando o alpha escolhido
+        int tamanhoAtual;
+        int* solucaoAtual = construcaoGulosaRandomizada(alphas[indexAlpha], &tamanhoAtual);
+        
+        // Aplica busca local
+        int tamanhoMelhorada;
+        int* solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
+
+        // Atualiza estatísticas
+        contadores[indexAlpha]++;
+        valores[indexAlpha] += tamanhoMelhorada;
+        
+        // Atualiza melhor solução
+        if(tamanhoMelhorada < melhorTamanho) {
+            delete[] melhorSolucao;
+            melhorSolucao = solucaoMelhorada;
+            melhorTamanho = tamanhoMelhorada;
+            solucaoMelhorada = nullptr;
+        } else {
+            delete[] solucaoMelhorada;
+        }
+        
+        delete[] solucaoAtual;
+
+        // A cada 100 iterações, atualiza as probabilidades
+        if((iter + 1) % 100 == 0) {
+            atualizaProbabilidades(alphas, probabilidades, valores, tamanhoListaAlpha);
+        }
+    }
+
+    // Limpa memória
+    delete[] alphas;
+    delete[] probabilidades;
+    delete[] valores;
+    delete[] contadores;
+
+    *tamanhoCobertura = melhorTamanho;
+    return melhorSolucao;
+}
+
+void GrafoLista::atualizaProbabilidades(float* alphas, float* probabilidades, float* valores, int tamanhoLista) {
+    float somaQ = 0;
+    float* q = new float[tamanhoLista];
+    
+    // Calcula q_i para cada alpha
+    for(int i = 0; i < tamanhoLista; i++) {
+        if(valores[i] > 0) {
+            q[i] = pow(melhorTamanho / (valores[i] / contadores[i]), 10);
+            somaQ += q[i];
+        } else {
+            q[i] = 0;
+        }
+    }
+    
+    // Atualiza probabilidades
+    for(int i = 0; i < tamanhoLista; i++) {
+        if(somaQ > 0) {
+            probabilidades[i] = q[i] / somaQ;
+        } else {
+            probabilidades[i] = 1.0f / tamanhoLista;
+        }
+    }
+    
+    delete[] q;
+}

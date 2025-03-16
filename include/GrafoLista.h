@@ -30,12 +30,14 @@ public:
     int* coberturaArestas(float alpha, int maxIteracoes, int* tamanhoCobertura) override;
     int* construcaoGulosa(int* tamanhoCobertura) override;
     void removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) override;
+    virtual int* coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlpha, int* tamanhoCobertura) override;
     
 private:
     int* construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) override;
     int* buscaLocal(int* solucao, int tamanhoSolucao, int* tamanhoMelhorSolucao) override;
     No* getNoPeloId(int id) { return nos[id]; }
     int* algoritmoGuloso(int* tamanhoCobertura);
+    virtual void atualizaProbabilidades(float* alphas, float* probabilidades, float* valores, int tamanhoLista) override;
 };
 
 #endif
