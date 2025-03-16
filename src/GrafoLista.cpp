@@ -21,8 +21,9 @@ GrafoLista::GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool
     : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
 {
     listaAdj = new Lista[ordem];
-    nos = new No*[ordem];
-    for (int i = 0; i < ordem; i++) {
+    nos = new No *[ordem];
+    for (int i = 0; i < ordem; i++)
+    {
         nos[i] = new No(i);
     }
     numArestas = 0;
@@ -36,7 +37,8 @@ GrafoLista::~GrafoLista()
 {
     // Se necessário, a limpeza é feita automaticamente em ~Lista()
 }
-int* GrafoLista::construcaoGulosa(int* tamanhoCobertura) {
+int *GrafoLista::construcaoGulosa(int *tamanhoCobertura)
+{
 
     return nullptr;
 }
@@ -102,7 +104,6 @@ bool GrafoLista::ehArvore()
 {
     return (nConexo() == 1 && (ordem - 1) == numArestas);
 }
-
 
 /**
  * @brief Verifica se o grafo possui pontes.
@@ -425,7 +426,7 @@ void GrafoLista::adicionaNo(int idNo)
  *
  * Se o grafo for não direcionado, a remoção da aresta ocorre nos dois sentidos.
  */
-void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) 
+void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
 {
     if (!listaAdj[idNoOrigem].contem(idNoDestino))
     {
@@ -636,56 +637,55 @@ int *GrafoLista::construcaoGulosaRandomizada(float alpha, int *tamanhoCobertura)
  * @param tamanhoCobertura Ponteiro para armazenar o tamanho da cobertura encontrada.
  * @return Um array contendo os vértices que fazem parte da cobertura.
  */
- int *GrafoLista::algoritmoGuloso(int *tamanhoCobertura)
- {
-     bool *verticesCobertos = new bool[ordem];
-     int *cobertura = new int[ordem];
-     *tamanhoCobertura = 0;
- 
-     // Inicialização
-     for (int i = 0; i < ordem; i++)
-     {
-         verticesCobertos[i] = false;
-     }
- 
-     while (true)
-     {
-         // Encontra o vértice com o maior grau não coberto
-         int maxGrau = -1;
-         int verticeEscolhido = -1;
- 
-         for (int i = 0; i < ordem; i++)
-         {
-             if (!verticesCobertos[i])
-             {
-                 int grau = listaAdj[i].getTamanho();
-                 if (grau > maxGrau)
-                 {
-                     maxGrau = grau;
-                     verticeEscolhido = i;
-                 }
-             }
-         }
- 
-         if (verticeEscolhido == -1)
-             break;
- 
-         // Adiciona o vértice escolhido à cobertura
-         cobertura[(*tamanhoCobertura)++] = verticeEscolhido;
-         verticesCobertos[verticeEscolhido] = true;
- 
-         // Marca todos os vértices adjacentes como cobertos
-         for (int i = 0; i < listaAdj[verticeEscolhido].getTamanho(); i++)
-         {
-             int adj = listaAdj[verticeEscolhido].getElemento(i)->getIdNo();
-             verticesCobertos[adj] = true;
-         }
-     }
- 
-     delete[] verticesCobertos;
-     return cobertura;
- }
- 
+int *GrafoLista::algoritmoGuloso(int *tamanhoCobertura)
+{
+    bool *verticesCobertos = new bool[ordem];
+    int *cobertura = new int[ordem];
+    *tamanhoCobertura = 0;
+
+    // Inicialização
+    for (int i = 0; i < ordem; i++)
+    {
+        verticesCobertos[i] = false;
+    }
+
+    while (true)
+    {
+        // Encontra o vértice com o maior grau não coberto
+        int maxGrau = -1;
+        int verticeEscolhido = -1;
+
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i])
+            {
+                int grau = listaAdj[i].getTamanho();
+                if (grau > maxGrau)
+                {
+                    maxGrau = grau;
+                    verticeEscolhido = i;
+                }
+            }
+        }
+
+        if (verticeEscolhido == -1)
+            break;
+
+        // Adiciona o vértice escolhido à cobertura
+        cobertura[(*tamanhoCobertura)++] = verticeEscolhido;
+        verticesCobertos[verticeEscolhido] = true;
+
+        // Marca todos os vértices adjacentes como cobertos
+        for (int i = 0; i < listaAdj[verticeEscolhido].getTamanho(); i++)
+        {
+            int adj = listaAdj[verticeEscolhido].getElemento(i)->getIdNo();
+            verticesCobertos[adj] = true;
+        }
+    }
+
+    delete[] verticesCobertos;
+    return cobertura;
+}
 
 int *GrafoLista::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
 {
@@ -732,4 +732,124 @@ int *GrafoLista::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhor
     } while (melhorou);
 
     return melhorVizinho;
+}
+
+int* GrafoLista::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlpha, int* tamanhoCobertura) {
+    float* alphas = new float[tamanhoListaAlpha];
+    float* probabilidades = new float[tamanhoListaAlpha];
+    float* valores = new float[tamanhoListaAlpha];
+    int* contadores = new int[tamanhoListaAlpha];
+    
+    // Inicialização
+    for(int i = 0; i < tamanhoListaAlpha; i++) {
+        alphas[i] = (i + 1.0f) / tamanhoListaAlpha;
+        probabilidades[i] = 1.0f / tamanhoListaAlpha;
+        valores[i] = 0;
+        contadores[i] = 0;
+    }
+
+    int* melhorSolucao = nullptr;
+    int melhorTamanho = ordem + 1;
+    
+    for(int iter = 0; iter < maxIteracoes; iter++) {
+        // Escolhe alpha baseado nas probabilidades
+        float r = (float)rand() / RAND_MAX;
+        float soma = 0;
+        int indexAlpha = 0;
+        
+        for(int i = 0; i < tamanhoListaAlpha; i++) {
+            soma += probabilidades[i];
+            if(r <= soma) {
+                indexAlpha = i;
+                break;
+            }
+        }
+
+        // Constrói solução
+        int tamanhoAtual;
+        int* solucaoAtual = construcaoGulosaRandomizada(alphas[indexAlpha], &tamanhoAtual);
+        
+        // Busca local
+        int tamanhoMelhorada;
+        int* solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
+
+        // Atualiza estatísticas
+        contadores[indexAlpha]++;
+        valores[indexAlpha] += tamanhoMelhorada;
+        
+        // Atualiza melhor solução
+        if(tamanhoMelhorada < melhorTamanho) {
+            delete[] melhorSolucao;
+            melhorSolucao = solucaoMelhorada;
+            melhorTamanho = tamanhoMelhorada;
+            solucaoMelhorada = nullptr;
+        } else {
+            delete[] solucaoMelhorada;
+        }
+        
+        delete[] solucaoAtual;
+
+        // Atualiza probabilidades a cada 100 iterações
+        if((iter + 1) % 100 == 0) {
+            float melhorValor = valores[0];
+            for(int i = 1; i < tamanhoListaAlpha; i++) {
+                if(valores[i] < melhorValor && valores[i] > 0) {
+                    melhorValor = valores[i];
+                }
+            }
+            atualizaProbabilidades(alphas, probabilidades, valores, contadores, 
+                                 tamanhoListaAlpha, melhorValor);
+        }
+    }
+
+    delete[] alphas;
+    delete[] probabilidades;
+    delete[] valores;
+    delete[] contadores;
+
+    *tamanhoCobertura = melhorTamanho;
+    return melhorSolucao;
+}
+void GrafoLista::atualizaProbabilidades(float *alphas, float *probabilidades,
+                                        float *valores, int *contadores,
+                                        int tamanhoLista, float melhorValor)
+{
+    float somaQ = 0;
+    float *q = new float[tamanhoLista];
+
+    // Calcula q_i para cada alpha usando multiplicação
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        if (valores[i] > 0 && contadores[i] > 0)
+        {
+            float ratio = melhorValor / (valores[i] / contadores[i]);
+            // Simula pow(ratio, 10) com multiplicações
+            float result = ratio;
+            for (int j = 1; j < 10; j++)
+            {
+                result *= ratio;
+            }
+            q[i] = result;
+            somaQ += q[i];
+        }
+        else
+        {
+            q[i] = 0;
+        }
+    }
+
+    // Atualiza probabilidades
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        if (somaQ > 0)
+        {
+            probabilidades[i] = q[i] / somaQ;
+        }
+        else
+        {
+            probabilidades[i] = 1.0f / tamanhoLista;
+        }
+    }
+
+    delete[] q;
 }

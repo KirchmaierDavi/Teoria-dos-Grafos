@@ -466,7 +466,7 @@ void GrafoMatriz::adicionaNo(int idNo)
  *
  * @note Se a aresta não existir, a função exibe uma mensagem informativa e não realiza nenhuma alteração.
  */
-void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) 
+void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
 {
     if (matrizAdj[idNoOrigem][idNoDestino] == 0)
     {
@@ -564,40 +564,39 @@ int *GrafoMatriz::coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCo
     return melhorSolucao;
 }
 
-
 /**
  * @brief Implementa um algoritmo guloso para encontrar uma cobertura de vértices.
  * @param tamanhoCobertura Ponteiro para armazenar o tamanho da cobertura encontrada.
  * @return Um array contendo os vértices que fazem parte da cobertura.
  */
- int *GrafoMatriz::construcaoGulosa(int *tamanhoCobertura)
- {
-     bool *coberto = new bool[ordem];
-     for (int i = 0; i < ordem; i++)
-     {
-         coberto[i] = false;
-     }
- 
-     int *cobertura = new int[ordem];
-     int tamanhoAtual = 0;
- 
-     for (int i = 0; i < ordem; i++)
-     {
-         for (int j = 0; j < ordem; j++)
-         {
-             if (matrizAdj[i][j] && !coberto[i] && !coberto[j])
-             {
-                 cobertura[tamanhoAtual++] = i;
-                 cobertura[tamanhoAtual++] = j;
-                 coberto[i] = true;
-                 coberto[j] = true;
-             }
-         }
-     }
- 
-     *tamanhoCobertura = tamanhoAtual;
-     return cobertura;
- }
+int *GrafoMatriz::construcaoGulosa(int *tamanhoCobertura)
+{
+    bool *coberto = new bool[ordem];
+    for (int i = 0; i < ordem; i++)
+    {
+        coberto[i] = false;
+    }
+
+    int *cobertura = new int[ordem];
+    int tamanhoAtual = 0;
+
+    for (int i = 0; i < ordem; i++)
+    {
+        for (int j = 0; j < ordem; j++)
+        {
+            if (matrizAdj[i][j] && !coberto[i] && !coberto[j])
+            {
+                cobertura[tamanhoAtual++] = i;
+                cobertura[tamanhoAtual++] = j;
+                coberto[i] = true;
+                coberto[j] = true;
+            }
+        }
+    }
+
+    *tamanhoCobertura = tamanhoAtual;
+    return cobertura;
+}
 
 bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
 {
@@ -633,8 +632,94 @@ bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
     return true;
 }
 
-int* GrafoMatriz::construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) {
-    return nullptr;  
+int *GrafoMatriz::construcaoGulosaRandomizada(float alpha, int *tamanhoCobertura)
+{
+    bool *verticesCobertos = new bool[ordem];
+    int *graus = new int[ordem];
+    int *cobertura = new int[ordem];
+    *tamanhoCobertura = 0;
+
+    // Inicialização
+    for (int i = 0; i < ordem; i++)
+    {
+        verticesCobertos[i] = false;
+        graus[i] = 0;
+        // Calcula grau inicial de cada vértice
+        for (int j = 0; j < ordem; j++)
+        {
+            if (matrizAdj[i][j] != 0)
+            {
+                graus[i]++;
+            }
+        }
+    }
+
+    while (true)
+    {
+        // Encontra maior e menor grau entre vértices não cobertos
+        int maxGrau = -1;
+        int minGrau = ordem + 1;
+
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i] && graus[i] > 0)
+            {
+                if (graus[i] > maxGrau)
+                    maxGrau = graus[i];
+                if (graus[i] < minGrau)
+                    minGrau = graus[i];
+            }
+        }
+
+        if (maxGrau == -1)
+            break; // Todas arestas foram cobertas
+
+        // Conta quantos candidatos atendem ao critério guloso
+        int limiar = minGrau + (int)(alpha * (maxGrau - minGrau));
+        int numCandidatos = 0;
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i] && graus[i] >= limiar)
+            {
+                numCandidatos++;
+            }
+        }
+
+        if (numCandidatos == 0)
+            break;
+
+        // Cria array de candidatos
+        int *candidatos = new int[numCandidatos];
+        int idx = 0;
+        for (int i = 0; i < ordem; i++)
+        {
+            if (!verticesCobertos[i] && graus[i] >= limiar)
+            {
+                candidatos[idx++] = i;
+            }
+        }
+
+        // Escolhe aleatoriamente um candidato
+        int escolhido = candidatos[rand() % numCandidatos];
+        cobertura[(*tamanhoCobertura)++] = escolhido;
+        verticesCobertos[escolhido] = true;
+
+        // Atualiza graus após escolha do vértice
+        for (int j = 0; j < ordem; j++)
+        {
+            if (matrizAdj[escolhido][j] != 0)
+            {
+                graus[j]--;
+                graus[escolhido]--;
+            }
+        }
+
+        delete[] candidatos;
+    }
+
+    delete[] verticesCobertos;
+    delete[] graus;
+    return cobertura;
 }
 
 int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
@@ -682,4 +767,136 @@ int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelho
     } while (melhorou);
 
     return melhorVizinho;
+}
+
+int *GrafoMatriz::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlpha, int *tamanhoCobertura)
+{
+    float *alphas = new float[tamanhoListaAlpha];
+    float *probabilidades = new float[tamanhoListaAlpha];
+    float *valores = new float[tamanhoListaAlpha];
+    int *contadores = new int[tamanhoListaAlpha];
+
+    // Inicialização
+    for (int i = 0; i < tamanhoListaAlpha; i++)
+    {
+        alphas[i] = (i + 1.0f) / tamanhoListaAlpha;
+        probabilidades[i] = 1.0f / tamanhoListaAlpha;
+        valores[i] = 0;
+        contadores[i] = 0;
+    }
+
+    int *melhorSolucao = nullptr;
+    int melhorTamanho = ordem + 1;
+
+    for (int iter = 0; iter < maxIteracoes; iter++)
+    {
+        // Escolhe alpha baseado nas probabilidades
+        float r = (float)rand() / RAND_MAX;
+        float soma = 0;
+        int indexAlpha = 0;
+
+        for (int i = 0; i < tamanhoListaAlpha; i++)
+        {
+            soma += probabilidades[i];
+            if (r <= soma)
+            {
+                indexAlpha = i;
+                break;
+            }
+        }
+
+        // Constrói solução
+        int tamanhoAtual;
+        int *solucaoAtual = construcaoGulosaRandomizada(alphas[indexAlpha], &tamanhoAtual);
+
+        // Busca local
+        int tamanhoMelhorada;
+        int *solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
+
+        // Atualiza estatísticas
+        contadores[indexAlpha]++;
+        valores[indexAlpha] += tamanhoMelhorada;
+
+        // Atualiza melhor solução
+        if (tamanhoMelhorada < melhorTamanho)
+        {
+            delete[] melhorSolucao;
+            melhorSolucao = solucaoMelhorada;
+            melhorTamanho = tamanhoMelhorada;
+            solucaoMelhorada = nullptr;
+        }
+        else
+        {
+            delete[] solucaoMelhorada;
+        }
+
+        delete[] solucaoAtual;
+
+        // Atualiza probabilidades a cada 100 iterações
+        if ((iter + 1) % 100 == 0)
+        {
+            float melhorValor = valores[0];
+            for (int i = 1; i < tamanhoListaAlpha; i++)
+            {
+                if (valores[i] < melhorValor && valores[i] > 0)
+                {
+                    melhorValor = valores[i];
+                }
+            }
+            atualizaProbabilidades(alphas, probabilidades, valores, contadores,
+                                   tamanhoListaAlpha, melhorValor);
+        }
+    }
+
+    delete[] alphas;
+    delete[] probabilidades;
+    delete[] valores;
+    delete[] contadores;
+
+    *tamanhoCobertura = melhorTamanho;
+    return melhorSolucao;
+}
+
+void GrafoMatriz::atualizaProbabilidades(float *alphas, float *probabilidades,
+                                         float *valores, int *contadores,
+                                         int tamanhoLista, float melhorValor)
+{
+    float somaQ = 0;
+    float *q = new float[tamanhoLista];
+
+    // Calcula q_i para cada alpha usando multiplicação
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        if (valores[i] > 0 && contadores[i] > 0)
+        {
+            float ratio = melhorValor / (valores[i] / contadores[i]);
+            // Simula pow(ratio, 10) com multiplicações
+            float result = ratio;
+            for (int j = 1; j < 10; j++)
+            {
+                result *= ratio;
+            }
+            q[i] = result;
+            somaQ += q[i];
+        }
+        else
+        {
+            q[i] = 0;
+        }
+    }
+
+    // Atualiza probabilidades
+    for (int i = 0; i < tamanhoLista; i++)
+    {
+        if (somaQ > 0)
+        {
+            probabilidades[i] = q[i] / somaQ;
+        }
+        else
+        {
+            probabilidades[i] = 1.0f / tamanhoLista;
+        }
+    }
+
+    delete[] q;
 }

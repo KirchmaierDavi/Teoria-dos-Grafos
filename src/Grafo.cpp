@@ -561,3 +561,5 @@ float Grafo::getPesoAresta(int origem, int destino)
     }
     return -1;
 }
+
+
