@@ -830,10 +830,16 @@ void GrafoMatriz::atualizaProbabilidades(float* alphas, float* probabilidades, f
     float somaQ = 0;
     float* q = new float[tamanhoLista];
     
-    // Calcula q_i para cada alpha
+    // Calcula q_i para cada alpha usando multiplicação ao invés de pow
     for(int i = 0; i < tamanhoLista; i++) {
-        if(valores[i] > 0) {
-            q[i] = pow(melhorTamanho / (valores[i] / contadores[i]), 10);
+        if(valores[i] > 0 && contadores[i] > 0) {
+            float ratio = melhorValor / (valores[i] / contadores[i]);
+            // Simula pow(ratio, 10) com multiplicações
+            float result = ratio;
+            for(int j = 1; j < 10; j++) {
+                result *= ratio;
+            }
+            q[i] = result;
             somaQ += q[i];
         } else {
             q[i] = 0;
