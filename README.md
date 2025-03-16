@@ -117,6 +117,7 @@ Vértice de Articulação: Sim
 - `GrafoLista.h` e `GrafoLista.cpp`: Implementação da representação por lista de adjacência.
 - `Aresta.h` e `Aresta.cpp`: Classe para representação de arestas.
 - `No.h` e `No.cpp`: Classe para representação de nós.
+- `main.py` Código utilizado para criação das entradas utilizadas no trabalho.
 
 ## Requisitos
 
