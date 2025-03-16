@@ -771,13 +771,12 @@ int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelho
 
 int *GrafoMatriz::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlpha, int *tamanhoCobertura)
 {
-    // Inicialização dos valores de alpha e suas probabilidades
     float *alphas = new float[tamanhoListaAlpha];
     float *probabilidades = new float[tamanhoListaAlpha];
     float *valores = new float[tamanhoListaAlpha];
     int *contadores = new int[tamanhoListaAlpha];
 
-    // Inicializa os valores de alpha uniformemente distribuídos
+    // Inicialização
     for (int i = 0; i < tamanhoListaAlpha; i++)
     {
         alphas[i] = (i + 1.0f) / tamanhoListaAlpha;
@@ -789,10 +788,9 @@ int *GrafoMatriz::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlph
     int *melhorSolucao = nullptr;
     int melhorTamanho = ordem + 1;
 
-    // Fase de reação
     for (int iter = 0; iter < maxIteracoes; iter++)
     {
-        // Escolhe um valor de alpha baseado nas probabilidades
+        // Escolhe alpha baseado nas probabilidades
         float r = (float)rand() / RAND_MAX;
         float soma = 0;
         int indexAlpha = 0;
@@ -807,11 +805,11 @@ int *GrafoMatriz::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlph
             }
         }
 
-        // Constrói solução usando o alpha escolhido
+        // Constrói solução
         int tamanhoAtual;
         int *solucaoAtual = construcaoGulosaRandomizada(alphas[indexAlpha], &tamanhoAtual);
 
-        // Aplica busca local
+        // Busca local
         int tamanhoMelhorada;
         int *solucaoMelhorada = buscaLocal(solucaoAtual, tamanhoAtual, &tamanhoMelhorada);
 
@@ -834,14 +832,22 @@ int *GrafoMatriz::coberturaArestasReativa(int maxIteracoes, int tamanhoListaAlph
 
         delete[] solucaoAtual;
 
-        // A cada 100 iterações, atualiza as probabilidades
+        // Atualiza probabilidades a cada 100 iterações
         if ((iter + 1) % 100 == 0)
         {
-            atualizaProbabilidades(alphas, probabilidades, valores, tamanhoListaAlpha);
+            float melhorValor = valores[0];
+            for (int i = 1; i < tamanhoListaAlpha; i++)
+            {
+                if (valores[i] < melhorValor && valores[i] > 0)
+                {
+                    melhorValor = valores[i];
+                }
+            }
+            atualizaProbabilidades(alphas, probabilidades, valores, contadores,
+                                   tamanhoListaAlpha, melhorValor);
         }
     }
 
-    // Limpa memória
     delete[] alphas;
     delete[] probabilidades;
     delete[] valores;
