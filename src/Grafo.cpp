@@ -266,13 +266,13 @@ int Grafo::nConexo()
 
     int componentes = 0;
 
-    auto dfs = [&](No *no, auto &dfsRef) -> void
+    auto dfs = [this, &visitado](No *no, auto &dfsRef) -> void
     {
         visitado[no->getIdNo()] = true;
         Aresta *aresta = no->getPrimeiraAresta();
         while (aresta != nullptr)
         {
-            No *noAdjacente = getNoPeloId(aresta->getIdDestino());
+            No *noAdjacente = this->getNoPeloId(aresta->getIdDestino());
             if (!visitado[noAdjacente->getIdNo()])
             {
                 dfsRef(noAdjacente, dfsRef);
@@ -294,8 +294,6 @@ int Grafo::nConexo()
 
     delete[] visitado;
     return componentes;
-
-    return 0;
 }
 
 /**
@@ -372,19 +370,20 @@ bool Grafo::possuiPonte()
                 visitado[i] = false;
             }
 
-            auto dfs = [&](No *noAtual, auto &dfsRef) -> void
+            auto dfs = [this, &visitado, origem, destino](No *noAtual, auto &dfsRef) -> void
             {
                 visitado[noAtual->getIdNo()] = true;
                 Aresta *arestaAtual = noAtual->getPrimeiraAresta();
                 while (arestaAtual != nullptr)
                 {
                     int adj = arestaAtual->getIdDestino();
-                    if ((noAtual->getIdNo() == origem && adj == destino) || (noAtual->getIdNo() == destino && adj == origem))
+                    if ((noAtual->getIdNo() == origem && adj == destino) || 
+                        (noAtual->getIdNo() == destino && adj == origem))
                     {
                         arestaAtual = arestaAtual->getProxAresta();
                         continue;
                     }
-                    No *noAdjacente = getNoPeloId(adj);
+                    No *noAdjacente = this->getNoPeloId(adj);
                     if (!visitado[noAdjacente->getIdNo()])
                     {
                         dfsRef(noAdjacente, dfsRef);
@@ -430,13 +429,13 @@ bool Grafo::possuiArticulacao()
         }
 
         No *noInicial = (no == primeiroNo) ? no->getProxNo() : primeiroNo;
-        auto dfs = [&](No *noAtual, auto &dfsRef) -> void
+        auto dfs = [this, &visitado, idNo](No *noAtual, auto &dfsRef) -> void
         {
             visitado[noAtual->getIdNo()] = true;
             Aresta *aresta = noAtual->getPrimeiraAresta();
             while (aresta != nullptr)
             {
-                No *noAdjacente = getNoPeloId(aresta->getIdDestino());
+                No *noAdjacente = this->getNoPeloId(aresta->getIdDestino());
                 if (noAdjacente->getIdNo() != idNo && !visitado[noAdjacente->getIdNo()])
                 {
                     dfsRef(noAdjacente, dfsRef);

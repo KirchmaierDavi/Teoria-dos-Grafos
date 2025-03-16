@@ -56,37 +56,42 @@ Certifique-se de que você tenha um compilador C++ instalado, como o **g++**.
 
 1. Compile o projeto:
    ```bash
-   g++ -std=c++14 -Wall -Iinclude -o grafo_exec src/*.cpp
+   g++ -std=c++14 -Wall -Iinclude -o grafo_exec main.cpp src/*.cpp
    ```
 
 2. Execute o programa:
    - Para carregar um grafo como **matriz**:
      ```bash
-     .\grafo_exec.exe -m grafo.txt
+     .\grafo_exec.exe -m entradas\grafo.txt
      ```
    - Para carregar um grafo como **lista**:
      ```bash
-     .\grafo_exec.exe -l grafo.txt
+     .\grafo_exec.exe -l entradas\grafo.txt
      ```
    - Para carregar um grafo a partir de um arquivo de configuração:
      ```bash
-     .\grafo_exec.exe -c descricao.txt
+     .\grafo_exec.exe -l entradas\grafo.txt
      ```
    - Para deletar um nó em um grafo como **matriz**:
      ```bash
-     .\grafo_exec.exe -m grafo.txt -r 2
+     .\grafo_exec.exe -m entradas\grafo.txt -r 2
      ```
    - Para deletar um nó em um grafo como **lista**:
      ```bash
-     .\grafo_exec.exe -l grafo.txt -r 3
+     .\grafo_exec.exe -l entradas\grafo.txt -r 3
      ```
    - Para adicionar um nó em um grafo como **matriz**:
      ```bash
-     .\grafo_exec.exe -m grafo.txt -a 2
+     .\grafo_exec.exe -m entradas\grafo.txt -a 2
      ```
    - Para adicionar um nó em um grafo como **lista**:
      ```bash
-     .\grafo_exec.exe -l grafo.txt -a 3
+     .\grafo_exec.exe -m entradas\grafo.txt -a 2
+     ```
+   - Para executar o algoritmo guloso e construção gulosa randomizada:
+     ```bash
+     .\grafo_exec.exe -m entradas\grafo.txt -g
+     .\grafo_exec.exe -l entradas\grafo.txt -g
      ```
 
 ## Saída Esperada

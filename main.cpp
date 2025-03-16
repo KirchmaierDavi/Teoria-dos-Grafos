@@ -1,6 +1,6 @@
-#include "../include/Grafo.h"
-#include "../include/GrafoMatriz.h"
-#include "../include/GrafoLista.h"
+#include "include/Grafo.h"
+#include "include/GrafoMatriz.h"
+#include "include/GrafoLista.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -146,8 +146,15 @@ int main(int argc, char *argv[])
     string arquivo = argv[2];
     bool removerNo = false;
     bool adicionarNo = false;
+    bool executarGuloso = false;
     int idNoRemover = -1;
     int idNoAdicionar = -1;
+
+    // Verificar se há a opção de executar algoritmos gulosos (-g)
+    if (argc == 4 && string(argv[3]) == "-g")
+    {
+        executarGuloso = true;
+    }
 
     // Verificar se há a opção de remover nó (-r <idNo>)
     if (argc == 5 && string(argv[3]) == "-r")
@@ -172,6 +179,46 @@ int main(int argc, char *argv[])
         grafo = new GrafoMatriz(0, true, true, true);
         grafo->carregaGrafo(arquivo);
 
+        if (executarGuloso)
+        {
+            cout << "\n========== Algoritmos Gulosos ==========\n";
+            int tamanhoCobertura;
+            
+            // Executar construção gulosa randomizada
+            cout << "Executando construção gulosa randomizada...\n";
+            float alpha = 0.5; // valor entre 0 e 1
+            int maxIteracoes = 100;
+            int* coberturaRandomizada = grafo->coberturaArestas(alpha, maxIteracoes, &tamanhoCobertura);
+            
+            if (coberturaRandomizada != nullptr) {
+                cout << "Tamanho da cobertura (randomizada): " << tamanhoCobertura << "\nVértices na cobertura: ";
+                for(int i = 0; i < tamanhoCobertura; i++) {
+                    cout << coberturaRandomizada[i] + 1 << " "; // +1 para ajustar índice baseado em 0
+                }
+                cout << "\n";
+                delete[] coberturaRandomizada;
+            } else {
+                cout << "Não foi possível encontrar uma cobertura randomizada.\n";
+            }
+
+            // Executar algoritmo guloso
+            cout << "\nExecutando algoritmo guloso...\n";
+            int* coberturaGulosa = grafo->construcaoGulosa(&tamanhoCobertura);
+            
+            if (coberturaGulosa != nullptr) {
+                cout << "Tamanho da cobertura (gulosa): " << tamanhoCobertura << "\nVértices na cobertura: ";
+                for(int i = 0; i < tamanhoCobertura; i++) {
+                    cout << coberturaGulosa[i] + 1 << " "; // +1 para ajustar índice baseado em 0
+                }
+                cout << "\n";
+                delete[] coberturaGulosa;
+            } else {
+                cout << "Não foi possível encontrar uma cobertura gulosa.\n";
+            }
+            
+            cout << "=======================================\n\n";
+        }
+
         if (removerNo)
         {
             cout << "Removendo nó " << idNoRemover << "...\n";
@@ -191,6 +238,46 @@ int main(int argc, char *argv[])
         cout << "Carregando grafo como lista..." << endl;
         grafo = new GrafoLista(0, true, true, true);
         grafo->carregaGrafo(arquivo);
+
+        if (executarGuloso)
+        {
+            cout << "\n========== Algoritmos Gulosos ==========\n";
+            int tamanhoCobertura;
+            
+            // Executar construção gulosa randomizada
+            cout << "Executando construção gulosa randomizada...\n";
+            float alpha = 0.5; // valor entre 0 e 1
+            int maxIteracoes = 100;
+            int* coberturaRandomizada = grafo->coberturaArestas(alpha, maxIteracoes, &tamanhoCobertura);
+            
+            if (coberturaRandomizada != nullptr) {
+                cout << "Tamanho da cobertura (randomizada): " << tamanhoCobertura << "\nVértices na cobertura: ";
+                for(int i = 0; i < tamanhoCobertura; i++) {
+                    cout << coberturaRandomizada[i] + 1 << " "; // +1 para ajustar índice baseado em 0
+                }
+                cout << "\n";
+                delete[] coberturaRandomizada;
+            } else {
+                cout << "Não foi possível encontrar uma cobertura randomizada.\n";
+            }
+
+            // Executar algoritmo guloso
+            cout << "\nExecutando algoritmo guloso...\n";
+            int* coberturaGulosa = grafo->construcaoGulosa(&tamanhoCobertura);
+            
+            if (coberturaGulosa != nullptr) {
+                cout << "Tamanho da cobertura (gulosa): " << tamanhoCobertura << "\nVértices na cobertura: ";
+                for(int i = 0; i < tamanhoCobertura; i++) {
+                    cout << coberturaGulosa[i] + 1 << " "; // +1 para ajustar índice baseado em 0
+                }
+                cout << "\n";
+                delete[] coberturaGulosa;
+            } else {
+                cout << "Não foi possível encontrar uma cobertura gulosa.\n";
+            }
+            
+            cout << "=======================================\n\n";
+        }
 
         if (removerNo)
         {
