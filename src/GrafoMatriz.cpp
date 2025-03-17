@@ -632,93 +632,108 @@ bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
     return true;
 }
 
-int *GrafoMatriz::construcaoGulosaRandomizada(float alpha, int *tamanhoCobertura)
-{
-    bool *verticesCobertos = new bool[ordem];
-    int *graus = new int[ordem];
-    int *cobertura = new int[ordem];
+int* GrafoMatriz::construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) {
+    // Inicialização
+    bool* verticesCobertos = new bool[ordem];
+    int* cobertura = new int[ordem];
     *tamanhoCobertura = 0;
 
-    // Inicialização
-    for (int i = 0; i < ordem; i++)
-    {
+    // Inicializa array de vértices cobertos
+    for(int i = 0; i < ordem; i++) {
         verticesCobertos[i] = false;
-        graus[i] = 0;
-        // Calcula grau inicial de cada vértice
-        for (int j = 0; j < ordem; j++)
-        {
-            if (matrizAdj[i][j] != 0)
-            {
-                graus[i]++;
-            }
-        }
     }
 
-    while (true)
-    {
-        // Encontra maior e menor grau entre vértices não cobertos
+    bool todasArestasCoberta = false;
+    while(!todasArestasCoberta) {
+        // Conta graus dos vértices não cobertos
         int maxGrau = -1;
         int minGrau = ordem + 1;
-
-        for (int i = 0; i < ordem; i++)
-        {
-            if (!verticesCobertos[i] && graus[i] > 0)
-            {
-                if (graus[i] > maxGrau)
-                    maxGrau = graus[i];
-                if (graus[i] < minGrau)
-                    minGrau = graus[i];
+        
+        // Calcula graus máximo e mínimo
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < ordem; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[j]) {
+                    grau++;
+                }
             }
+            
+            if(grau > maxGrau) maxGrau = grau;
+            if(grau < minGrau && grau > 0) minGrau = grau;
         }
 
-        if (maxGrau == -1)
-            break; // Todas arestas foram cobertas
+        if(maxGrau == -1) {
+            break;  // Não há mais arestas para cobrir
+        }
 
-        // Conta quantos candidatos atendem ao critério guloso
+        // Calcula limiar para LRC
         int limiar = minGrau + (int)(alpha * (maxGrau - minGrau));
+
+        // Conta candidatos
         int numCandidatos = 0;
-        for (int i = 0; i < ordem; i++)
-        {
-            if (!verticesCobertos[i] && graus[i] >= limiar)
-            {
-                numCandidatos++;
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < ordem; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[j]) {
+                    grau++;
+                }
             }
+            
+            if(grau >= limiar) numCandidatos++;
         }
 
-        if (numCandidatos == 0)
-            break;
+        if(numCandidatos == 0) {
+            break;  // Não há mais candidatos válidos
+        }
 
-        // Cria array de candidatos
-        int *candidatos = new int[numCandidatos];
+        // Cria e preenche array de candidatos
+        int* candidatos = new int[numCandidatos];
         int idx = 0;
-        for (int i = 0; i < ordem; i++)
-        {
-            if (!verticesCobertos[i] && graus[i] >= limiar)
-            {
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < ordem; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[j]) {
+                    grau++;
+                }
+            }
+            
+            if(grau >= limiar) {
                 candidatos[idx++] = i;
             }
         }
 
-        // Escolhe aleatoriamente um candidato
+        // Seleciona candidato aleatoriamente
         int escolhido = candidatos[rand() % numCandidatos];
         cobertura[(*tamanhoCobertura)++] = escolhido;
         verticesCobertos[escolhido] = true;
 
-        // Atualiza graus após escolha do vértice
-        for (int j = 0; j < ordem; j++)
-        {
-            if (matrizAdj[escolhido][j] != 0)
-            {
-                graus[j]--;
-                graus[escolhido]--;
+        // Verifica se todas as arestas estão cobertas
+        todasArestasCoberta = true;
+        for(int i = 0; i < ordem && todasArestasCoberta; i++) {
+            for(int j = 0; j < ordem && todasArestasCoberta; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[i] && !verticesCobertos[j]) {
+                    todasArestasCoberta = false;
+                }
             }
         }
 
         delete[] candidatos;
     }
 
+    // Imprime resultado para debug
+    std::cout << "Cobertura encontrada: ";
+    for(int i = 0; i < *tamanhoCobertura; i++) {
+        std::cout << cobertura[i] + 1 << " ";
+    }
+    std::cout << "\nTamanho da cobertura: " << *tamanhoCobertura << std::endl;
+
     delete[] verticesCobertos;
-    delete[] graus;
     return cobertura;
 }
 
