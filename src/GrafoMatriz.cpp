@@ -634,7 +634,108 @@ bool GrafoMatriz::verificarCobertura(int *cobertura, int tamanhoCobertura)
 }
 
 int* GrafoMatriz::construcaoGulosaRandomizada(float alpha, int* tamanhoCobertura) {
-    return nullptr;  
+    // Inicialização
+    bool* verticesCobertos = new bool[ordem];
+    int* cobertura = new int[ordem];
+    *tamanhoCobertura = 0;
+
+    // Inicializa array de vértices cobertos
+    for(int i = 0; i < ordem; i++) {
+        verticesCobertos[i] = false;
+    }
+
+    bool todasArestasCoberta = false;
+    while(!todasArestasCoberta) {
+        // Conta graus dos vértices não cobertos
+        int maxGrau = -1;
+        int minGrau = ordem + 1;
+        
+        // Calcula graus máximo e mínimo
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < ordem; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[j]) {
+                    grau++;
+                }
+            }
+            
+            if(grau > maxGrau) maxGrau = grau;
+            if(grau < minGrau && grau > 0) minGrau = grau;
+        }
+
+        if(maxGrau == -1) {
+            break;  // Não há mais arestas para cobrir
+        }
+
+        // Calcula limiar para LRC
+        int limiar = minGrau + (int)(alpha * (maxGrau - minGrau));
+
+        // Conta candidatos
+        int numCandidatos = 0;
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < ordem; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[j]) {
+                    grau++;
+                }
+            }
+            
+            if(grau >= limiar) numCandidatos++;
+        }
+
+        if(numCandidatos == 0) {
+            break;  // Não há mais candidatos válidos
+        }
+
+        // Cria e preenche array de candidatos
+        int* candidatos = new int[numCandidatos];
+        int idx = 0;
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < ordem; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[j]) {
+                    grau++;
+                }
+            }
+            
+            if(grau >= limiar) {
+                candidatos[idx++] = i;
+            }
+        }
+
+        // Seleciona candidato aleatoriamente
+        int escolhido = candidatos[rand() % numCandidatos];
+        cobertura[(*tamanhoCobertura)++] = escolhido;
+        verticesCobertos[escolhido] = true;
+
+        // Verifica se todas as arestas estão cobertas
+        todasArestasCoberta = true;
+        for(int i = 0; i < ordem && todasArestasCoberta; i++) {
+            for(int j = 0; j < ordem && todasArestasCoberta; j++) {
+                if(matrizAdj[i][j] && !verticesCobertos[i] && !verticesCobertos[j]) {
+                    todasArestasCoberta = false;
+                }
+            }
+        }
+
+        delete[] candidatos;
+    }
+
+    // Imprime resultado para debug
+    std::cout << "Cobertura encontrada: ";
+    for(int i = 0; i < *tamanhoCobertura; i++) {
+        std::cout << cobertura[i] + 1 << " ";
+    }
+    std::cout << "\nTamanho da cobertura: " << *tamanhoCobertura << std::endl;
+
+    delete[] verticesCobertos;
+    return cobertura;
 }
 
 int *GrafoMatriz::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
