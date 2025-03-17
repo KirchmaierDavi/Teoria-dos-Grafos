@@ -37,9 +37,60 @@
      // Se necessário, a limpeza é feita automaticamente em ~Lista()
  }
  int* GrafoLista::construcaoGulosa(int* tamanhoCobertura) {
- 
-     return nullptr;
- }
+    bool* verticesCobertos = new bool[ordem];
+    int* cobertura = new int[ordem];
+    *tamanhoCobertura = 0;
+
+    // Inicialização 
+    for(int i = 0; i < ordem; i++) {
+        verticesCobertos[i] = false;
+    }
+
+    bool todasArestasCoberta = false;
+    while(!todasArestasCoberta) {
+        // Encontra vértice com maior grau não coberto
+        int maxGrau = -1;
+        int verticeEscolhido = -1;
+        
+        for(int i = 0; i < ordem; i++) {
+            if(verticesCobertos[i]) continue;
+            
+            int grau = 0;
+            for(int j = 0; j < listaAdj[i].getTamanho(); j++) {
+                int adj = listaAdj[i].getElemento(j)->getIdNo();
+                if(!verticesCobertos[adj]) {
+                    grau++;
+                }
+            }
+            
+            if(grau > maxGrau) {
+                maxGrau = grau;
+                verticeEscolhido = i;
+            }
+        }
+
+        if(verticeEscolhido == -1) break;
+
+        // Adiciona vértice à cobertura
+        cobertura[(*tamanhoCobertura)++] = verticeEscolhido;
+        verticesCobertos[verticeEscolhido] = true;
+
+        // Verifica se todas as arestas estão cobertas
+        todasArestasCoberta = true;
+        for(int i = 0; i < ordem && todasArestasCoberta; i++) {
+            for(int j = 0; j < listaAdj[i].getTamanho(); j++) {
+                int adj = listaAdj[i].getElemento(j)->getIdNo();
+                if(!verticesCobertos[i] && !verticesCobertos[adj]) {
+                    todasArestasCoberta = false;
+                    break;
+                }
+            }
+        }
+    }
+
+    delete[] verticesCobertos;
+    return cobertura;
+}
  
  /**
   * @brief Verifica se o grafo é completo.
