@@ -10,13 +10,6 @@
 
 using namespace std;
 
-/**
- * @brief Construtor da classe GrafoMatriz.
- * @param ordem Número de vértices do grafo.
- * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
- * @param ponderadoVertices Indica se os vértices possuem pesos (true) ou não (false).
- * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
- */
 GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas) : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas), matrizAdj(nullptr), nos(nullptr)
 {
     this->capacidade = 10;
@@ -27,10 +20,6 @@ GrafoMatriz::GrafoMatriz(int ordem, bool direcionado, bool ponderadoVertices, bo
     }
 }
 
-/**
- * @brief Destrutor da classe GrafoMatriz.
- * Libera a memória alocada para o grafo de matriz de adjacência.
- */
 GrafoMatriz::~GrafoMatriz()
 {
     if (matrizAdj != nullptr)
@@ -52,11 +41,6 @@ GrafoMatriz::~GrafoMatriz()
     }
 }
 
-/**
- * @brief Verifica se o grafo é completo.
- * Um grafo completo possui todas as combinações possíveis de arestas entre seus vértices.
- * @return true se o grafo é completo; caso contrário, false.
- */
 bool GrafoMatriz::ehCompleto()
 {
     for (int i = 0; i < ordem; i++)
@@ -72,11 +56,6 @@ bool GrafoMatriz::ehCompleto()
     return true;
 }
 
-/**
- * @brief Determina o número de componentes conexos no grafo.
- * Um componente conexo é um subconjunto de vértices onde existe pelo menos um caminho entre cada par de vértices.
- * @return Número de componentes conexos no grafo.
- */
 int GrafoMatriz::nConexo()
 {
     bool *visitado = new bool[ordem];
@@ -112,21 +91,11 @@ int GrafoMatriz::nConexo()
     return componentes;
 }
 
-/**
- * @brief Verifica se o grafo é uma árvore.
- * Uma árvore é um grafo conexo sem ciclos.
- * @return true se o grafo é uma árvore; caso contrário, false.
- */
 bool GrafoMatriz::ehArvore()
 {
     return (nConexo() == 1 && (numNos - 1) == getOrdem());
 }
 
-/**
- * @brief Verifica se o grafo possui pontes.
- * Uma ponte é uma aresta cuja remoção aumenta o número de componentes conexos do grafo.
- * @return true se existe pelo menos uma ponte; caso contrário, false.
- */
 bool GrafoMatriz::possuiPonte()
 {
     for (int u = 0; u < numNos; u++)
@@ -148,11 +117,6 @@ bool GrafoMatriz::possuiPonte()
     return false;
 }
 
-/**
- * @brief Verifica se o grafo possui vértices de articulação.
- * Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo.
- * @return true se existe pelo menos um vértice de articulação; caso contrário, false.
- */
 bool GrafoMatriz::possuiArticulacao()
 {
     bool *visitado = new bool[numNos];
@@ -198,11 +162,6 @@ bool GrafoMatriz::possuiArticulacao()
     return false;
 }
 
-/**
- * @brief Carrega o grafo a partir de um arquivo.
- * O arquivo deve conter os dados do grafo, como número de nós, tipo de grafo e arestas.
- * @param arquivo Caminho para o arquivo de entrada.
- */
 void GrafoMatriz::carregaGrafo(const std::string &arquivo)
 {
     std::ifstream file(arquivo);
@@ -258,11 +217,6 @@ void GrafoMatriz::carregaGrafo(const std::string &arquivo)
     std::cout << "Matriz de Adjacência carregada com sucesso." << std::endl;
 }
 
-/**
- * @brief Cria um novo grafo a partir de um arquivo de configuração.
- * O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas.
- * @param arquivoConfig Caminho para o arquivo de configuração.
- */
 void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
 {
     std::ifstream file(arquivoConfig);
@@ -320,10 +274,6 @@ void GrafoMatriz::novoGrafo(const std::string &arquivoConfig)
     std::cout << "Novo grafo configurado como " << estrutura << "." << std::endl;
 }
 
-/**
- * @brief Remove um nó do grafo representado por matriz de adjacência.
- * @param idNo ID do nó a ser removido.
- */
 void GrafoMatriz::deleta_no(int idNo)
 {
     if (idNo < 0 || idNo >= ordem)
@@ -400,10 +350,6 @@ void GrafoMatriz::deleta_no(int idNo)
     cout << "Nó " << idNo << " removido com sucesso! Nova ordem: " << ordem << endl;
 }
 
-/**
- * @brief Adiciona um nó ao grafo representado por matriz de adjacência.
- * @param idNo ID do nó a ser adicionado.
- */
 void GrafoMatriz::adicionaNo(int idNo)
 {
     if (idNo < 0 || idNo >= ordem)
@@ -453,19 +399,6 @@ void GrafoMatriz::adicionaNo(int idNo)
     cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
 }
 
-/**
- * @brief Remove uma aresta do grafo.
- *
- * Esta função remove a aresta entre dois nós especificados. Se o grafo for não direcionado,
- * a remoção ocorre nos dois sentidos. Além disso, a aresta correspondente é removida da estrutura
- * de nós do grafo.
- *
- * @param idNoOrigem ID do nó de origem da aresta.
- * @param idNoDestino ID do nó de destino da aresta.
- * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
- *
- * @note Se a aresta não existir, a função exibe uma mensagem informativa e não realiza nenhuma alteração.
- */
 void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado)
 {
     if (matrizAdj[idNoOrigem][idNoDestino] == 0)
@@ -484,19 +417,6 @@ void GrafoMatriz::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado
     nos[idNoOrigem]->removeAresta(idNoDestino, direcionado);
 }
 
-/**
- * @brief Adiciona uma nova aresta ao grafo.
- *
- * Esta função adiciona uma aresta entre dois nós, atribuindo um peso caso o grafo seja ponderado.
- * Se o grafo for não direcionado, a aresta é adicionada em ambos os sentidos.
- *
- * @param origem ID do nó de origem.
- * @param destino ID do nó de destino.
- * @param peso Peso da aresta (usado apenas se o grafo for ponderado).
- *
- * @note A função verifica se os índices dos nós são válidos e impede a criação de laços (arestas de um nó para ele mesmo).
- * @warning Se os parâmetros forem inválidos ou se origem e destino forem iguais, uma mensagem de erro será exibida.
- */
 void GrafoMatriz::novaAresta(int origem, int destino, float peso)
 {
     if (origem < 0 || origem >= numNos || destino < 0 || destino >= numNos)
@@ -564,11 +484,6 @@ int *GrafoMatriz::coberturaArestas(float alpha, int maxIteracoes, int *tamanhoCo
     return melhorSolucao;
 }
 
-/**
- * @brief Implementa um algoritmo guloso para encontrar uma cobertura de vértices.
- * @param tamanhoCobertura Ponteiro para armazenar o tamanho da cobertura encontrada.
- * @return Um array contendo os vértices que fazem parte da cobertura.
- */
 int *GrafoMatriz::construcaoGulosa(int *tamanhoCobertura)
 {
     bool *coberto = new bool[ordem];
