@@ -10,13 +10,6 @@
  
  using namespace std;
  
- /**
-  * @brief Construtor da classe GrafoLista.
-  * @param ordem Número de vértices do grafo.
-  * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
-  * @param ponderadoVertices Indica se os vértices possuem pesos (true) ou não (false).
-  * @param ponderadoArestas Indica se as arestas possuem pesos (true) ou não (false).
-  */
  GrafoLista::GrafoLista(int ordem, bool direcionado, bool ponderadoVertices, bool ponderadoArestas)
      : Grafo(ordem, direcionado, ponderadoVertices, ponderadoArestas)
  {
@@ -27,15 +20,12 @@
      }
      numArestas = 0;
  }
- 
- /**
-  * @brief Destrutor da classe GrafoLista.
-  * Libera a memória alocada para a lista de adjacência.
-  */
+
  GrafoLista::~GrafoLista()
  {
      // Se necessário, a limpeza é feita automaticamente em ~Lista()
  }
+
  int* GrafoLista::construcaoGulosa(int* tamanhoCobertura) {
     bool* verticesCobertos = new bool[ordem];
     int* cobertura = new int[ordem];
@@ -91,12 +81,7 @@
     delete[] verticesCobertos;
     return cobertura;
 }
- 
- /**
-  * @brief Verifica se o grafo é completo.
-  * Um grafo completo possui todas as combinações possíveis de arestas entre seus vértices.
-  * @return true se o grafo é completo; caso contrário, false.
-  */
+
  bool GrafoLista::ehCompleto()
  {
      for (int i = 0; i < ordem; i++)
@@ -108,12 +93,7 @@
      }
      return true;
  }
- 
- /**
-  * @brief Determina o número de componentes conexos no grafo.
-  * Um componente conexo é um subconjunto de vértices onde existe pelo menos um caminho entre cada par de vértices.
-  * @return Número de componentes conexos no grafo.
-  */
+
  int GrafoLista::nConexo()
  {
      bool *visitado = new bool[ordem];
@@ -149,17 +129,12 @@
      delete[] visitado;
      return componentes;
  }
+
  bool GrafoLista::ehArvore()
  {
      return (nConexo() == 1 && (ordem - 1) == numArestas);
  }
- 
- 
- /**
-  * @brief Verifica se o grafo possui pontes.
-  * Uma ponte é uma aresta cuja remoção aumenta o número de componentes conexos do grafo.
-  * @return true se existe pelo menos uma ponte; caso contrário, false.
-  */
+
  bool GrafoLista::possuiPonte()
  {
      for (int u = 0; u < ordem; u++)
@@ -218,12 +193,7 @@
  
      return false;
  }
- 
- /**
-  * @brief Verifica se o grafo possui vértices de articulação.
-  * Um vértice de articulação é aquele cuja remoção aumenta o número de componentes conexos do grafo.
-  * @return true se existe pelo menos um vértice de articulação; caso contrário, false.
-  */
+
  bool GrafoLista::possuiArticulacao()
  {
      bool *visitado = new bool[ordem];
@@ -269,12 +239,7 @@
      delete[] visitado;
      return false;
  }
- 
- /**
-  * @brief Carrega o grafo a partir de um arquivo.
-  * O arquivo deve conter os dados do grafo, como número de nós, tipo de grafo e arestas.
-  * @param arquivo Caminho para o arquivo de entrada.
-  */
+
  void GrafoLista::carregaGrafo(const std::string &arquivo)
  {
      std::ifstream file(arquivo);
@@ -322,12 +287,7 @@
      file.close();
      std::cout << "Lista de Adjacência carregada com sucesso." << std::endl;
  }
- 
- /**
-  * @brief Cria um novo grafo a partir de um arquivo de configuração.
-  * O arquivo deve conter as informações do grafo, como tipo de estrutura, número de nós e arestas.
-  * @param arquivoConfig Caminho para o arquivo de configuração.
-  */
+
  void GrafoLista::novoGrafo(const std::string &arquivoConfig)
  {
      std::ifstream file(arquivoConfig);
@@ -356,11 +316,7 @@
      file.close();
      std::cout << "Novo grafo configurado como " << tipo << "." << std::endl;
  }
- 
- /**
-  * @brief Remove um nó do grafo representado por lista de adjacência.
-  * @param idNo ID do nó a ser removido (ajustado para índice zero-based).
-  */
+
  void GrafoLista::deleta_no(int idNo)
  {
      if (idNo <= 0 || idNo > ordem)
@@ -429,11 +385,7 @@
  
      cout << "Nó " << idNo + 1 << " removido com sucesso! Nova ordem: " << ordem << endl;
  }
- 
- /**
-  * @brief Adiciona um nó ao grafo representado por lista de adjacência.
-  * @param idNo ID do nó a ser adicionado.
-  */
+
  void GrafoLista::adicionaNo(int idNo)
  {
      if (idNo < 0 || idNo >= ordem)
@@ -467,15 +419,7 @@
  
      cout << "Nó " << idNo << " adicionado com sucesso! Nova ordem: " << ordem << endl;
  }
- 
- /**
-  * @brief Remove uma aresta do grafo.
-  * @param idNoOrigem ID do nó de origem da aresta.
-  * @param idNoDestino ID do nó de destino da aresta.
-  * @param direcionado Indica se o grafo é direcionado (true) ou não (false).
-  *
-  * Se o grafo for não direcionado, a remoção da aresta ocorre nos dois sentidos.
-  */
+
  void GrafoLista::removeAresta(int idNoOrigem, int idNoDestino, bool direcionado) 
  {
      if (!listaAdj[idNoOrigem].contem(idNoDestino))
@@ -493,15 +437,7 @@
          listaAdj[idNoOrigem].getElemento(idNoOrigem)->removeAresta(idNoOrigem, direcionado);
      }
  }
- 
- /**
-  * @brief Adiciona uma nova aresta ao grafo.
-  * @param origem ID do nó de origem da aresta.
-  * @param destino ID do nó de destino da aresta.
-  * @param peso Peso da aresta (caso o grafo seja ponderado por arestas).
-  *
-  * Se o grafo for não direcionado, a aresta é adicionada nos dois sentidos.
-  */
+
  void GrafoLista::novaAresta(int origem, int destino, float peso)
  {
      if (origem < 0 || origem >= ordem || destino < 0 || destino >= ordem)
@@ -698,12 +634,7 @@
      delete[] verticesCobertos;
      return cobertura;
  }
- 
- /**
-  * @brief Implementa um algoritmo guloso para encontrar uma cobertura de vértices.
-  * @param tamanhoCobertura Ponteiro para armazenar o tamanho da cobertura encontrada.
-  * @return Um array contendo os vértices que fazem parte da cobertura.
-  */
+
   int *GrafoLista::algoritmoGuloso(int *tamanhoCobertura)
   {
       bool *verticesCobertos = new bool[ordem];
@@ -754,7 +685,6 @@
       return cobertura;
   }
   
- 
  int *GrafoLista::buscaLocal(int *solucao, int tamanhoSolucao, int *tamanhoMelhorSolucao)
  {
      int *melhorVizinho = new int[tamanhoSolucao];
@@ -878,6 +808,7 @@
     *tamanhoCobertura = melhorTamanho;
     return melhorSolucao;
 }
+
 void GrafoLista::atualizaProbabilidades(float *alphas, float *probabilidades,
                                         float *valores, int *contadores,
                                         int tamanhoLista, float melhorValor)
