@@ -88,10 +88,20 @@ Certifique-se de que você tenha um compilador C++ instalado, como o **g++**.
      ```bash
      .\grafo_exec.exe -m entradas\grafo.txt -a 2
      ```
-   - Para executar o algoritmo guloso e construção gulosa randomizada:
+   - Para executar apenas o algoritmo guloso:
      ```bash
-     .\grafo_exec.exe -m entradas\grafo.txt -g
-     .\grafo_exec.exe -l entradas\grafo.txt -g
+     .\grafo_exec.exe -m .\entradas\grafo.txt -g
+     .\grafo_exec.exe -l .\entradas\grafo.txt -g
+     ```
+   - Para executar apenas o algoritmo guloso randomizado:
+     ```bash
+     .\grafo_exec.exe -m .\entradas\grafo.txt -gr
+     .\grafo_exec.exe -l .\entradas\grafo.txt -gr
+     ```
+   - Para executar apenas o algoritmo reativo:
+     ```bash
+     .\grafo_exec.exe -m .\entradas\grafo.txt -r
+     .\grafo_exec.exe -l .\entradas\grafo.txt -r
      ```
 
 ## Saída Esperada
